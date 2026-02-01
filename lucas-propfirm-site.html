@@ -3,18 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUCAS PROPFIRM | Formation & Affiliation Trading</title>
+    <title>LUCAS PROPFIRM | Formation & Affiliation Trading Futures</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Devenez trader financé avec Phidias Propfirm. Utilisez le code LUCAS pour bénéficier de réductions exceptionnelles jusqu'à 80%. Capital jusqu'à 1M$, 90% de profits.">
+    <meta name="keywords" content="prop firm, trading, futures, phidias, lucas propfirm, trader financé, forex, challenge trading">
+    <meta name="author" content="Lucas Propfirm">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://lucaspropfirm.com/">
+    <meta property="og:title" content="LUCAS PROPFIRM | Devenez Trader Financé">
+    <meta property="og:description" content="Utilisez le code LUCAS pour bénéficier de réductions exceptionnelles jusqu'à 80% sur Phidias Propfirm. Capital jusqu'à 1M$, 90% de profits.">
+    <meta property="og:image" content="https://lucaspropfirm.com/og-image.jpg">
+    <meta property="og:locale" content="fr_FR">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LUCAS PROPFIRM | Devenez Trader Financé">
+    <meta name="twitter:description" content="Utilisez le code LUCAS pour bénéficier de réductions exceptionnelles jusqu'à 80% sur Phidias Propfirm.">
+    <meta name="twitter:image" content="https://lucaspropfirm.com/og-image.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+
+    <!-- Preconnect for external resources -->
+    <link rel="preconnect" href="https://member.phidiaspropfirm.com">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Lucas Propfirm",
+        "description": "Partenaire affilié Phidias Propfirm - Formation et accompagnement trading futures",
+        "url": "https://lucaspropfirm.com",
+        "logo": "https://lucaspropfirm.com/logo.png",
+        "sameAs": [],
+        "offers": {
+            "@type": "Offer",
+            "description": "Code promo LUCAS pour Phidias Propfirm",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+
     <style>
+        /* CSS Variables */
+        :root {
+            --color-primary: #FFD700;
+            --color-secondary: #FFA500;
+            --color-accent: #87CEEB;
+            --color-accent-dark: #4682B4;
+            --color-bg-dark: #0a0a0a;
+            --color-bg-medium: #1a1a2e;
+            --color-bg-light: #16213e;
+            --color-text: #fff;
+            --color-text-muted: #ccc;
+            --color-text-dimmed: #999;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --transition-fast: 0.3s;
+            --transition-medium: 0.4s;
+            --border-radius-small: 10px;
+            --border-radius-medium: 20px;
+            --border-radius-large: 25px;
+            --border-radius-pill: 50px;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        /* Skip to content link for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--color-primary);
+            color: #000;
+            padding: 8px 16px;
+            z-index: 1000;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16213e);
-            color: #fff;
+            font-family: var(--font-main);
+            background: linear-gradient(135deg, var(--color-bg-dark), var(--color-bg-medium), var(--color-bg-light));
+            color: var(--color-text);
             overflow-x: hidden;
         }
 
@@ -599,50 +682,324 @@
             font-weight: 300;
         }
 
+        /* Mobile Menu Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--color-primary);
+            margin: 3px 0;
+            transition: var(--transition-fast);
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Mobile Menu Overlay */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 15px 30px;
+            transition: color var(--transition-fast);
+        }
+
+        .mobile-menu a:hover {
+            color: var(--color-primary);
+        }
+
+        /* Badge Recommandé */
+        .badge-recommended {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+            color: #000;
+            padding: 8px 20px;
+            border-radius: var(--border-radius-pill);
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Footer Styles */
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: left;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            color: var(--color-primary);
+            font-size: 18px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #aaa;
+            font-size: 14px;
+            line-height: 1.8;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 8px;
+            transition: color var(--transition-fast);
+        }
+
+        .footer-section a:hover {
+            color: var(--color-primary);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            color: var(--color-primary);
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .footer-code {
+            color: var(--color-primary);
+            font-size: 20px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .footer-copyright {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Contact Form Styles */
+        .contact-form {
+            max-width: 500px;
+            margin: 30px auto 0;
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--color-text-muted);
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: var(--border-radius-small);
+            color: var(--color-text);
+            font-size: 16px;
+            font-family: inherit;
+            transition: border-color var(--transition-fast);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+            color: #000;
+            border: none;
+            border-radius: var(--border-radius-pill);
+            font-size: 18px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+        }
+
         @media (max-width: 768px) {
             h1 {
-                font-size: 40px;
+                font-size: 36px;
             }
-            
+
             .subtitle {
-                font-size: 20px;
+                font-size: 18px;
             }
-            
+
             .nav-links {
                 display: none;
             }
-            
+
+            .hamburger {
+                display: flex;
+            }
+
             .code-text {
-                font-size: 24px;
+                font-size: 22px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .promo-title {
+                font-size: 28px;
+            }
+
+            .promo-percent {
+                font-size: 36px;
+            }
+
+            .stat-number {
+                font-size: 40px;
+            }
+
+            .feature-card, .account-card {
+                padding: 30px 20px;
+            }
+
+            .footer-content {
+                text-align: center;
+            }
+
+            .cta-button {
+                padding: 15px 40px;
+                font-size: 16px;
+            }
+
+            .hero {
+                padding: 100px 20px 60px;
+            }
+
+            .contact-form {
+                padding: 0 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 28px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .promo-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <nav class="container">
-            <div class="logo">LUCAS PROPFIRM</div>
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="skip-link">Aller au contenu principal</a>
+
+    <!-- Mobile Menu Overlay -->
+    <nav class="mobile-menu" id="mobileMenu" aria-label="Menu mobile">
+        <a href="#accueil" onclick="closeMobileMenu()">Accueil</a>
+        <a href="#avantages" onclick="closeMobileMenu()">Avantages</a>
+        <a href="#comptes" onclick="closeMobileMenu()">Comptes</a>
+        <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+        <a href="https://member.phidiaspropfirm.com/aff/go/lucasdu73?i=1" target="_blank" rel="noopener noreferrer" onclick="closeMobileMenu()">Démarrer</a>
+    </nav>
+
+    <header role="banner">
+        <nav class="container" aria-label="Navigation principale">
+            <div class="logo" aria-label="Lucas Propfirm - Accueil">LUCAS PROPFIRM</div>
             <ul class="nav-links">
                 <li><a href="#accueil">Accueil</a></li>
                 <li><a href="#avantages">Avantages</a></li>
                 <li><a href="#comptes">Comptes</a></li>
-                <li><a href="#contact">Démarrer</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" id="hamburger" aria-label="Ouvrir le menu" aria-expanded="false" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </nav>
     </header>
 
-    <section class="hero" id="accueil">
+    <main id="main-content">
+    <section class="hero" id="accueil" role="region" aria-labelledby="hero-title">
         <div class="hero-content">
             <div class="container">
-                <h1>LUCAS PROPFIRM</h1>
+                <h1 id="hero-title">LUCAS PROPFIRM</h1>
                 <p class="subtitle">Votre partenaire pour réussir en trading Futures</p>
-                
-                <div class="code-highlight">
+
+                <div class="code-highlight" role="button" tabindex="0" aria-label="Code affilié LUCAS - Cliquez pour copier">
                     <span class="code-label">Utilisez mon code affilié :</span>
                     <div class="code-text">LUCAS</div>
                 </div>
-                
-                <a href="https://member.phidiaspropfirm.com/aff/go/lucasdu73?i=1" target="_blank" class="cta-button">Commencer Maintenant</a>
+
+                <a href="https://member.phidiaspropfirm.com/aff/go/lucasdu73?i=1" target="_blank" rel="noopener noreferrer" class="cta-button" aria-label="Commencer maintenant sur Phidias Propfirm">Commencer Maintenant</a>
             </div>
         </div>
     </section>
@@ -706,8 +1063,8 @@
                     </div>
                 </div>
 
-                <a href="https://member.phidiaspropfirm.com/aff/go/lucasdu73?i=1" target="_blank" class="cta-button promo-cta">
-                    Profiter de la Promo 🎿
+                <a href="https://member.phidiaspropfirm.com/aff/go/lucasdu73?i=1" target="_blank" rel="noopener noreferrer" class="cta-button promo-cta" aria-label="Profiter de la promotion Winter Launch Sale">
+                    Profiter de la Promo
                 </a>
 
                 <p class="promo-warning">⏰ Ne laissez pas passer cette opportunité comme la neige fraîche !</p>
@@ -790,78 +1147,137 @@
             <p class="section-subtitle">Tous les comptes sont accessibles avec le code LUCAS</p>
             
             <div class="accounts-grid">
-                <div class="account-card">
-                    <h3>Static 25K</h3>
+                <div class="account-card" role="article" aria-labelledby="static-title">
+                    <h3 id="static-title">Static 25K</h3>
                     <div class="account-price">25 000$</div>
-                    <ul class="account-features">
+                    <ul class="account-features" role="list">
                         <li>Drawdown fixe</li>
                         <li>Pas de jours minimum</li>
                         <li>Accès LIVE direct</li>
                         <li>Parfait pour débuter</li>
                         <li>Règles ultra-simples</li>
                     </ul>
-                    <a href="https://member.phidiaspropfirm.com/aff/go/lucasdu73?i=1" target="_blank" class="cta-button">Démarrer</a>
+                    <a href="https://member.phidiaspropfirm.com/aff/go/lucasdu73?i=1" target="_blank" rel="noopener noreferrer" class="cta-button" aria-label="Démarrer avec le compte Static 25K">Démarrer</a>
                 </div>
-                
-                <div class="account-card">
-                    <h3>Fundamental</h3>
+
+                <div class="account-card" role="article" aria-labelledby="fundamental-title">
+                    <span class="badge-recommended">Recommandé</span>
+                    <h3 id="fundamental-title">Fundamental</h3>
                     <div class="account-price">50K - 150K</div>
-                    <ul class="account-features">
+                    <ul class="account-features" role="list">
                         <li>Scalping & Day Trading</li>
                         <li>Trailing drawdown 5%</li>
                         <li>7 jours de trading minimum</li>
                         <li>80% puis 90% de profit</li>
                         <li>Intraday seulement</li>
                     </ul>
-                    <a href="#contact" class="cta-button">Démarrer</a>
+                    <a href="https://member.phidiaspropfirm.com/aff/go/lucasdu73?i=1" target="_blank" rel="noopener noreferrer" class="cta-button" aria-label="Démarrer avec le compte Fundamental">Démarrer</a>
                 </div>
-                
-                <div class="account-card">
-                    <h3>Swing</h3>
+
+                <div class="account-card" role="article" aria-labelledby="swing-title">
+                    <h3 id="swing-title">Swing</h3>
                     <div class="account-price">50K - 150K</div>
-                    <ul class="account-features">
+                    <ul class="account-features" role="list">
                         <li>Positions overnight</li>
                         <li>Trading weekend inclus</li>
                         <li>Trailing drawdown 5%</li>
                         <li>Flexibilité maximale</li>
                         <li>Tous les styles acceptés</li>
                     </ul>
-                    <a href="#contact" class="cta-button">Démarrer</a>
+                    <a href="https://member.phidiaspropfirm.com/aff/go/lucasdu73?i=1" target="_blank" rel="noopener noreferrer" class="cta-button" aria-label="Démarrer avec le compte Swing">Démarrer</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="cta-section" id="contact">
+    <section class="cta-section" id="contact" role="region" aria-labelledby="contact-title">
         <div class="container">
             <div class="cta-box">
-                <h2 class="section-title">Prêt à Commencer ?</h2>
-                <p style="font-size: 20px; margin: 30px 0; color: #ddd;">Inscrivez-vous sur Phidias avec mon code affilié</p>
-                
-                <div class="code-highlight" style="margin: 30px 0;">
+                <h2 class="section-title" id="contact-title">Prêt à Commencer ?</h2>
+                <p class="section-subtitle">Inscrivez-vous sur Phidias avec mon code affilié ou contactez-moi</p>
+
+                <div class="code-highlight" role="button" tabindex="0" aria-label="Code affilié LUCAS - Cliquez pour copier">
                     <span class="code-label">N'oubliez pas le code :</span>
                     <div class="code-text">LUCAS</div>
                 </div>
-                
-                <a href="https://member.phidiaspropfirm.com/aff/go/lucasdu73?i=1" target="_blank" class="cta-button">S'inscrire sur Phidias</a>
-                
-                <p style="margin-top: 40px; color: #999; font-size: 14px;">
+
+                <a href="https://member.phidiaspropfirm.com/aff/go/lucasdu73?i=1" target="_blank" rel="noopener noreferrer" class="cta-button" aria-label="S'inscrire sur Phidias Propfirm">S'inscrire sur Phidias</a>
+
+                <!-- Contact Form -->
+                <div class="contact-form" role="form" aria-labelledby="form-title">
+                    <h3 id="form-title" style="color: var(--color-primary); text-align: center; margin: 40px 0 30px; font-size: 24px;">Ou contactez-moi directement</h3>
+                    <form id="contactForm" onsubmit="handleSubmit(event)">
+                        <div class="form-group">
+                            <label for="name">Nom complet</label>
+                            <input type="text" id="name" name="name" required placeholder="Votre nom" aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required placeholder="votre@email.com" aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Sujet</label>
+                            <input type="text" id="subject" name="subject" required placeholder="Votre question" aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required placeholder="Décrivez votre demande..." aria-required="true"></textarea>
+                        </div>
+                        <button type="submit" class="form-submit">Envoyer le message</button>
+                    </form>
+                    <p id="formStatus" style="text-align: center; margin-top: 20px; color: var(--color-primary); display: none;"></p>
+                </div>
+
+                <p class="section-subtitle" style="margin-top: 40px; font-size: 14px;">
                     En utilisant le code LUCAS, vous soutenez mon travail et bénéficiez de mon support exclusif
                 </p>
             </div>
         </div>
     </section>
+    </main>
 
-    <footer>
+    <footer role="contentinfo">
         <div class="container">
-            <h3 style="color: #FFD700; font-size: 28px; margin-bottom: 20px; font-weight: 800;">LUCAS PROPFIRM</h3>
-            <p style="color: #aaa; margin-bottom: 15px;">Partenaire affilié Phidias Propfirm</p>
-            <p style="color: #FFD700; font-size: 20px; font-weight: bold; margin: 20px 0;">Code affilié : LUCAS</p>
-            <p style="margin-top: 40px; color: #666; font-size: 14px;">© 2026 Lucas Propfirm - Tous droits réservés</p>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Lucas Propfirm</h4>
+                    <p>Votre partenaire de confiance pour réussir en trading Futures avec Phidias Propfirm.</p>
+                    <p class="footer-code">Code : LUCAS</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Navigation</h4>
+                    <a href="#accueil">Accueil</a>
+                    <a href="#avantages">Avantages</a>
+                    <a href="#comptes">Comptes</a>
+                    <a href="#contact">Contact</a>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Ressources</h4>
+                    <a href="https://member.phidiaspropfirm.com/aff/go/lucasdu73?i=1" target="_blank" rel="noopener noreferrer">Phidias Propfirm</a>
+                    <a href="#contact">Support</a>
+                    <a href="#comptes">Tarifs</a>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Légal</h4>
+                    <p>Ce site est un partenaire affilié indépendant de Phidias Propfirm.</p>
+                    <p>Le trading comporte des risques. Tradez de manière responsable.</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-logo">LUCAS PROPFIRM</div>
+                <p style="color: #aaa; margin-bottom: 15px;">Partenaire affilié officiel Phidias Propfirm</p>
+                <p class="footer-code">Code affilié : LUCAS</p>
+                <p class="footer-copyright">© 2026 Lucas Propfirm - Tous droits réservés</p>
+            </div>
         </div>
     </footer>
 
     <script>
+        // Smooth scroll navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -872,6 +1288,7 @@
             });
         });
 
+        // Intersection Observer for animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -893,7 +1310,9 @@
             observer.observe(el);
         });
 
+        // Copy code functionality
         document.querySelectorAll('.code-text').forEach(code => {
+            code.style.cursor = 'pointer';
             code.addEventListener('click', function() {
                 navigator.clipboard.writeText('LUCAS').then(() => {
                     const original = this.textContent;
@@ -902,6 +1321,19 @@
                         this.textContent = original;
                     }, 2000);
                 });
+            });
+        });
+
+        // Also handle keyboard events for accessibility
+        document.querySelectorAll('.code-highlight').forEach(highlight => {
+            highlight.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    const codeText = this.querySelector('.code-text');
+                    if (codeText) {
+                        codeText.click();
+                    }
+                }
             });
         });
 
@@ -914,6 +1346,125 @@
                 }, 2000);
             });
         }
+
+        // Mobile menu functionality
+        function toggleMobileMenu() {
+            const hamburger = document.getElementById('hamburger');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+
+            // Update aria-expanded
+            const isExpanded = hamburger.classList.contains('active');
+            hamburger.setAttribute('aria-expanded', isExpanded);
+            hamburger.setAttribute('aria-label', isExpanded ? 'Fermer le menu' : 'Ouvrir le menu');
+
+            // Prevent body scroll when menu is open
+            document.body.style.overflow = isExpanded ? 'hidden' : '';
+        }
+
+        function closeMobileMenu() {
+            const hamburger = document.getElementById('hamburger');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+            hamburger.setAttribute('aria-label', 'Ouvrir le menu');
+            document.body.style.overflow = '';
+        }
+
+        // Close mobile menu on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeMobileMenu();
+            }
+        });
+
+        // Contact form handling
+        function handleSubmit(event) {
+            event.preventDefault();
+
+            const form = document.getElementById('contactForm');
+            const formStatus = document.getElementById('formStatus');
+            const submitBtn = form.querySelector('.form-submit');
+
+            // Get form data
+            const formData = {
+                name: form.name.value,
+                email: form.email.value,
+                subject: form.subject.value,
+                message: form.message.value
+            };
+
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Envoi en cours...';
+
+            // Simulate form submission (replace with actual endpoint)
+            setTimeout(() => {
+                // Show success message
+                formStatus.style.display = 'block';
+                formStatus.textContent = 'Message envoyé avec succès ! Je vous répondrai rapidement.';
+                formStatus.style.color = '#4CAF50';
+
+                // Reset form
+                form.reset();
+
+                // Re-enable button
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Envoyer le message';
+
+                // Hide status after 5 seconds
+                setTimeout(() => {
+                    formStatus.style.display = 'none';
+                }, 5000);
+            }, 1500);
+        }
+
+        // Counter animation for stats
+        function animateCounter(element, target, duration = 2000) {
+            const start = 0;
+            const increment = target / (duration / 16);
+            let current = start;
+
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target;
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current);
+                }
+            }, 16);
+        }
+
+        // Animate stats when they come into view
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.dataset.animated) {
+                    entry.target.dataset.animated = 'true';
+                    const statNumber = entry.target.querySelector('.stat-number');
+                    if (statNumber) {
+                        const text = statNumber.textContent;
+                        // Extract number from text like "1M$", "90%", "15", "24/7"
+                        if (text === '1M$') {
+                            // Keep as is for special formatting
+                        } else if (text === '90%') {
+                            animateCounter({ set textContent(v) { statNumber.textContent = v + '%'; } }, 90);
+                        } else if (text === '15') {
+                            animateCounter(statNumber, 15);
+                        }
+                        // "24/7" stays as is
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.stat-item').forEach(item => {
+            statsObserver.observe(item);
+        });
     </script>
 </body>
 </html>

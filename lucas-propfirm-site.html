@@ -77,6 +77,95 @@
             color: #FFD700;
         }
 
+        /* Dropdown styles */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .dropdown-toggle::after {
+            content: '▼';
+            font-size: 10px;
+            transition: transform 0.3s;
+        }
+
+        .dropdown:hover .dropdown-toggle::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.95);
+            border: 2px solid #FFD700;
+            border-radius: 15px;
+            padding: 15px 0;
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 1000;
+            margin-top: 10px;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 12px 25px;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .dropdown-menu a:hover {
+            background: rgba(255, 215, 0, 0.2);
+            color: #FFD700;
+        }
+
+        .dropdown-menu .propfirm-tag {
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 8px;
+        }
+
+        .tag-recommended {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #000;
+        }
+
+        .tag-popular {
+            background: #4682B4;
+            color: #fff;
+        }
+
+        .nav-link-style {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .nav-link-style:hover {
+            color: #FFD700;
+        }
+
         .hero {
             text-align: center;
             padding: 140px 20px 100px;
@@ -599,21 +688,208 @@
             font-weight: 300;
         }
 
+        /* Newsletter Section */
+        .newsletter-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.08), rgba(255, 165, 0, 0.03));
+            border-top: 2px solid rgba(255, 215, 0, 0.3);
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .newsletter-box {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 50px 40px;
+            border-radius: 25px;
+            border: 2px solid rgba(255, 215, 0, 0.4);
+        }
+
+        .newsletter-box h2 {
+            font-size: 36px;
+            color: #FFD700;
+            margin-bottom: 15px;
+        }
+
+        .newsletter-box p {
+            color: #ccc;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .newsletter-form input[type="email"] {
+            flex: 1;
+            min-width: 280px;
+            padding: 18px 25px;
+            border: 2px solid rgba(255, 215, 0, 0.4);
+            border-radius: 50px;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .newsletter-form input[type="email"]:focus {
+            border-color: #FFD700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .newsletter-form input[type="email"]::placeholder {
+            color: #888;
+        }
+
+        .newsletter-form button {
+            padding: 18px 40px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #000;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .newsletter-form button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+        }
+
+        .newsletter-benefits {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .newsletter-benefit {
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        .newsletter-benefit::before {
+            content: '✓ ';
+            color: #FFD700;
+        }
+
+        /* Guide Propfirm Section */
+        .guide-section {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, rgba(70, 130, 180, 0.1), rgba(135, 206, 250, 0.05));
+        }
+
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .guide-card {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 40px 30px;
+            border-radius: 20px;
+            border: 2px solid rgba(135, 206, 250, 0.3);
+            transition: all 0.3s;
+        }
+
+        .guide-card:hover {
+            border-color: #87CEEB;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(135, 206, 250, 0.2);
+        }
+
+        .guide-card h3 {
+            font-size: 24px;
+            color: #87CEEB;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .guide-card h3 span {
+            font-size: 32px;
+        }
+
+        .guide-card p {
+            color: #ccc;
+            line-height: 1.8;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .guide-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .guide-card ul li {
+            padding: 10px 0;
+            color: #ddd;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .guide-card ul li::before {
+            content: '→ ';
+            color: #87CEEB;
+        }
+
+        .guide-intro {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            border-left: 4px solid #FFD700;
+        }
+
+        .guide-intro p {
+            color: #ddd;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 40px;
             }
-            
+
             .subtitle {
                 font-size: 20px;
             }
-            
+
             .nav-links {
                 display: none;
             }
-            
+
             .code-text {
                 font-size: 24px;
+            }
+
+            .guide-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-form input[type="email"] {
+                min-width: 100%;
             }
         }
     </style>
@@ -626,6 +902,27 @@
                 <li><a href="#accueil">Accueil</a></li>
                 <li><a href="#avantages">Avantages</a></li>
                 <li><a href="#comptes">Comptes</a></li>
+                <li><a href="#guide">Guide</a></li>
+                <li class="dropdown">
+                    <span class="dropdown-toggle nav-link-style">Autres Propfirms</span>
+                    <div class="dropdown-menu">
+                        <a href="https://member.phidiaspropfirm.com/aff/go/lucasdu73?i=1" target="_blank">
+                            Phidias <span class="propfirm-tag tag-recommended">Recommandé</span>
+                        </a>
+                        <a href="https://www.topstep.com/" target="_blank">
+                            Topstep <span class="propfirm-tag tag-popular">Populaire</span>
+                        </a>
+                        <a href="https://tradeify.com/" target="_blank">
+                            Tradeify
+                        </a>
+                        <a href="https://www.apextraderfunding.com/" target="_blank">
+                            Apex Trader Funding
+                        </a>
+                        <a href="https://www.ftmo.com/" target="_blank">
+                            FTMO
+                        </a>
+                    </div>
+                </li>
                 <li><a href="#contact">Démarrer</a></li>
             </ul>
         </nav>
@@ -832,6 +1129,83 @@
         </div>
     </section>
 
+    <!-- Newsletter Section -->
+    <section class="newsletter-section" id="newsletter">
+        <div class="container">
+            <div class="newsletter-box">
+                <h2>Restez Informé</h2>
+                <p>Recevez mes conseils de trading, les meilleures promos propfirm et des analyses exclusives directement dans votre boîte mail.</p>
+                <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+                    <input type="email" id="newsletter-email" placeholder="Votre adresse email" required>
+                    <button type="submit">S'abonner</button>
+                </form>
+                <div class="newsletter-benefits">
+                    <span class="newsletter-benefit">Conseils trading hebdomadaires</span>
+                    <span class="newsletter-benefit">Promos exclusives</span>
+                    <span class="newsletter-benefit">Analyses de marché</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guide Propfirm Section -->
+    <section class="guide-section" id="guide">
+        <div class="container">
+            <h2 class="section-title">Guide des Propfirms</h2>
+            <p class="section-subtitle">Tout ce que vous devez savoir pour réussir votre challenge</p>
+
+            <div class="guide-intro">
+                <p>Les prop firms (proprietary trading firms) offrent aux traders la possibilité de trader avec des capitaux importants sans risquer leur propre argent. En échange, vous partagez vos profits avec la firme. C'est une opportunité exceptionnelle pour les traders talentueux de passer au niveau supérieur.</p>
+            </div>
+
+            <div class="guide-grid">
+                <div class="guide-card">
+                    <h3><span>1</span> Qu'est-ce qu'une Propfirm ?</h3>
+                    <p>Une propfirm vous fournit un capital de trading après avoir passé un challenge (évaluation). Vous tradez leur argent et gardez une partie des profits.</p>
+                    <ul>
+                        <li>Capital de 10K$ à 1M$ disponible</li>
+                        <li>Gardez 80% à 90% de vos profits</li>
+                        <li>Aucun risque sur votre capital personnel</li>
+                        <li>Retraits réguliers possibles</li>
+                    </ul>
+                </div>
+
+                <div class="guide-card">
+                    <h3><span>2</span> Comment réussir le Challenge ?</h3>
+                    <p>Le challenge teste votre discipline et vos compétences. Voici les clés du succès pour le réussir.</p>
+                    <ul>
+                        <li>Respectez strictement le drawdown maximum</li>
+                        <li>Tradez avec un plan précis</li>
+                        <li>Gérez vos émotions et votre risque</li>
+                        <li>Ne visez pas l'objectif en un jour</li>
+                    </ul>
+                </div>
+
+                <div class="guide-card">
+                    <h3><span>3</span> Choisir sa Propfirm</h3>
+                    <p>Toutes les propfirms ne se valent pas. Voici les critères essentiels à considérer.</p>
+                    <ul>
+                        <li>Partage des profits (80-90% idéal)</li>
+                        <li>Type de drawdown (EOD vs Trailing)</li>
+                        <li>Règles de trading (news, overnight)</li>
+                        <li>Réputation et fiabilité des paiements</li>
+                    </ul>
+                </div>
+
+                <div class="guide-card">
+                    <h3><span>4</span> Pourquoi Phidias ?</h3>
+                    <p>Phidias se distingue par ses conditions exceptionnelles et sa transparence.</p>
+                    <ul>
+                        <li>90% de profits après compte LIVE</li>
+                        <li>Drawdown EOD 5% (pas de trailing)</li>
+                        <li>Retraits quotidiens illimités</li>
+                        <li>Support réactif et fiable</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="cta-section" id="contact">
         <div class="container">
             <div class="cta-box">
@@ -914,6 +1288,39 @@
                 }, 2000);
             });
         }
+
+        function handleNewsletterSubmit(event) {
+            event.preventDefault();
+            const email = document.getElementById('newsletter-email').value;
+            const button = event.target.querySelector('button');
+            const originalText = button.textContent;
+
+            // Simulate subscription (in production, this would send to a backend)
+            button.textContent = 'Envoi...';
+            button.disabled = true;
+
+            setTimeout(() => {
+                button.textContent = 'Inscrit !';
+                button.style.background = 'linear-gradient(45deg, #4CAF50, #45a049)';
+                document.getElementById('newsletter-email').value = '';
+
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = 'linear-gradient(45deg, #FFD700, #FFA500)';
+                    button.disabled = false;
+                }, 3000);
+            }, 1000);
+
+            console.log('Newsletter subscription for:', email);
+        }
+
+        // Add animation to guide cards
+        document.querySelectorAll('.guide-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
     </script>
 </body>
 </html>

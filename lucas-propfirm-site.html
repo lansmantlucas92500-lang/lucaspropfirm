@@ -41,7 +41,7 @@
             backdrop-filter: blur(15px);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
             border-bottom: 3px solid #FFD700;
         }
 
@@ -124,7 +124,9 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
+            /* text-shadow ne fonctionne pas avec background-clip:text,
+               on utilise filter:drop-shadow à la place */
+            filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.3));
             letter-spacing: 3px;
         }
 
@@ -294,7 +296,7 @@
             letter-spacing: 3px;
             cursor: pointer;
             transition: all 0.3s;
-            user-select: all;
+            user-select: none;
         }
 
         .promo-code-value:hover {
@@ -530,7 +532,7 @@
         }
 
         .account-card:hover {
-            transform: scale(1.08);
+            transform: translateY(-10px);
             box-shadow: 0 30px 60px rgba(255, 215, 0, 0.3);
         }
 
@@ -609,6 +611,18 @@
             font-size: 20px;
             margin-bottom: 50px;
             font-weight: 300;
+        }
+
+        /* Scroll fade-in animation (class-based to avoid inline style conflicts with :hover) */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Mobile hamburger menu */
@@ -700,7 +714,7 @@
                 justify-content: center;
                 align-items: center;
                 gap: 40px;
-                z-index: 150;
+                z-index: 999;
             }
 
             .nav-links.open {
@@ -856,10 +870,10 @@
                 </div>
 
                 <a href="https://member.phidiaspropfirm.com/aff/go/lucasdu73?i=1" target="_blank" rel="noopener noreferrer" class="cta-button promo-cta">
-                    Profiter de la Promo 🎿
+                    Profiter de la Promo 🔥
                 </a>
 
-                <p class="promo-warning">⏰ Ne laissez pas passer cette opportunité comme la neige fraîche !</p>
+                <p class="promo-warning">⏰ Offre limitée — Ne laissez pas passer cette opportunité !</p>
             </div>
         </div>
     </section>
@@ -1022,13 +1036,15 @@
             this.classList.toggle('active');
         });
 
-        // Smooth scroll navigation (closes mobile menu on click)
+        // Smooth scroll navigation with sticky header offset compensation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    const targetPosition = target.getBoundingClientRect().top + window.scrollY - headerHeight;
+                    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
                 }
                 navLinks.classList.remove('open');
                 menuToggle.classList.remove('active');
@@ -1057,40 +1073,64 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
 
         document.querySelectorAll('.feature-card, .account-card, .stat-item').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 0.6s ease-out';
+            el.classList.add('fade-in');
             observer.observe(el);
         });
 
-        // Copy code functionality
+        // Robust copy-to-clipboard with fallback for HTTP/insecure contexts
+        function copyToClipboard(text) {
+            if (navigator.clipboard && window.isSecureContext) {
+                return navigator.clipboard.writeText(text);
+            }
+            // Fallback for non-HTTPS contexts
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+            } catch (err) {
+                // Silent fail — user can still manually copy
+            }
+            document.body.removeChild(textarea);
+            return Promise.resolve();
+        }
+
+        function showCopyFeedback(element, originalText) {
+            element.textContent = 'COPIÉ ✓';
+            setTimeout(() => {
+                element.textContent = originalText;
+            }, 2000);
+        }
+
+        // Copy code on click
         document.querySelectorAll('.code-text').forEach(code => {
             code.style.cursor = 'pointer';
             code.addEventListener('click', function() {
-                navigator.clipboard.writeText('LUCAS').then(() => {
-                    const original = this.textContent;
-                    this.textContent = 'COPIÉ ✓';
-                    setTimeout(() => {
-                        this.textContent = original;
-                    }, 2000);
+                const original = this.textContent;
+                copyToClipboard('LUCAS').then(() => {
+                    showCopyFeedback(this, original);
+                }).catch(() => {
+                    showCopyFeedback(this, original);
                 });
             });
         });
 
         function copyPromoCode(element) {
-            navigator.clipboard.writeText('LUCAS').then(() => {
-                const original = element.textContent;
-                element.textContent = 'COPIÉ ✓';
-                setTimeout(() => {
-                    element.textContent = original;
-                }, 2000);
+            const original = element.textContent;
+            copyToClipboard('LUCAS').then(() => {
+                showCopyFeedback(element, original);
+            }).catch(() => {
+                showCopyFeedback(element, original);
             });
         }
     </script>

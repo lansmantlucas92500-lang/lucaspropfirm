@@ -3,7 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUCAS PROPFIRM | Formation & Affiliation Trading</title>
+    <title>LUCAS PROPFIRM | Code Promo Phidias -80% | Trading Futures</title>
+    <meta name="description" content="Obtenez jusqu'à -80% sur Phidias Propfirm avec le code LUCAS. Comptes de trading Futures de 25K$ à 150K$, 90% de profits, support personnalisé.">
+    <meta name="keywords" content="prop firm, phidias propfirm, code promo, trading futures, compte financé, LUCAS">
+    <meta property="og:title" content="LUCAS PROPFIRM | Code Promo Phidias -80%">
+    <meta property="og:description" content="Devenez trader financé avec Phidias Propfirm. Code LUCAS pour -80% de réduction.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://lucaspropfirm.fr">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,7 +23,7 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16213e);
             color: #fff;
             overflow-x: hidden;
@@ -132,6 +143,7 @@
             margin: 20px 0 40px;
             border: 2px solid #FFD700;
             animation: pulse 2s ease-in-out infinite;
+            cursor: pointer;
         }
 
         @keyframes pulse {
@@ -292,7 +304,7 @@
 
         .promo-code-hint {
             font-size: 14px;
-            color: #999;
+            color: #aaa;
             margin-top: 10px;
             font-style: italic;
         }
@@ -593,27 +605,159 @@
 
         .section-subtitle {
             text-align: center;
-            color: #bbb;
+            color: #ccc;
             font-size: 20px;
             margin-bottom: 50px;
             font-weight: 300;
         }
 
+        /* Mobile hamburger menu */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 200;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background: #FFD700;
+            margin: 5px 0;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 6px);
+        }
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -6px);
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #000;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 99;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.6);
+        }
+
         @media (max-width: 768px) {
             h1 {
-                font-size: 40px;
+                font-size: 36px;
             }
-            
+
             .subtitle {
-                font-size: 20px;
+                font-size: 18px;
             }
-            
+
+            .hero {
+                padding: 100px 20px 70px;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
             .nav-links {
                 display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(10, 10, 10, 0.97);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 40px;
+                z-index: 150;
             }
-            
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links a {
+                font-size: 22px;
+            }
+
             .code-text {
                 font-size: 24px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .section-subtitle {
+                font-size: 16px;
+            }
+
+            .promo-title {
+                font-size: 28px;
+            }
+
+            .promo-percent {
+                font-size: 36px;
+            }
+
+            .cta-button {
+                padding: 16px 40px;
+                font-size: 16px;
+            }
+
+            .stat-number {
+                font-size: 40px;
+            }
+
+            .account-card h3 {
+                font-size: 26px;
+            }
+
+            .account-price {
+                font-size: 32px;
+            }
+
+            .feature-card {
+                padding: 35px 25px;
+            }
+
+            .promo-banner {
+                padding: 40px 20px;
+            }
+
+            .cta-box {
+                padding: 40px 20px;
             }
         }
     </style>
@@ -622,12 +766,17 @@
     <header>
         <nav class="container">
             <div class="logo">LUCAS PROPFIRM</div>
-            <ul class="nav-links">
+            <ul class="nav-links" id="navLinks">
                 <li><a href="#accueil">Accueil</a></li>
                 <li><a href="#avantages">Avantages</a></li>
                 <li><a href="#comptes">Comptes</a></li>
                 <li><a href="#contact">Démarrer</a></li>
             </ul>
+            <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu de navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </nav>
     </header>
 
@@ -642,7 +791,7 @@
                     <div class="code-text">LUCAS</div>
                 </div>
                 
-                <a href="https://member.phidiaspropfirm.com/aff/go/lucasdu73?i=1" target="_blank" class="cta-button">Commencer Maintenant</a>
+                <a href="https://member.phidiaspropfirm.com/aff/go/lucasdu73?i=1" target="_blank" rel="noopener noreferrer" class="cta-button">Commencer Maintenant</a>
             </div>
         </div>
     </section>
@@ -659,9 +808,9 @@
     <section class="promo-section">
         <div class="container">
             <div class="promo-banner">
-                <div class="promo-badge">🎿 WINTER LAUNCH SALE 2026</div>
+                <div class="promo-badge">🔥 SPRING SALE 2026</div>
                 <h2 class="promo-title">Profitez des Réductions Exceptionnelles !</h2>
-                <p class="promo-dates">Du 12 au 26 Janvier 2026</p>
+                <p class="promo-dates">Offre à durée limitée</p>
                 
                 <div class="promo-grid">
                     <div class="promo-item">
@@ -706,7 +855,7 @@
                     </div>
                 </div>
 
-                <a href="https://member.phidiaspropfirm.com/aff/go/lucasdu73?i=1" target="_blank" class="cta-button promo-cta">
+                <a href="https://member.phidiaspropfirm.com/aff/go/lucasdu73?i=1" target="_blank" rel="noopener noreferrer" class="cta-button promo-cta">
                     Profiter de la Promo 🎿
                 </a>
 
@@ -800,7 +949,7 @@
                         <li>Parfait pour débuter</li>
                         <li>Règles ultra-simples</li>
                     </ul>
-                    <a href="https://member.phidiaspropfirm.com/aff/go/lucasdu73?i=1" target="_blank" class="cta-button">Démarrer</a>
+                    <a href="https://member.phidiaspropfirm.com/aff/go/lucasdu73?i=1" target="_blank" rel="noopener noreferrer" class="cta-button">Démarrer</a>
                 </div>
                 
                 <div class="account-card">
@@ -813,9 +962,9 @@
                         <li>80% puis 90% de profit</li>
                         <li>Intraday seulement</li>
                     </ul>
-                    <a href="#contact" class="cta-button">Démarrer</a>
+                    <a href="https://member.phidiaspropfirm.com/aff/go/lucasdu73?i=1" target="_blank" rel="noopener noreferrer" class="cta-button">Démarrer</a>
                 </div>
-                
+
                 <div class="account-card">
                     <h3>Swing</h3>
                     <div class="account-price">50K - 150K</div>
@@ -826,7 +975,7 @@
                         <li>Flexibilité maximale</li>
                         <li>Tous les styles acceptés</li>
                     </ul>
-                    <a href="#contact" class="cta-button">Démarrer</a>
+                    <a href="https://member.phidiaspropfirm.com/aff/go/lucasdu73?i=1" target="_blank" rel="noopener noreferrer" class="cta-button">Démarrer</a>
                 </div>
             </div>
         </div>
@@ -843,25 +992,37 @@
                     <div class="code-text">LUCAS</div>
                 </div>
                 
-                <a href="https://member.phidiaspropfirm.com/aff/go/lucasdu73?i=1" target="_blank" class="cta-button">S'inscrire sur Phidias</a>
+                <a href="https://member.phidiaspropfirm.com/aff/go/lucasdu73?i=1" target="_blank" rel="noopener noreferrer" class="cta-button">S'inscrire sur Phidias</a>
                 
-                <p style="margin-top: 40px; color: #999; font-size: 14px;">
+                <p style="margin-top: 40px; color: #aaa; font-size: 14px;">
                     En utilisant le code LUCAS, vous soutenez mon travail et bénéficiez de mon support exclusif
                 </p>
             </div>
         </div>
     </section>
 
+    <button class="back-to-top" id="backToTop" aria-label="Retour en haut de page">↑</button>
+
     <footer>
         <div class="container">
             <h3 style="color: #FFD700; font-size: 28px; margin-bottom: 20px; font-weight: 800;">LUCAS PROPFIRM</h3>
             <p style="color: #aaa; margin-bottom: 15px;">Partenaire affilié Phidias Propfirm</p>
             <p style="color: #FFD700; font-size: 20px; font-weight: bold; margin: 20px 0;">Code affilié : LUCAS</p>
-            <p style="margin-top: 40px; color: #666; font-size: 14px;">© 2026 Lucas Propfirm - Tous droits réservés</p>
+            <p style="margin-top: 40px; color: #888; font-size: 14px;">© 2026 Lucas Propfirm - Tous droits réservés</p>
         </div>
     </footer>
 
     <script>
+        // Mobile hamburger menu
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', function () {
+            navLinks.classList.toggle('open');
+            this.classList.toggle('active');
+        });
+
+        // Smooth scroll navigation (closes mobile menu on click)
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -869,9 +1030,25 @@
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
+                navLinks.classList.remove('open');
+                menuToggle.classList.remove('active');
             });
         });
 
+        // Back to top button
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+        backToTop.addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Intersection Observer for fade-in animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -893,7 +1070,9 @@
             observer.observe(el);
         });
 
+        // Copy code functionality
         document.querySelectorAll('.code-text').forEach(code => {
+            code.style.cursor = 'pointer';
             code.addEventListener('click', function() {
                 navigator.clipboard.writeText('LUCAS').then(() => {
                     const original = this.textContent;

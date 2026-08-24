@@ -35,7 +35,7 @@ UNE idée par vidéo ; 38-42 mots ; ≈15 s (durée verrouillée au TTS réel Ju
 
 ## Publication
 - Signature de fin : logo LP rond lime (2 dernières s) + encart CODE LUCAS / lucaspropfirm.fr.
-- Descriptions IG/TikTok/YouTube : accroche → contenu → **bloc de liens 9 lignes** (Phidias LUCAS, Discord, PropLog, 2 newsletters, Affiliation, Limova PROFILM30, Wisewand LUCAS10 FR/EN). Format exact et texte dans `short-description`.
+- Descriptions IG/TikTok/YouTube : accroche → contenu → **bloc de liens 10 lignes** (Phidias LUCAS, Discord, PropLog, 2 newsletters, Affiliation, Limova PROFILM30, Wisewand LUCAS10 FR/EN, Higgsfield lucas17). Format exact et texte dans `short-description`.
 
 ## Mesure
 - Tester **UNE seule variable par post** ; seuils relatifs à la médiane du compte.

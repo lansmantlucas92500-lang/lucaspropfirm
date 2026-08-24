@@ -67,7 +67,7 @@ Le hook est la phrase d'accroche des 0-1,2 s. Il doit être compréhensible **sa
 ## DESCRIPTION IG (format fixe)
 accroche émoji → lignes "👉" → "🎓 abonne-toi" → **bloc de liens complet**. Dire « jusqu'à -80 % », jamais garanti.
 
-### Bloc de liens (9 lignes — TOUJOURS COMPLET, chaque lien sur SA propre ligne)
+### Bloc de liens (10 lignes — TOUJOURS COMPLET, chaque lien sur SA propre ligne)
 ```
 🔑 Code 𝗟𝗨𝗖𝗔𝗦 → jusqu'à -80 % chez Phidias : https://phidiaspropfirm.com
 📌 Discord & formation : https://lucaspropfirm.fr
@@ -78,8 +78,9 @@ accroche émoji → lignes "👉" → "🎓 abonne-toi" → **bloc de liens comp
 🎁 Limova code promo PROFILM30 : https://limova.ai/?linkId=lp_079563&sourceId=lucas-lansmant&tenantId=limova
 🤖 Wisewand.ai (rédacteur IA optimisé SEO) code promo LUCAS10 → -10 % : https://wisewand.ai/?fpr=lucas
 🤖 Wisewand.ai (EN) (rédacteur IA optimisé SEO) code promo LUCAS10 → -10 % : https://wisewand.ai/en/?fpr=lucas
+🎬 Higgsfield (génération vidéo IA) : https://higgsfield.ai?fpr=lucas17
 ```
-Structure : accroche → ligne vide → contenu (1-2 lignes) → ligne vide → bloc de liens (9 lignes). Ne jamais tronquer ni coller les liens sur une seule ligne.
+Structure : accroche → ligne vide → contenu (1-2 lignes) → ligne vide → bloc de liens (10 lignes). Ne jamais tronquer ni coller les liens sur une seule ligne.
 
 ## RÈGLE DE VALIDATION
 Proposer d'abord **concept + script + prompt complet**, attendre la **validation utilisateur**, puis **confirmer les crédits AVANT toute génération**. Jamais de génération sans double validation.

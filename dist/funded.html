@@ -1732,20 +1732,20 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
       --surface:#090b0a;
       --surface-2:#162d1f;
       --surface-3:#162d1f;
-      --text:#2ce877;
-      --muted:#625a55;
-      --subtle:#7b6f68;
+      --text:#133521;--text__fg:#4fee8e;
+      --muted:#cbc6c3;
+      --subtle:#ccc6c2;
       --line:#2a6f47;
       --line-strong:#2a6f47;
-      --coral:#2ce877;
-      --coral-bright:#2ce877;
-      --coral-dark:#18a553;
-      --coral-soft:rgba(44,232,119,0.12);
-      --coral-faint:rgba(44,232,119,0.055);
-      --success:#6cc69b;
-      --success-soft:#eef8f2;
+      --coral:#133521;
+      --coral-bright:#133521;--coral-bright__fg:#4fee8e;
+      --coral-dark:#133521;--coral-dark__fg:#4fee8e;
+      --coral-soft:rgba(19,53,33,0.12);
+      --coral-faint:rgba(19,53,33,0.055);
+      --success:#73c9a0;
+      --success-soft:#153321;
       --danger:#18a553;
-      --danger-soft:#2a6f47;
+      --danger-soft:#162d1f;
       --ink:#ffffff;
       --font-sans:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       --font-display:"Playfair Display", Georgia, serif;
@@ -1775,9 +1775,9 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     body {
       margin:0;
       overflow-x:clip;
-      background:radial-gradient(circle at 88% 3%, rgba(23,64,40,0.14), transparent 30rem),
+      background:radial-gradient(circle at 88% 3%, rgba(19,53,33,0.14), transparent 30rem),
         linear-gradient(180deg, var(--bg), #090b0a 35rem, var(--bg));
-      color:var(--text);
+      color:var(--text__fg);
       font-family:var(--font-sans);
       font-size:1rem;
       line-height:1.65;
@@ -1788,8 +1788,8 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
       position:fixed;
       inset:0;
       z-index:-2;
-      background-image:linear-gradient(rgba(18,54,33,0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(18,54,33,0.025) 1px, transparent 1px);
+      background-image:linear-gradient(rgba(19,53,33,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(19,53,33,0.025) 1px, transparent 1px);
       background-size:4rem 4rem;
       content:"";
       pointer-events:none;
@@ -1901,7 +1901,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
       display:inline-flex;
       align-items:center;
       gap:0.55rem;
-      color:var(--text);
+      color:var(--text__fg);
       font-weight:850;
     }
 
@@ -1933,7 +1933,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     }
 
     .copy-code__state {
-      color:#81f8b3;
+      color:#8bf9b9;
       font-family:var(--font-sans);
       font-size:0.75rem;
       font-weight:800;
@@ -1944,7 +1944,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
       display:inline-flex;
       min-height:2.75rem;
       align-items:center;
-      color:var(--coral-bright);
+      color:var(--coral-bright__fg);
       font-weight:800;
       text-decoration:none;
     }
@@ -1976,12 +1976,12 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     }
 
     .monogram-disc {
-      fill:var(--coral-bright);
+      fill:var(--coral-bright__fg);
     }
 
     .monogram-ring {
       fill:none;
-      stroke:#81f8b3;
+      stroke:#8bf9b9;
       stroke-width:1.5;
     }
 
@@ -2001,7 +2001,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
 
     .brand__descriptor {
       margin-top:0.25rem;
-      color:var(--coral-dark);
+      color:var(--coral-dark__fg);
       font-size:0.69rem;
       font-weight:850;
       letter-spacing:0.16em;
@@ -2009,7 +2009,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     }
 
     .desktop-nav__strong {
-      color:var(--text) !important;
+      color:var(--text__fg) !important;
       font-weight:900 !important;
     }
 
@@ -2063,7 +2063,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     .mobile-menu__panel a:hover,
     .mobile-menu__panel a:focus-visible {
       background:var(--coral-soft);
-      color:var(--coral-dark);
+      color:var(--coral-dark__fg);
     }
 
     .mobile-menu__languages {
@@ -2096,7 +2096,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     }
 
     .breadcrumb a {
-      color:var(--coral-bright);
+      color:var(--coral-bright__fg);
     }
 
     .button {
@@ -2133,12 +2133,12 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     .button--secondary {
       border-color:var(--line-strong);
       background:var(--surface);
-      color:var(--text);
+      color:var(--text__fg);
     }
 
     .button--secondary:hover {
       border-color:var(--coral-bright);
-      color:var(--coral-dark);
+      color:var(--coral-dark__fg);
     }
 
     .eyebrow {
@@ -2146,7 +2146,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
       align-items:center;
       gap:0.6rem;
       margin-bottom:1rem;
-      color:var(--coral-bright);
+      color:var(--coral-bright__fg);
       font-size:0.74rem;
       font-weight:900;
       letter-spacing:0.13em;
@@ -2205,7 +2205,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
       height:1.25rem;
       flex:0 0 auto;
       margin-top:0.15rem;
-      color:var(--coral-bright);
+      color:var(--coral-bright__fg);
     }
 
     .session-card {
@@ -2285,7 +2285,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
       place-items:center;
       border-radius:50%;
       background:var(--coral-soft);
-      color:var(--coral-dark);
+      color:var(--coral-dark__fg);
       font-family:var(--font-mono);
       font-size:0.68rem;
       font-weight:900;
@@ -2361,7 +2361,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
       place-items:center;
       border-radius:0.85rem;
       background:var(--coral-soft);
-      color:var(--coral-dark);
+      color:var(--coral-dark__fg);
     }
 
     .resource-card__icon svg {
@@ -2392,7 +2392,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
 
     .resource-note strong,
     .source-note strong {
-      color:var(--text);
+      color:var(--text__fg);
     }
 
     .setup-grid {
@@ -2416,7 +2416,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     }
 
     .setup-card__number {
-      color:var(--coral-bright);
+      color:var(--coral-bright__fg);
       font-family:var(--font-mono);
       font-size:0.72rem;
       font-weight:900;
@@ -2426,7 +2426,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     .pill {
       flex:0 0 auto;
       background:var(--coral-soft);
-      color:var(--coral-dark);
+      color:var(--coral-dark__fg);
     }
 
     .setup-card > p {
@@ -2457,7 +2457,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
 
     .setup-card dd {
       margin:0;
-      color:var(--text);
+      color:var(--text__fg);
       font-size:0.86rem;
       font-weight:700;
       overflow-wrap:anywhere;
@@ -2475,7 +2475,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     .setup-example strong {
       display:block;
       margin-bottom:0.25rem;
-      color:var(--coral-dark);
+      color:var(--coral-dark__fg);
     }
 
     .setup-card .text-link {
@@ -2516,7 +2516,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
       border:1px solid var(--line-strong);
       border-radius:50%;
       background:var(--surface);
-      color:var(--coral-dark);
+      color:var(--coral-dark__fg);
       content:counter(method, decimal-leading-zero);
       font-family:var(--font-mono);
       font-size:0.68rem;
@@ -2550,7 +2550,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
 
     .method-aside p,
     .method-aside li {
-      color:#81f8b3;
+      color:#8bf9b9;
       font-size:0.88rem;
     }
 
@@ -2592,7 +2592,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     }
 
     .access-card__label {
-      color:var(--coral-bright);
+      color:var(--coral-bright__fg);
       font-size:0.72rem;
       font-weight:900;
       letter-spacing:0.08em;
@@ -2747,7 +2747,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
       position:relative;
       z-index:1;
       max-width:54rem;
-      color:#81f8b3;
+      color:#8bf9b9;
     }
 
     .transparency-grid {
@@ -2769,12 +2769,12 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     .transparency-item strong {
       display:block;
       margin-bottom:0.35rem;
-      color:#2ce877;
+      color:#4fee8e;
       font-size:0.85rem;
     }
 
     .transparency-item p {
-      color:#81f8b3;
+      color:#8bf9b9;
       font-size:0.82rem;
     }
 
@@ -2788,7 +2788,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     }
 
     .transparency-links a {
-      color:#81f8b3;
+      color:#8bf9b9;
       font-weight:800;
     }
 
@@ -2828,7 +2828,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
       place-items:center;
       border-radius:50%;
       background:var(--coral-soft);
-      color:var(--coral-dark);
+      color:var(--coral-dark__fg);
       content:"+";
       font-size:1.1rem;
     }
@@ -2843,14 +2843,14 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     }
 
     .faq-list__answer a {
-      color:var(--coral-bright);
+      color:var(--coral-bright__fg);
       font-weight:750;
     }
 
     .final-cta {
       padding:clamp(1.6rem, 5vw, 3.5rem);
       border-radius:var(--radius-xl);
-      background:linear-gradient(135deg, #123621, #123621);
+      background:linear-gradient(135deg, #133521, #133521);
       color:#ffffff;
       box-shadow:var(--shadow);
     }
@@ -2861,7 +2861,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
 
     .final-cta > p {
       max-width:52rem;
-      color:#81f8b3;
+      color:#8bf9b9;
     }
 
     .final-cta .button--secondary {
@@ -2872,7 +2872,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
 
     .final-cta__note {
       margin-top:1rem;
-      color:#81f8b3;
+      color:#8bf9b9;
       font-size:0.78rem;
     }
 
@@ -2923,7 +2923,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     }
 
     .footer-legal a:hover {
-      color:var(--coral-bright);
+      color:var(--coral-bright__fg);
       text-decoration:underline;
     }
 

@@ -340,7 +340,8 @@ def transform_color(tok, prop=''):
     if s < 0.13:  # neutres
         if a is not None and a < 0.95:  # voiles translucides
             if is_fg:
-                return tok if l > 0.5 else _from_hls(h, 1 - l, s, a)
+                # texte translucide : toujours clair et assez opaque pour rester lisible
+                return _from_hls(h, max(l, 0.85) if l > 0.5 else max(0.80, 1 - l), s, max(a, 0.75))
             return _from_hls(h, 1 - l, s, a)
         if is_fg:
             # texte : clair reste clair, sombre devient clair
@@ -348,7 +349,9 @@ def transform_color(tok, prop=''):
         if is_bg:
             if l > 0.65:
                 return _from_hls(0.42, max(0.04, min(0.10, 1 - l + 0.04)), 0.10, a)
-            return _from_hls(h, 1 - l, s, a) if l > 0.35 else tok  # fonds déjà sombres conservés
+            if l > 0.35:
+                return _from_hls(h, 0.13, s, a)  # gris moyens : jamais de fond intermédiaire
+            return tok  # fonds déjà sombres conservés
         # bordures / divers : inversion
         if l > 0.8:
             return _from_hls(h, max(0.10, min(0.18, 1 - l + 0.10)), s, a)
@@ -358,35 +361,65 @@ def transform_color(tok, prop=''):
         if is_bg:
             if l > 0.6:
                 return _from_hls(H, 0.13, 0.35, a)   # fonds teintés clairs → panneau vert sombre
-            if l >= 0.35:
-                # panneaux/boutons pleins : panneau vert sombre (leur texte clair reste lisible)
-                return _from_hls(H, 0.17, 0.48, a)
-            return _from_hls(H, 0.14, 0.50, a)
+            return _from_hls(H, 0.14, 0.48, a)       # panneaux/boutons pleins → panneau sombre
         if is_fg:
-            return _from_hls(144 / 360, 0.54, 0.80, a) if l < 0.75 else _from_hls(H, 0.74, 0.90, a)
+            return _from_hls(144 / 360, 0.62, 0.82, a) if l < 0.75 else _from_hls(H, 0.76, 0.90, a)
         # bordures et divers
         if l > 0.6:
             return _from_hls(H, 0.30, 0.45, a)
-        return _from_hls(144 / 360, 0.54, 0.80, a) if l >= 0.35 else _from_hls(H, 0.37, 0.75, a)
+        return _from_hls(144 / 360, 0.58, 0.80, a) if l >= 0.35 else _from_hls(H, 0.37, 0.75, a)
     if deg < 5 or deg > 340:  # rouges (danger)
         if is_bg:
-            return _from_hls(h, 0.16, 0.45, a) if l > 0.6 else (tok if l < 0.45 else _from_hls(h, 0.30, s, a))
-        return _from_hls(h, 0.68, min(s, 0.9), a) if l < 0.55 else tok
+            return _from_hls(h, 0.15, 0.45, a) if l > 0.25 else tok
+        return _from_hls(h, 0.72, min(s, 0.9), a) if l < 0.6 else tok
     if 180 <= deg <= 300:  # bleus / violets
         if is_bg:
-            return _from_hls(h, 0.15, min(s, 0.5), a) if l > 0.6 else tok
-        return _from_hls(h, 0.70, s, a) if l < 0.45 else tok
+            return _from_hls(h, 0.14, min(s, 0.5), a) if l > 0.25 else tok
+        return _from_hls(h, 0.72, s, a) if l < 0.5 else tok
     # verts / jaunes déjà en place
     if is_bg:
-        if l > 0.6:
-            return _from_hls(h, 0.14, min(s, 0.5), a)
-        return _from_hls(h, 0.17, min(s, 0.5), a) if l >= 0.35 else tok
-    return _from_hls(h, 0.60, s, a) if l < 0.35 else tok
+        return _from_hls(h, 0.14, min(s, 0.5), a) if l >= 0.25 else tok
+    return _from_hls(h, 0.62, s, a) if l < 0.6 else tok
 
 COLOR_TOKEN = re.compile(r'#[0-9a-fA-F]{3,8}\b|rgba?\([^)]*\)|hsla?\([^)]*\)|\b(?:white|black)\b')
 
-def resolve_prop_role(prop):
-    """Rôle effectif d'une propriété ; les variables CSS sont classées par leur nom sémantique."""
+def classify_var_usages(css):
+    """Rôle réel de chaque variable CSS d'après ses usages : {'--x': {'fg','bg',...}}."""
+    usage = {}
+    for m in re.finditer(r'([a-zA-Z-][\w-]*)\s*:\s*([^;}]+)', css):
+        prop, value = m.group(1).lower(), m.group(2)
+        if 'var(' not in value:
+            continue
+        if prop in FG_PROPS:
+            role = 'fg'
+        elif 'background' in prop:
+            role = 'bg'
+        elif 'border' in prop or 'outline' in prop or 'shadow' in prop:
+            role = 'border'
+        else:
+            role = 'other'
+        for var in re.findall(r'var\(\s*(--[\w-]+)', value):
+            usage.setdefault(var, set()).add(role)
+    # propagation à travers les indirections (--gradient: linear-gradient(var(--green)) …)
+    defs = dict(re.findall(r'(--[\w-]+)\s*:\s*([^;}]+)', css))
+    for _ in range(3):
+        changed = False
+        for var, roles in list(usage.items()):
+            val = defs.get(var)
+            if not val:
+                continue
+            for ref in re.findall(r'var\(\s*(--[\w-]+)', val):
+                cur = usage.setdefault(ref, set())
+                add = roles - cur
+                if add:
+                    cur |= add
+                    changed = True
+        if not changed:
+            break
+    return usage
+
+def resolve_prop_role(prop, var_roles=None):
+    """Rôle effectif d'une propriété ; les variables CSS sont classées par nom puis par usage réel."""
     p = prop.lower()
     if p.startswith('--'):
         if re.search(r'ink|text|fg|foreground|title|heading|label', p):
@@ -395,16 +428,40 @@ def resolve_prop_role(prop):
             return 'background'
         if re.search(r'shadow', p):
             return 'box-shadow'
+        roles = (var_roles or {}).get(prop, set())
+        if 'bg' in roles:
+            return 'background'   # les doubles usages reçoivent une jumelle __fg
+        if 'fg' in roles:
+            return 'color'
         return p  # bordures/accents : règles par défaut
     return p
 
+_FG_PROPS_ALT = '|'.join(re.escape(p) for p in sorted(FG_PROPS))
+
 def transform_css_colors(css):
-    """Transforme toutes les couleurs d'un bloc CSS, déclaration par déclaration."""
+    """Transforme toutes les couleurs d'un bloc CSS, déclaration par déclaration.
+    Les variables utilisées à la fois en texte et en fond reçoivent une jumelle --x__fg."""
+    var_roles = classify_var_usages(css)
+    # double usage réel (texte ET fond) : prime sur la classification par nom (--ink en fond de bouton…)
+    dual = {v for v, roles in var_roles.items() if 'fg' in roles and 'bg' in roles}
+
     def decl(m):
-        prop, val = resolve_prop_role(m.group(2)), m.group(3)
+        raw_prop = m.group(2)
+        prop = 'background' if raw_prop in dual else resolve_prop_role(raw_prop, var_roles)
+        val = m.group(3)
         newval = COLOR_TOKEN.sub(lambda cm: transform_color(cm.group(0), prop), val)
-        return m.group(1) + m.group(2) + ':' + newval
-    return re.sub(r'([{;]\s*)(-{0,2}[a-zA-Z][\w-]*)\s*:\s*([^;}]+)', decl, css)
+        out = m.group(1) + raw_prop + ':' + newval
+        if raw_prop in dual:
+            fgval = COLOR_TOKEN.sub(lambda cm: transform_color(cm.group(0), 'color'), m.group(3))
+            out += ';' + raw_prop + '__fg:' + fgval
+        return out
+    css = re.sub(r'([{;]\s*)(-{0,2}[a-zA-Z][\w-]*)\s*:\s*([^;}]+)', decl, css)
+    # rediriger les usages texte des variables doubles vers leur jumelle
+    for var in dual:
+        css = re.sub(
+            r'((?:[{;]\s*)(?:' + _FG_PROPS_ALT + r')\s*:[^;}]*?var\(\s*)' + re.escape(var) + r'(\s*[,)])',
+            lambda mm: mm.group(1) + var + '__fg' + mm.group(2), css)
+    return css
 
 # ---------- Élagage des règles CSS du vieux shell ----------
 SHELL_SEL = re.compile(

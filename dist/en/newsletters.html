@@ -1747,22 +1747,22 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     :root {
       color-scheme:light;
       --paper:#162d1f;
-      --surface:#090b0a;
+      --surface:#090b0a;--surface__fg:#ffffff;
       --surface-soft:#162d1f;
       --surface-strong:#162d1f;
-      --ink:#2ce877;
+      --ink:#133521;--ink__fg:#4fee8e;
       --ink-soft:#ccc5c2;
       --ink-muted:#ccc5c2;
-      --coral:#2ce877;
-      --coral-dark:#2ce877;
+      --coral:#133521;--coral__fg:#4fee8e;
+      --coral-dark:#133521;--coral-dark__fg:#4fee8e;
       --coral-deep:#18a553;
-      --coral-soft:#2a6f47;
+      --coral-soft:#162d1f;
       --line:#2a6f47;
-      --line-strong:#2a6f47;
-      --success:#70c2a4;
-      --success-soft:#edf8f2;
-      --error:#de847d;
-      --error-soft:#fff0ef;
+      --line-strong:#8bf9b9;
+      --success:#77c5a9;
+      --success-soft:#143322;
+      --error:#e2938d;
+      --error-soft:#371715;
       --shadow-sm:0 12px 34px rgba(74, 43, 29, 0.07);
       --shadow:0 28px 76px rgba(74, 43, 29, 0.12);
       --radius-sm:12px;
@@ -1791,9 +1791,9 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
       min-width:320px;
       margin:0;
       overflow-x:hidden;
-      color:var(--ink);
-      background:linear-gradient(rgba(23,64,40,0.028) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(23,64,40,0.028) 1px, transparent 1px),
+      color:var(--ink__fg);
+      background:linear-gradient(rgba(19,53,33,0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(19,53,33,0.028) 1px, transparent 1px),
         var(--paper);
       background-size:56px 56px;
       font-family:var(--font-sans);
@@ -1854,12 +1854,12 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     }
 
     :focus-visible {
-      outline:3px solid rgba(44,232,119,0.48);
+      outline:3px solid rgba(62,234,131,0.48);
       outline-offset:4px;
     }
 
     ::selection {
-      color:var(--ink);
+      color:var(--ink__fg);
       background:var(--coral-soft);
     }
 
@@ -1875,7 +1875,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
 
     .top-note {
       border-bottom:1px solid var(--line);
-      color:var(--ink);
+      color:var(--ink__fg);
       background:rgba(0,0,0,0.9);
     }
 
@@ -1913,7 +1913,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     }
 
     .top-note__link {
-      color:var(--coral-dark);
+      color:var(--coral-dark__fg);
       font-weight:800;
       text-decoration:none;
     }
@@ -1936,8 +1936,8 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     }
 
     .monogram-disc {
-      fill:var(--surface);
-      stroke:var(--coral);
+      fill:var(--surface__fg);
+      stroke:var(--coral__fg);
       stroke-width:1.5;
     }
 
@@ -1948,7 +1948,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     }
 
     .monogram-letter {
-      fill:var(--coral-dark);
+      fill:var(--coral-dark__fg);
     }
 
     .brand__wordmark {
@@ -1974,7 +1974,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     }
 
     .desktop-nav__strong {
-      color:var(--ink) !important;
+      color:var(--ink__fg) !important;
       font-weight:840 !important;
     }
 
@@ -2027,7 +2027,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
 
     .mobile-menu__panel > a:hover,
     .mobile-menu__panel > a[aria-current="page"] {
-      color:var(--coral-dark);
+      color:var(--coral-dark__fg);
       background:var(--surface-soft);
     }
 
@@ -2066,7 +2066,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     }
 
     .breadcrumb a {
-      color:var(--coral-dark);
+      color:var(--coral-dark__fg);
       font-weight:750;
       text-decoration:none;
     }
@@ -2079,7 +2079,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
       position:relative;
       overflow:hidden;
       border-block:1px solid var(--line);
-      background:radial-gradient(circle at 12% 10%, rgba(23,64,40,0.16), transparent 30%),
+      background:radial-gradient(circle at 12% 10%, rgba(19,53,33,0.16), transparent 30%),
         radial-gradient(circle at 88% 16%, rgba(22,45,31,0.7), transparent 26%),
         linear-gradient(145deg, rgba(9,11,10,0.98), rgba(22,45,31,0.92));
     }
@@ -2090,7 +2090,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
       right:-120px;
       width:560px;
       height:560px;
-      border:1px solid rgba(44,232,119,0.18);
+      border:1px solid rgba(62,234,131,0.18);
       border-radius:50%;
       content:"";
     }
@@ -2111,7 +2111,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
       align-items:center;
       gap:10px;
       margin-bottom:18px;
-      color:var(--coral-dark);
+      color:var(--coral-dark__fg);
       font-family:var(--font-mono);
       font-size:0.71rem;
       font-weight:750;
@@ -2137,7 +2137,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
 
     .hero h1 em {
       display:block;
-      color:var(--coral-dark);
+      color:var(--coral-dark__fg);
       font-weight:500;
     }
 
@@ -2202,7 +2202,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
 
     .signup-card__label {
       margin-bottom:10px;
-      color:var(--coral-dark);
+      color:var(--coral-dark__fg);
       font-family:var(--font-mono);
       font-size:0.7rem;
       font-weight:750;
@@ -2252,7 +2252,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
       padding:0 16px;
       border:1px solid var(--line-strong);
       border-radius:12px;
-      color:var(--ink);
+      color:var(--ink__fg);
       background:var(--surface);
       font-size:1rem;
       transition:border-color 160ms ease, box-shadow 160ms ease;
@@ -2287,7 +2287,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     }
 
     .form-consent a {
-      color:var(--coral-dark);
+      color:var(--coral-dark__fg);
       font-weight:750;
     }
 
@@ -2331,7 +2331,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     }
 
     .button--secondary {
-      color:var(--coral-dark);
+      color:var(--coral-dark__fg);
       border-color:var(--line-strong);
       background:var(--surface);
     }
@@ -2394,7 +2394,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     }
 
     .form-flow strong {
-      color:var(--ink);
+      color:var(--ink__fg);
       font-family:var(--font-mono);
       font-size:0.7rem;
     }
@@ -2414,7 +2414,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     }
 
     .disclosure__title {
-      color:var(--coral-dark);
+      color:var(--coral-dark__fg);
       font-family:var(--font-mono);
       font-size:0.7rem;
       font-weight:750;
@@ -2484,7 +2484,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
 
     .content-card__number {
       margin-bottom:42px;
-      color:var(--coral-dark);
+      color:var(--coral-dark__fg);
       font-family:var(--font-mono);
       font-size:0.74rem;
       font-weight:800;
@@ -2547,7 +2547,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
       display:grid;
       place-items:center;
       border-radius:50%;
-      color:var(--coral-dark);
+      color:var(--coral-dark__fg);
       background:var(--coral-soft);
       font-size:0.68rem;
       font-weight:900;
@@ -2636,7 +2636,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     }
 
     .email-preview__sections strong {
-      color:var(--coral-dark);
+      color:var(--coral-dark__fg);
       font-family:var(--font-mono);
       font-size:0.69rem;
       letter-spacing:0.06em;
@@ -2703,7 +2703,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
       display:grid;
       place-items:center;
       border-radius:50%;
-      color:var(--coral-dark);
+      color:var(--coral-dark__fg);
       background:var(--surface-soft);
       font-family:var(--font-mono);
       font-size:0.7rem;
@@ -2749,7 +2749,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
 
     .source-list a {
       width:fit-content;
-      color:var(--coral-dark);
+      color:var(--coral-dark__fg);
       font-size:0.8rem;
       font-weight:800;
       text-decoration:none;
@@ -2810,7 +2810,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
 
     .resource-card__tag {
       margin-bottom:30px;
-      color:var(--coral-dark);
+      color:var(--coral-dark__fg);
       font-family:var(--font-mono);
       font-size:0.68rem;
       font-weight:750;
@@ -2832,7 +2832,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     .resource-card a {
       width:fit-content;
       margin-top:auto;
-      color:var(--coral-dark);
+      color:var(--coral-dark__fg);
       font-weight:850;
       text-decoration:none;
     }
@@ -2849,13 +2849,13 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
       padding:clamp(34px, 6vw, 68px);
       border-radius:var(--radius-lg);
       color:#ffffff;
-      background:radial-gradient(circle at 90% 0, rgba(23,64,40,0.32), transparent 34%),
-        linear-gradient(135deg, #123621, #123621);
+      background:radial-gradient(circle at 90% 0, rgba(19,53,33,0.32), transparent 34%),
+        linear-gradient(135deg, #133521, #133521);
       box-shadow:var(--shadow);
     }
 
     .affiliate-panel .eyebrow {
-      color:#81f8b3;
+      color:#8bf9b9;
     }
 
     .affiliate-panel .eyebrow::before {
@@ -2873,7 +2873,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     .affiliate-panel p {
       max-width:720px;
       margin-bottom:0;
-      color:rgba(255, 255, 255, 0.76);
+      color:rgba(255,255,255,0.76);
     }
 
     .code-box {
@@ -2886,7 +2886,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     }
 
     .code-box__label {
-      color:rgba(255, 255, 255, 0.7);
+      color:rgba(255,255,255,0.75);
       font-family:var(--font-mono);
       font-size:0.67rem;
       letter-spacing:0.1em;
@@ -2914,13 +2914,13 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     }
 
     .copy-code span {
-      color:#81f8b3;
+      color:#8bf9b9;
       font-size:0.75rem;
       font-weight:800;
     }
 
     .code-box .button {
-      color:var(--ink);
+      color:var(--ink__fg);
       background:#090b0a;
     }
 
@@ -2947,7 +2947,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
       place-items:center;
       border:1px solid var(--coral);
       border-radius:50%;
-      color:var(--coral-dark);
+      color:var(--coral-dark__fg);
       background:var(--surface-soft);
       font-family:var(--font-display);
       font-size:1.8rem;
@@ -3008,7 +3008,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
       display:grid;
       place-items:center;
       border-radius:50%;
-      color:var(--coral-dark);
+      color:var(--coral-dark__fg);
       background:var(--surface-soft);
       font-size:1.1rem;
       content:"+";
@@ -3051,12 +3051,12 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     .final-cta p {
       max-width:740px;
       margin-bottom:0;
-      color:rgba(255, 255, 255, 0.72);
+      color:rgba(255,255,255,0.75);
     }
 
     .final-cta .button {
       min-width:250px;
-      color:var(--ink);
+      color:var(--ink__fg);
       background:#090b0a;
     }
 
@@ -3109,7 +3109,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
     }
 
     .footer-legal a:hover {
-      color:var(--coral-dark);
+      color:var(--coral-dark__fg);
       text-decoration:underline;
     }
 
@@ -3123,7 +3123,7 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
       padding:12px 16px;
       border:1px solid var(--line-strong);
       border-radius:12px;
-      color:var(--ink);
+      color:var(--ink__fg);
       background:var(--surface);
       box-shadow:var(--shadow);
       font-size:0.82rem;
@@ -4105,5 +4105,6 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
       });
     })();
   </script>
+<style data-contrast-fix>body main .container em{color:#06180d!important}</style>
 </body>
 </html>

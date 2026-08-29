@@ -1272,6 +1272,259 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
   main th, main td { padding: .5em .6em; font-size: .85rem; }
 }
 </style>
+  <style data-page-css>
+/*
+ * css/recapmacros.css — landing "Recap Macro" (thème corail claude.ai).
+ * Autonome : aucun bundle externe. Reproduit l'esthétique Claude Design en CSS statique.
+ */
+:root {
+  --c-bg:#162d1f;
+  --c-surface:#090b0a;
+  --c-text:#e0e0e2;
+  --c-text-secondary:#cbc9c2;
+  --c-text-muted:#cac8c4;
+  --c-text-faint:#cbc9c2;
+  --c-accent:#2ce877;
+  --c-accent-hover:#2ce877;
+  --c-accent-pressed:#2ce877;
+  --c-accent-tint:#2a6f47;
+  --c-accent-ring:rgba(44,232,119,0.35);
+  --c-border:#2a6f47;
+  --c-border-subtle:#2a6f47;
+  --c-border-strong:#2a6f47;
+  --c-success:#6ac895;
+  --c-success-bg:#1a2e22;
+  --c-danger:#df807c;
+  --c-danger-bg:#162d1f;
+  --font-sans:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-serif:'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-mono:'SFMono-Regular', ui-monospace, Menlo, Consolas, monospace;
+  --radius-sm:9px;
+  --radius-md:14px;
+  --radius-lg:22px;
+  --shadow-xs:0 1px 2px rgba(40, 30, 20, 0.06);
+  --shadow-sm:0 2px 10px rgba(40, 30, 20, 0.06);
+  --shadow-md:0 12px 40px rgba(40, 30, 20, 0.10);
+  --ease:cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  margin:0;
+  background:var(--c-bg);
+  color:var(--c-text);
+  font-family:var(--font-sans);
+  font-size:16px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+.rm-root { min-height:100vh; position:relative; }
+.wrap { max-width:700px; margin:0 auto; padding-left:24px; padding-right:24px; }
+.wrap--narrow { max-width:680px; }
+.rm-header__inner { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:13px 0; }
+.rm-brand { display:flex; align-items:center; gap:10px; min-width:0; }
+.rm-logo {
+  width:32px; height:32px; border-radius:9px; background:var(--c-accent);
+  display:grid; place-items:center; box-shadow:var(--shadow-xs); flex:none;
+}
+.rm-brand__name { font-weight:600; font-size:15px; letter-spacing:-0.01em; white-space:nowrap; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  font-family:inherit; font-weight:600; border:none; cursor:pointer;
+  border-radius:var(--radius-sm); text-decoration:none; line-height:1;
+  transition:background 0.18s var(--ease), transform 0.05s var(--ease);
+}
+.btn:active { transform:translateY(1px); }
+.btn--primary { background:var(--c-accent); color:#ffffff; }
+.btn--primary:hover { background:var(--c-accent-hover); }
+.btn--primary:active { background:var(--c-accent-pressed); }
+.btn--sm { height:34px; padding:0 14px; font-size:13.5px; }
+.btn--md { height:46px; padding:0 18px; font-size:15px; }
+.btn--lg { height:50px; padding:0 26px; font-size:15.5px; }
+.btn--block { width:100%; }
+.btn:disabled { opacity:0.65; cursor:default; }
+
+/* ---------- Badge / Eyebrow ---------- */
+.badge {
+  display:inline-flex; align-items:center; gap:7px;
+  background:var(--c-accent-tint); color:var(--c-accent-pressed);
+  border-radius:999px; padding:6px 13px; font-size:13px; font-weight:500;
+}
+.badge__dot { width:7px; height:7px; border-radius:999px; background:var(--c-accent); flex:none; }
+.eyebrow {
+  font-family:var(--font-mono); font-size:12px; letter-spacing:0.12em;
+  text-transform:uppercase; color:var(--c-accent-pressed); font-weight:500;
+}
+
+/* ---------- Hero ---------- */
+.hero { padding-top:72px; text-align:center; }
+.hero__title {
+  font-family:var(--font-serif); font-weight:600;
+  font-size:clamp(34px, 5.6vw, 52px); line-height:1.1; letter-spacing:-0.025em;
+  margin:22px 0 0; text-wrap:balance;
+}
+.hero__title em { font-style:italic; color:var(--c-accent); }
+.hero__lead {
+  font-size:clamp(16px, 2.3vw, 19px); line-height:1.62; color:var(--c-text-secondary);
+  max-width:35rem; margin:26px auto 0; text-wrap:pretty;
+}
+.hero__trust {
+  max-width:580px; margin:24px auto 0; display:flex; flex-wrap:wrap;
+  align-items:center; justify-content:center; gap:9px 16px;
+  font-size:13px; color:var(--c-text-muted);
+}
+.hero__trust .sep { opacity:0.35; }
+
+/* ---------- Card (form) ---------- */
+.form-wrap { max-width:452px; margin:36px auto 0; }
+.card {
+  background:var(--c-surface); border:1px solid var(--c-border);
+  border-radius:var(--radius-lg); padding:26px 26px 22px; text-align:left;
+  box-shadow:var(--shadow-md);
+}
+.card--sunken { background:#162d1f; border:1px solid var(--c-border); box-shadow:none; padding:36px 32px; }
+.form-title { font-family:var(--font-serif); font-size:20px; font-weight:600; margin:0; letter-spacing:-0.01em; }
+.form-sub { font-size:13.5px; color:var(--c-text-muted); margin:6px 0 0; }
+.lead-form { margin-top:18px; display:flex; flex-direction:column; gap:10px; }
+.hp { position:absolute; left:-9999px; width:1px; height:1px; opacity:0; pointer-events:none; }
+.input {
+  width:100%; height:46px; padding:0 15px; font-family:inherit; font-size:15px;
+  color:var(--c-text); background:var(--c-bg);
+  border:1px solid var(--c-border); border-radius:var(--radius-sm);
+  transition:border-color 0.18s var(--ease), box-shadow 0.18s var(--ease);
+}
+.input::placeholder { color:var(--c-text-faint); }
+.input:focus { outline:none; border-color:var(--c-accent); box-shadow:0 0 0 3px var(--c-accent-ring); }
+.alert {
+  font-size:13.5px; padding:11px 14px; border-radius:var(--radius-sm);
+  background:var(--c-danger-bg); color:var(--c-danger); border:1px solid rgba(223,128,124,0.25);
+}
+.form-privacy { font-size:12px; color:var(--c-text-faint); margin:13px 0 0; text-align:center; }
+.form-success { text-align:center; padding:14px 4px 10px; }
+.success-icon {
+  width:50px; height:50px; border-radius:999px; background:var(--c-success-bg);
+  color:var(--c-success); display:grid; place-items:center; margin:0 auto;
+}
+.success-title { font-family:var(--font-serif); font-size:21px; font-weight:600; margin:16px 0 0; letter-spacing:-0.01em; }
+.success-text { font-size:14px; color:var(--c-text-secondary); margin:7px 0 0; line-height:1.55; }
+.is-hidden { display:none !important; }
+
+/* ---------- Section headings ---------- */
+.section { padding-top:72px; }
+.section__head { text-align:center; max-width:37rem; margin:0 auto; }
+.section__title {
+  font-family:var(--font-serif); font-weight:600; font-size:clamp(28px, 4.4vw, 40px);
+  line-height:1.12; letter-spacing:-0.022em; margin:12px 0 0; text-wrap:balance;
+}
+.section__lead { font-size:16.5px; line-height:1.6; color:var(--c-text-secondary); margin:16px auto 0; max-width:33rem; text-wrap:pretty; }
+
+/* ---------- Feature list ---------- */
+.features { margin-top:44px; display:flex; flex-direction:column; }
+.feature { display:flex; gap:18px; align-items:flex-start; padding:24px 0; border-top:1px solid var(--c-border-subtle); }
+.feature:last-child { border-bottom:1px solid var(--c-border-subtle); }
+.icon-badge {
+  width:46px; height:46px; border-radius:var(--radius-md); flex:none;
+  background:var(--c-accent-tint); color:var(--c-accent-pressed);
+  display:grid; place-items:center;
+}
+.feature__body { flex:1; min-width:0; }
+.feature__title { font-family:var(--font-serif); font-size:19px; font-weight:600; margin:0; letter-spacing:-0.01em; }
+.feature__text { font-size:15px; line-height:1.55; color:var(--c-text-secondary); margin:5px 0 0; }
+.feature__num { font-family:var(--font-mono); font-size:12px; color:var(--c-text-faint); padding-top:4px; flex:none; }
+
+/* ---------- Quote / stats ---------- */
+.quote-block { display:flex; flex-direction:column; align-items:center; text-align:center; max-width:34rem; margin:0 auto; }
+.quote-mark { font-family:var(--font-serif); font-size:46px; line-height:1; color:var(--c-accent); height:26px; opacity:0.85; }
+.quote-text { font-family:var(--font-serif); font-size:clamp(20px, 3vw, 26px); line-height:1.42; letter-spacing:-0.015em; margin:10px 0 0; text-wrap:pretty; }
+.quote-author { display:flex; align-items:center; gap:12px; margin-top:24px; }
+.avatar {
+  width:40px; height:40px; border-radius:999px; flex:none;
+  background:var(--c-accent); color:#ffffff; display:grid; place-items:center;
+  font-weight:600; font-size:14px; letter-spacing:0.02em;
+}
+.quote-author__name { font-size:14.5px; font-weight:600; margin:0; }
+.quote-author__role { font-size:13px; color:var(--c-text-muted); margin:2px 0 0; }
+.stats-divider { height:1px; background:var(--c-border); margin:32px 0 0; }
+.stats { display:grid; grid-template-columns:repeat(2, 1fr); gap:16px; margin-top:26px; text-align:center; }
+.stats > div:first-child { border-right:1px solid var(--c-border); }
+.stat__num { font-family:var(--font-serif); font-size:27px; font-weight:600; letter-spacing:-0.01em; }
+.stat__num--accent { color:var(--c-accent); }
+.stat__num small { font-size:15px; color:var(--c-text-muted); font-weight:500; }
+.stat__label { font-size:12.5px; color:var(--c-text-muted); margin-top:4px; line-height:1.3; }
+
+/* ---------- FAQ ---------- */
+.faq { margin-top:38px; }
+.faq details { border-top:1px solid var(--c-border-subtle); }
+.faq details:last-child { border-bottom:1px solid var(--c-border-subtle); }
+.faq summary { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:21px 2px; font-size:16.5px; font-weight:500; cursor:pointer; list-style:none; }
+.faq summary::-webkit-details-marker { display:none; }
+.faq-chev { transition:transform 0.22s var(--ease); flex:none; color:var(--c-text-muted); }
+.faq details[open] .faq-chev { transform:rotate(180deg); }
+.faq__answer { font-size:15px; line-height:1.62; color:var(--c-text-secondary); margin:-2px 0 21px; padding-right:34px; }
+
+/* ---------- Final CTA ---------- */
+.cta-card {
+  background:var(--c-accent-tint); border:1px solid var(--c-border);
+  border-radius:var(--radius-lg); padding:46px 32px; text-align:center; box-shadow:var(--shadow-sm);
+}
+.cta-card__title { font-family:var(--font-serif); font-weight:600; font-size:clamp(26px, 3.7vw, 34px); line-height:1.14; letter-spacing:-0.02em; margin:0; text-wrap:balance; }
+.cta-card__lead { font-size:16.5px; line-height:1.6; color:var(--c-text-secondary); margin:14px auto 0; max-width:30rem; text-wrap:pretty; }
+.cta-card__actions { display:flex; flex-direction:column; align-items:center; gap:16px; margin-top:28px; }
+.cta-link { font-size:14px; color:var(--c-text-secondary); text-decoration:none; border-bottom:1px solid var(--c-border-strong); padding-bottom:1px; }
+.cta-link:hover { color:var(--c-accent-pressed); border-color:var(--c-accent); }
+.rm-footer__divider { height:1px; background:var(--c-border-subtle); margin-bottom:30px; }
+.rm-footer__brand { display:inline-flex; align-items:center; gap:9px; }
+.rm-footer__logo { width:26px; height:26px; border-radius:7px; background:var(--c-accent); display:grid; place-items:center; flex:none; }
+.rm-footer__name { font-weight:600; font-size:14px; }
+.rm-footer__note { font-size:13px; color:var(--c-text-muted); margin:16px 0 0; }
+.rm-footer__back { display:inline-block; margin-top:16px; font-size:14px; font-weight:500; color:var(--c-accent); text-decoration:none; }
+.rm-footer__copy { font-size:12px; color:var(--c-text-faint); margin:22px 0 0; }
+
+/* ---------- Bandeau affilié Phidias (bas) ---------- */
+.aff-band {
+  background:#1d1d1f; color:#ffffff; border-radius:var(--radius-lg);
+  padding:32px 28px; text-align:center; box-shadow:var(--shadow-md);
+}
+.aff-band__eyebrow { font-family:var(--font-mono); font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:var(--c-accent); }
+.aff-band__title { font-family:var(--font-serif); font-weight:600; font-size:clamp(23px, 3.4vw, 30px); line-height:1.16; letter-spacing:-0.02em; margin:10px 0 0; color:#ffffff; }
+.aff-band__lead { font-size:15px; line-height:1.6; color:rgba(255, 255, 255, 0.72); margin:12px auto 0; max-width:30rem; }
+.aff-band__row { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:14px; margin-top:24px; }
+.code-chip {
+  display:inline-flex; align-items:center; gap:9px; font-size:14px; color:rgba(255, 255, 255, 0.8);
+  background:rgba(0,0,0,0.07); border:1px dashed rgba(0,0,0,0.28);
+  border-radius:var(--radius-sm); padding:11px 16px;
+}
+.code-chip b { font-family:var(--font-mono); font-size:16px; letter-spacing:2px; color:var(--c-accent); }
+.aff-band .btn--primary { color:#ffffff; }
+.aff-disclaimer { font-size:11.5px; color:var(--c-text-faint); margin:14px 0 0; }
+
+/* ---------- Popup CODE LUCAS (haut) ---------- */
+.promo-pop {
+  position:fixed; top:70px; right:16px; transform:translateY(-12px);
+  z-index:200; width:calc(100% - 32px); max-width:372px;
+  background:var(--c-surface); border:1px solid var(--c-border);
+  border-radius:var(--radius-lg); box-shadow:var(--shadow-md);
+  padding:18px 20px 18px 18px; display:flex; align-items:flex-start; gap:14px;
+  opacity:0; pointer-events:none; transition:opacity 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.promo-pop.is-open { opacity:1; transform:translateY(0); pointer-events:auto; }
+.promo-pop__icon { width:40px; height:40px; border-radius:var(--radius-md); background:var(--c-accent-tint); display:grid; place-items:center; flex:none; font-size:20px; }
+.promo-pop__body { flex:1; min-width:0; }
+.promo-pop__title { font-weight:600; font-size:14.5px; color:var(--c-text); margin:0; letter-spacing:-0.01em; }
+.promo-pop__title b { color:var(--c-accent-pressed); font-family:var(--font-mono); letter-spacing:1px; }
+.promo-pop__text { font-size:12.5px; color:var(--c-text-muted); margin:3px 0 10px; line-height:1.45; }
+.promo-pop__cta { display:inline-flex; height:34px; align-items:center; padding:0 14px; background:var(--c-accent); color:#ffffff; font-size:13px; font-weight:600; border-radius:var(--radius-sm); text-decoration:none; }
+.promo-pop__cta:hover { background:var(--c-accent-hover); }
+.promo-pop__close { position:absolute; top:8px; right:8px; width:26px; height:26px; border:none; background:transparent; color:var(--c-text-faint); font-size:18px; line-height:1; cursor:pointer; border-radius:6px; }
+.promo-pop__close:hover { background:var(--c-bg); color:var(--c-text); }
+@media (max-width: 520px) { .promo-pop { top:70px; } }
+
+main h1,main h2,main h3,main h4{font-family:var(--font-display);color:var(--text-1)}html,body{background:var(--bg-0)}main .fade-in,main .fade-in-up,main .fade-up,main .fade-left,main .fade-right,main .reveal,main .rv,main [data-animate],main [data-aos],main .animate-on-scroll{opacity:1!important;transform:none!important}main .breadcrumb,main .breadcrumbs{display:flex;flex-wrap:wrap;gap:7px;justify-content:flex-start;max-width:1180px;margin:14px auto;padding:0 24px}.site-header .btn--primary{background:var(--accent)!important;color:var(--accent-ink)!important}.site-header a,.site-footer a{text-decoration:none}</style>
   <script>try{if(localStorage.getItem('lp-theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}</script>
 </head>
 <body>
@@ -1339,19 +1592,10 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
   </div>
 </header>
 <main id="main">
-<div class="container" style="padding-block:40px">
 
 <div class="rm-root">
 
-  <div id="promoPop" class="promo-pop" role="dialog" aria-label="Offre code LUCAS">
-    <button type="button" class="promo-pop__close" id="promoPopClose" aria-label="Fermer">&times;</button>
-    <span class="promo-pop__icon" aria-hidden="true">🔥</span>
-    <div class="promo-pop__body">
-      <p class="promo-pop__title">Code <b>LUCAS</b> : remise à vérifier au panier</p>
-      <p class="promo-pop__text">Profite de l'offre partenaire pour lancer ton challenge prop firm.</p>
-      <a href="https://member.phidiaspropfirm.com/aff/go/lucasdu73?i=3&amp;utm_source=lucaspropfirm&amp;utm_medium=website&amp;utm_campaign=recapmacros-popup" rel="noopener sponsored nofollow" class="promo-pop__cta">J'en profite →</a><small class="lp-affiliate-disclosure">Lien affilié : Lucas Prop Firm peut percevoir une commission sans surcoût pour vous.</small>
-    </div>
-  </div>
+  
 
   
 
@@ -1541,132 +1785,8 @@ main iframe { width: 100%; border: 0; border-radius: var(--r-m); }
   
 
 </div>
-<script>
-/**
- * js/recapmacros.js — handler de la landing "Recap Macro".
- * Externalisé pour la CSP (script-src 'self'). Chargé en defer.
- * POST /subscribe.php -> Mailjet, source: recapmacros.
- */
-(function () {
-  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-  // --- Boutons "Recevoir le PDF" -> scroll vers le champ email ---
-  function focusForm() {
-    var el = document.getElementById('lmEmail');
-    if (!el) return;
-    var top = el.getBoundingClientRect().top + window.pageYOffset - 130;
-    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
-    setTimeout(function () {
-      try { el.focus({ preventScroll: true }); } catch (_) { el.focus(); }
-    }, 420);
-  }
-  var triggers = document.querySelectorAll('[data-focus-form]');
-  for (var i = 0; i < triggers.length; i++) {
-    triggers[i].addEventListener('click', focusForm);
-  }
 
-  // --- Popup CODE LUCAS (1x par session) ---
-  var pop = document.getElementById('promoPop');
-  if (pop) {
-    var KEY = 'recapmacrosPromoDismissed';
-    var dismissed = false;
-    try { dismissed = sessionStorage.getItem(KEY) === '1'; } catch (_) {}
-    function closePop() {
-      pop.classList.remove('is-open');
-      try { sessionStorage.setItem(KEY, '1'); } catch (_) {}
-    }
-    var closeBtn = document.getElementById('promoPopClose');
-    if (closeBtn) closeBtn.addEventListener('click', closePop);
-    if (!dismissed) {
-      setTimeout(function () { pop.classList.add('is-open'); }, 1200);
-    }
-  }
-
-  // --- Formulaire de capture ---
-  var form = document.getElementById('leadMagnetForm');
-  if (!form) return;
-
-  var lastSubmit = 0;
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    var btn = document.getElementById('lmBtn');
-    var emailEl = document.getElementById('lmEmail');
-    var idle = document.getElementById('lmIdle');
-    var success = document.getElementById('lmSuccess');
-    var error = document.getElementById('lmError');
-    var email = emailEl.value.trim();
-    var website = form.querySelector('[name="website"]').value;
-
-    error.classList.add('is-hidden');
-
-    // Honeypot rempli par un bot -> succès factice, abandon silencieux.
-    if (website) {
-      idle.classList.add('is-hidden');
-      success.classList.remove('is-hidden');
-      return;
-    }
-
-    // Anti double-clic / spam.
-    var now = Date.now();
-    if (now - lastSubmit < 3000) {
-      error.textContent = 'Patiente un instant avant de réessayer.';
-      error.classList.remove('is-hidden');
-      return;
-    }
-
-    if (!EMAIL_RE.test(email)) {
-      error.textContent = 'Entre un email valide pour recevoir le Recap.';
-      error.classList.remove('is-hidden');
-      emailEl.focus();
-      return;
-    }
-
-    lastSubmit = now;
-    var label = btn.textContent;
-    btn.textContent = 'Envoi en cours...';
-    btn.disabled = true;
-
-    fetch('/subscribe.php', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email, source: 'recapmacros', website: website })
-    })
-      .then(function (r) { return r.json(); })
-      .then(function (data) {
-        if (data && data.success) {
-          idle.classList.add('is-hidden');
-          success.classList.remove('is-hidden');
-          if (typeof gtag === 'function') {
-            gtag('event', 'lead_magnet_download', {
-              event_category: 'Lead Generation',
-              event_label: 'Recap Macro PDF',
-              page_location: window.location.pathname
-            });
-          }
-          if (typeof fbq === 'function') {
-            fbq('track', 'Lead', { content_name: 'Recap Macro' });
-          }
-        } else {
-          error.textContent = (data && data.error) ? data.error : 'Erreur. Réessaie dans un instant.';
-          error.classList.remove('is-hidden');
-          btn.textContent = label;
-          btn.disabled = false;
-        }
-      })
-      .catch(function () {
-        error.textContent = 'Erreur réseau, réessaie dans un instant.';
-        error.classList.remove('is-hidden');
-        btn.textContent = label;
-        btn.disabled = false;
-      });
-  });
-})();
-
-</script>
-
-</div>
 </main>
 <footer class="site-footer">
   <div class="container">

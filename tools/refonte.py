@@ -5,7 +5,7 @@ Stratégie : extraction du contenu <main> (ou heuristique pour les vieilles page
 ré-habillage complet dans le shell du nouvel index.html (head, CSS, header, footer, JS),
 conservation des metas SEO/JSON-LD et des scripts interactifs propres à chaque page.
 """
-import re, sys, json, pathlib, html as htmlmod
+import re, sys, json, pathlib, colorsys, html as htmlmod
 
 REPO = pathlib.Path('/home/user/lucaspropfirm')
 SCRATCH = pathlib.Path('/tmp/claude-0/-home-user-lucaspropfirm/b7529ed5-1ed9-5596-90c1-47ef76569d2a/scratchpad')
@@ -155,11 +155,15 @@ def remove_balanced(text, start_regex, tagname='div'):
             return text
 
 COOKIE_JS = re.compile(r'cookieBanner|cookieConsent|cookieAccept|cookieReject|cookie_consent', re.I)
-SHELL_JS = re.compile(r'lp-rotbar|lp_rotbar', re.I)
+SHELL_JS = re.compile(r'lp-rotbar|lp_rotbar|stickyCode|sticky-code|scrollProgress|scroll-progress'
+                      r'|backToTop|back-to-top|read-progress|readProgress|promoPop|promo-pop', re.I)
 
 def clean_content(content):
     # bannières cookies héritées (markup + scripts + liens externes obsolètes)
     content = remove_balanced(content, r'<div[^>]*(?:cookie-banner|cookieBanner|CookieConsent)[^>]*>')
+    # widgets du vieux shell restés dans le contenu (code sticky, barres de progression, back-to-top, popups promo)
+    content = remove_balanced(content, r'<div[^>]*(?:sticky-code|stickyCode|scroll-progress|scrollProgress|read-progress|back-to-top|backToTop|promo-pop|promoPop)[^>]*>')
+    content = re.sub(r'<(?:button|a)[^>]*(?:back-to-top|backToTop)[^>]*>.*?</(?:button|a)>', '', content, flags=re.S)
     content = re.sub(r'<script[^>]*src="[^"]*(?:script\.min\.js|cookies-handler)[^"]*"[^>]*>\s*</script>', '', content)
     # barre promo rotative de l'ancien shell (style + script auto-injecté)
     content = re.sub(r'<style id="lp-rotbar-css">.*?</style>', '', content, flags=re.S)
@@ -202,7 +206,8 @@ def extract_content(html, path):
         return None, 'no-body'
     body = bm.group(1)
     # retirer le premier bloc nav/header proche du début (shell)
-    lead = body[:2000]
+    LEAD = 12000
+    lead = body[:LEAD]
     nav_m = re.search(r'<nav\b[^>]*>.*?</nav>', lead, re.S)
     hdr_m = re.search(r'<header\b[^>]*>.*?</header>', lead, re.S)
     first = None
@@ -214,7 +219,7 @@ def extract_content(html, path):
         # retrouver le bloc complet dans body (lead peut le tronquer)
         tag = 'nav' if first is nav_m else 'header'
         full = re.search(r'<' + tag + r'\b[^>]*>.*?</' + tag + '>', body, re.S)
-        if full and full.start() < 2000:
+        if full and full.start() < LEAD:
             body = body[:full.start()] + body[full.end():]
     # retirer le dernier footer
     footers = list(re.finditer(r'<footer\b[^>]*>.*?</footer>', body, re.S))
@@ -277,41 +282,241 @@ document.querySelectorAll('.faq-question').forEach(function(q){
 });})();
 </script>"""
 
-# ---------- Correctif couleurs dans les styles inline du contenu ----------
-BG_MAP = {  # anciennes couleurs claires → surfaces sombres (déclarations background)
-    'fff': 'var(--surface)', 'ffffff': 'var(--surface)', 'fffdfb': 'var(--surface)',
-    'fbf8f4': 'var(--bg-1)', 'f5eee8': 'var(--surface-2)', 'f8eee9': 'var(--surface-2)',
-    'fff3ee': 'rgba(44,232,120,.08)', 'f7dfd6': 'rgba(44,232,120,.15)',
-}
-FG_MAP = {  # anciens textes sombres → textes clairs (déclarations color)
-    '211b18': 'var(--text-1)', '000': 'var(--text-1)', '000000': 'var(--text-1)',
-    '222': 'var(--text-1)', '333': 'var(--text-1)', '1a1a1a': 'var(--text-1)',
-    '625954': 'var(--text-2)', '444': 'var(--text-2)', '555': 'var(--text-2)',
-    '867a73': 'var(--text-3)', '666': 'var(--text-3)', '777': 'var(--text-3)',
-}
-ANY_MAP = {  # accents et bordures, quel que soit le contexte
-    'dc7353': 'var(--accent)', 'b94f32': 'var(--accent-bright)',
-    'eaded6': 'var(--border)', 'd9c8bd': 'var(--border-strong)', 'efc8b9': 'var(--border-accent)',
-}
+# ---------- Transformation colorimétrique universelle (clair → dark + neon) ----------
+NAMED_COLORS = {'white': (255, 255, 255, None), 'black': (0, 0, 0, None)}
 
+def _parse_color(tok):
+    tok = tok.strip()
+    m = re.fullmatch(r'#([0-9a-fA-F]{3})([0-9a-fA-F])?', tok)
+    if m:
+        h = m.group(1)
+        a = int(m.group(2)*2, 16) / 255 if m.group(2) else None
+        return int(h[0]*2, 16), int(h[1]*2, 16), int(h[2]*2, 16), a
+    m = re.fullmatch(r'#([0-9a-fA-F]{6})([0-9a-fA-F]{2})?', tok)
+    if m:
+        h = m.group(1)
+        a = int(m.group(2), 16) / 255 if m.group(2) else None
+        return int(h[0:2], 16), int(h[2:4], 16), int(h[4:6], 16), a
+    m = re.fullmatch(r'rgba?\(\s*(\d+)[\s,]+(\d+)[\s,]+(\d+)\s*(?:[,/]\s*([\d.]+%?)\s*)?\)', tok)
+    if m:
+        a = m.group(4)
+        if a:
+            a = float(a[:-1]) / 100 if a.endswith('%') else float(a)
+        return int(m.group(1)), int(m.group(2)), int(m.group(3)), a
+    m = re.fullmatch(r'hsla?\(\s*([\d.]+)(?:deg)?[\s,]+([\d.]+)%[\s,]+([\d.]+)%\s*(?:[,/]\s*([\d.]+%?)\s*)?\)', tok)
+    if m:
+        r, g, b = colorsys.hls_to_rgb(float(m.group(1)) / 360, float(m.group(3)) / 100, float(m.group(2)) / 100)
+        a = m.group(4)
+        if a:
+            a = float(a[:-1]) / 100 if a.endswith('%') else float(a)
+        return round(r * 255), round(g * 255), round(b * 255), a
+    if tok.lower() in NAMED_COLORS:
+        return NAMED_COLORS[tok.lower()]
+    return None
+
+def _from_hls(h, l, s, a):
+    r, g, b = colorsys.hls_to_rgb(h, max(0, min(1, l)), max(0, min(1, s)))
+    r, g, b = round(r*255), round(g*255), round(b*255)
+    if a is not None and a < 0.999:
+        return f'rgba({r},{g},{b},{round(a, 3)})'
+    return f'#{r:02x}{g:02x}{b:02x}'
+
+FG_PROPS = {'color', '-webkit-text-fill-color', 'caret-color', 'fill', 'stroke',
+            'text-decoration-color', 'text-emphasis-color', 'column-rule-color'}
+
+def transform_color(tok, prop=''):
+    """Convertit une couleur du thème clair terracotta vers le thème dark + neon green.
+    Consciente du rôle : un texte clair reste clair, un fond clair devient sombre."""
+    parsed = _parse_color(tok)
+    if not parsed:
+        return tok
+    r, g, b, a = parsed
+    h, l, s = colorsys.rgb_to_hls(r/255, g/255, b/255)
+    deg = h * 360
+    is_fg = prop in FG_PROPS
+    is_bg = 'background' in prop or prop == 'background-image'
+    if 'shadow' in prop:
+        return tok if l < 0.5 else _from_hls(h, 0.0, 0.0, a if a is not None else 0.35)
+    if s < 0.13:  # neutres
+        if a is not None and a < 0.95:  # voiles translucides
+            if is_fg:
+                return tok if l > 0.5 else _from_hls(h, 1 - l, s, a)
+            return _from_hls(h, 1 - l, s, a)
+        if is_fg:
+            # texte : clair reste clair, sombre devient clair
+            return _from_hls(h, max(l, 0.88), 0, a) if l > 0.65 else _from_hls(h, max(0.78, 1 - l), s, a)
+        if is_bg:
+            if l > 0.65:
+                return _from_hls(0.42, max(0.04, min(0.10, 1 - l + 0.04)), 0.10, a)
+            return _from_hls(h, 1 - l, s, a) if l > 0.35 else tok  # fonds déjà sombres conservés
+        # bordures / divers : inversion
+        if l > 0.8:
+            return _from_hls(h, max(0.10, min(0.18, 1 - l + 0.10)), s, a)
+        return _from_hls(h, 1 - l, s, a) if l < 0.35 else tok
+    if 5 <= deg <= 55:  # terracotta / gold / orange → vert neon
+        H = 145 / 360
+        if is_bg:
+            if l > 0.6:
+                return _from_hls(H, 0.13, 0.35, a)   # fonds teintés clairs → panneau vert sombre
+            if l >= 0.35:
+                # panneaux/boutons pleins : panneau vert sombre (leur texte clair reste lisible)
+                return _from_hls(H, 0.17, 0.48, a)
+            return _from_hls(H, 0.14, 0.50, a)
+        if is_fg:
+            return _from_hls(144 / 360, 0.54, 0.80, a) if l < 0.75 else _from_hls(H, 0.74, 0.90, a)
+        # bordures et divers
+        if l > 0.6:
+            return _from_hls(H, 0.30, 0.45, a)
+        return _from_hls(144 / 360, 0.54, 0.80, a) if l >= 0.35 else _from_hls(H, 0.37, 0.75, a)
+    if deg < 5 or deg > 340:  # rouges (danger)
+        if is_bg:
+            return _from_hls(h, 0.16, 0.45, a) if l > 0.6 else (tok if l < 0.45 else _from_hls(h, 0.30, s, a))
+        return _from_hls(h, 0.68, min(s, 0.9), a) if l < 0.55 else tok
+    if 180 <= deg <= 300:  # bleus / violets
+        if is_bg:
+            return _from_hls(h, 0.15, min(s, 0.5), a) if l > 0.6 else tok
+        return _from_hls(h, 0.70, s, a) if l < 0.45 else tok
+    # verts / jaunes déjà en place
+    if is_bg:
+        if l > 0.6:
+            return _from_hls(h, 0.14, min(s, 0.5), a)
+        return _from_hls(h, 0.17, min(s, 0.5), a) if l >= 0.35 else tok
+    return _from_hls(h, 0.60, s, a) if l < 0.35 else tok
+
+COLOR_TOKEN = re.compile(r'#[0-9a-fA-F]{3,8}\b|rgba?\([^)]*\)|hsla?\([^)]*\)|\b(?:white|black)\b')
+
+def resolve_prop_role(prop):
+    """Rôle effectif d'une propriété ; les variables CSS sont classées par leur nom sémantique."""
+    p = prop.lower()
+    if p.startswith('--'):
+        if re.search(r'ink|text|fg|foreground|title|heading|label', p):
+            return 'color'
+        if re.search(r'paper|bg|background|surface|card|panel|fill', p):
+            return 'background'
+        if re.search(r'shadow', p):
+            return 'box-shadow'
+        return p  # bordures/accents : règles par défaut
+    return p
+
+def transform_css_colors(css):
+    """Transforme toutes les couleurs d'un bloc CSS, déclaration par déclaration."""
+    def decl(m):
+        prop, val = resolve_prop_role(m.group(2)), m.group(3)
+        newval = COLOR_TOKEN.sub(lambda cm: transform_color(cm.group(0), prop), val)
+        return m.group(1) + m.group(2) + ':' + newval
+    return re.sub(r'([{;]\s*)(-{0,2}[a-zA-Z][\w-]*)\s*:\s*([^;}]+)', decl, css)
+
+# ---------- Élagage des règles CSS du vieux shell ----------
+SHELL_SEL = re.compile(
+    r'\.(?:site-header|header-inner|header-actions|desktop-nav|language-nav|mobile-nav|mobile-nav-panel'
+    r'|site-footer|footer-links|footer-grid|footer-brand|footer-bottom|footer-navigation|footer-inner'
+    r'|brand|brand-mark|brand-copy|skip-link|cookie-banner|nav-toggle|main-nav|lang-switch|theme-toggle'
+    r'|rm-header|rm-footer|menu-toggle|menu-btn|page-loader|sticky-code|scroll-progress|back-to-top|read-progress)\b'
+    r'|#(?:lp-rotbar|cookieBanner|pageLoader|read-progress|mobile-menu|menuToggle|stickyCode|scrollProgress|backToTop)\b'
+    r'|^\s*\.nav\b|,\s*\.nav\b|body\.menu-open')
+
+def _iter_css_rules(css):
+    """Itère (selecteur, corps, brut) sur les règles top-level ; les blocs @ sont retournés entiers."""
+    i, n = 0, len(css)
+    while i < n:
+        j = css.find('{', i)
+        if j == -1:
+            yield None, None, css[i:]
+            return
+        sel = css[i:j]
+        depth, k = 1, j + 1
+        while k < n and depth:
+            if css[k] == '{': depth += 1
+            elif css[k] == '}': depth -= 1
+            k += 1
+        yield sel, css[j+1:k-1], css[i:k]
+        i = k
+
+def prune_shell_rules(css):
+    out = []
+    for sel, body, raw in _iter_css_rules(css):
+        if sel is None:
+            out.append(raw)
+        elif sel.strip().startswith('@'):
+            at = sel.strip().lower()
+            if at.startswith('@media') or at.startswith('@supports'):
+                out.append(sel + '{' + prune_shell_rules(body) + '}')
+            else:  # @font-face, @keyframes… gardés tels quels
+                out.append(raw)
+        else:
+            selectors = [s for s in sel.split(',') if s.strip()]
+            kept_sel = [s for s in selectors if not SHELL_SEL.search(s)]
+            if kept_sel:
+                body2 = body
+                # anti-espace fantôme : les paddings compensant l'ancien header fixe
+                if any(re.fullmatch(r'\s*(body|html)\s*', s) for s in kept_sel):
+                    body2 = re.sub(r'(?:padding|margin)-top\s*:[^;}]+;?', '', body2)
+                out.append(','.join(kept_sel) + '{' + body2 + '}')
+    return ''.join(out)
+
+CSS_CACHE_DIR = SCRATCH / 'csscache'
+CSS_URL_MAP = json.loads((CSS_CACHE_DIR / 'mapping.json').read_text()) if (CSS_CACHE_DIR / 'mapping.json').exists() else {}
+_transformed_ext = {}
+
+def _external_css(key):
+    """CSS externe élagué + transformé, mis en cache par fichier."""
+    if key not in _transformed_ext:
+        raw = (CSS_CACHE_DIR / f'{key}.css').read_text(encoding='utf-8', errors='replace')
+        _transformed_ext[key] = transform_css_colors(prune_shell_rules(raw))
+    return _transformed_ext[key]
+
+def collect_page_css(html, rel_full):
+    """CSS d'origine de la page (liens externes + <style> inline), élagué du shell et passé au thème sombre."""
+    import urllib.parse
+    page_url = 'https://lucaspropfirm.fr/' + rel_full
+    parts = []
+    for m in re.finditer(r'<link[^>]*rel="stylesheet"[^>]*href="([^"]+)"|<link[^>]*href="([^"]+)"[^>]*rel="stylesheet"', html):
+        href = m.group(1) or m.group(2)
+        if href.startswith('http') and 'lucaspropfirm.fr' not in href:
+            continue  # fontes Google externes : exclues (design sans requêtes tierces)
+        key = CSS_URL_MAP.get(urllib.parse.urljoin(page_url, href))
+        if key:
+            parts.append(_external_css(key))
+    inline = []
+    for m in re.finditer(r'<style\b([^>]*)>(.*?)</style>', html, re.S):
+        if 'lp-rotbar' in m.group(1):
+            continue
+        inline.append(m.group(2))
+    if inline:
+        parts.append(transform_css_colors(prune_shell_rules('\n'.join(inline))))
+    return neutralize_entrance_anims('\n'.join(parts))
+
+FONT_OVERLAY = ('main h1,main h2,main h3,main h4{font-family:var(--font-display);color:var(--text-1)}'
+                'html,body{background:var(--bg-0)}'
+                # animations d'entrée orphelines (leur JS d'origine a été retiré)
+                'main .fade-in,main .fade-in-up,main .fade-up,main .fade-left,main .fade-right,'
+                'main .reveal,main .rv,main [data-animate],main [data-aos],main .animate-on-scroll'
+                '{opacity:1!important;transform:none!important}'
+                # fil d'ariane : jamais étalé sur toute la largeur
+                'main .breadcrumb,main .breadcrumbs{display:flex;flex-wrap:wrap;gap:7px;'
+                'justify-content:flex-start;max-width:1180px;margin:14px auto;padding:0 24px}'
+                # le shell garde ses couleurs même si le CSS de page redéfinit .btn/.badge
+                '.site-header .btn--primary{background:var(--accent)!important;color:var(--accent-ink)!important}'
+                '.site-header a,.site-footer a{text-decoration:none}')
+
+def neutralize_entrance_anims(css):
+    """Supprime les opacity:0 des règles d'animation d'entrée (fade/reveal/slide) devenues orphelines."""
+    def fix(m):
+        sel, body = m.group(1), m.group(2)
+        if re.search(r'fade|reveal|animate|aos|slide-|-enter', sel, re.I) and 'opacity' in body:
+            body = re.sub(r'opacity\s*:\s*0[^;}]*;?', 'opacity:1;', body)
+            body = re.sub(r'transform\s*:\s*translate[^;}]*;?', '', body)
+        return sel + '{' + body + '}'
+    return re.sub(r'([^{}]+)\{([^{}]*)\}', fix, css)
+
+# ---------- Correctif couleurs dans les styles inline du contenu ----------
 def patch_inline_colors(content):
     def patch_style(m):
         style = m.group(1)
         def decl(dm):
-            prop, val = dm.group(1), dm.group(2)
-            low = val.lower()
-            for hexv, new in ANY_MAP.items():
-                low = low.replace('#' + hexv, new)
-            hm = re.fullmatch(r'\s*#([0-9a-f]{3}|[0-9a-f]{6})\s*', low)
-            if hm:
-                h = hm.group(1)
-                if 'background' in prop and h in BG_MAP:
-                    low = BG_MAP[h]
-                elif prop.strip() == 'color' and h in FG_MAP:
-                    low = FG_MAP[h]
-            return prop + ':' + low
-        style = re.sub(r'([a-z-]+)\s*:\s*([^;]+)', decl, style)
-        return 'style="' + style + '"'
+            prop, val = resolve_prop_role(dm.group(1)), dm.group(2)
+            return dm.group(1) + ':' + COLOR_TOKEN.sub(lambda cm: transform_color(cm.group(0), prop), val)
+        return 'style="' + re.sub(r'([a-zA-Z-]+)\s*:\s*([^;]+)', decl, style) + '"'
     return re.sub(r'style="([^"]*)"', patch_style, content)
 
 # ---------- Sélecteur de langue par page ----------
@@ -353,6 +558,7 @@ PAGE_TMPL = """<!doctype html>
 {plausible}
 {ldjson}
   <style>{css}</style>
+  <style data-page-css>{page_css}</style>
   {theme_init}
 </head>
 <body{body_attrs}>
@@ -380,9 +586,6 @@ def process(src: pathlib.Path, log):
         log.append((rel_full, 'ERREUR: pas de body'))
         return False
     content = clean_content(content)
-    if how == 'heuristic':
-        # les pages les plus anciennes n'ont pas de conteneur : on borne la largeur
-        content = '<div class="container" style="padding-block:40px">\n' + content + '\n</div>'
     bits = extract_head_bits(html)
     kept, dropped, need_faq = page_scripts(html, content)
     content = patch_inline_colors(content)
@@ -408,6 +611,7 @@ def process(src: pathlib.Path, log):
         plausible=('  ' + bits['plausible']) if bits['plausible'] else '',
         ldjson='\n'.join('  ' + t for t in bits['ldjson']),
         css=CSS_FULL + '\n' + CONTENT_CSS,
+        page_css=collect_page_css(html, rel_full) + FONT_OVERLAY,
         theme_init=THEME_INIT,
         body_attrs=battrs,
         skip=SKIP_LINK.format(label=SKIP_LABELS[lang]),

@@ -113,7 +113,7 @@
         <!-- ============ CORPS ============ -->
         <tr>
             <td style="background-color:#FFFFFF; padding:40px 40px 10px 40px;" class="p-side">
-                <p style="margin:0 0 14px 0; font-family:Arial,Helvetica,sans-serif; font-size:15px; font-weight:700; color:#23201E;">Bonjour,</p>
+                <p style="margin:0 0 14px 0; font-family:Arial,Helvetica,sans-serif; font-size:15px; font-weight:700; color:#23201E;">Bonjour{% if contact.PRENOM %} {{ contact.PRENOM }}{% endif %},</p>
                 <p style="margin:0 0 32px 0; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:24px; color:#615C58;">
                     Avant de vous lancer sur un compte financé, prenez trente secondes pour vérifier trois choses. L'objectif n'est pas de vous précipiter, mais de choisir <span style="color:#C0472B;">le bon compte, au bon prix, avec les bonnes règles</span>.
                 </p>
@@ -293,7 +293,7 @@
                     &nbsp;·&nbsp;
                     <a href="https://lucaspropfirm.fr/Affiliation.html" target="_blank" style="color:#8A8480; text-decoration:underline;">Affiliation</a>
                     &nbsp;·&nbsp;
-                    <a href="[[UNSUB_LINK_FR]]" style="color:#8A8480; text-decoration:underline;">Se désinscrire</a>
+                    <a href="{{ unsubscribe }}" style="color:#8A8480; text-decoration:underline;">Se désinscrire</a>
                 </p>
                 <p style="margin:0 0 12px 0; font-family:Arial,Helvetica,sans-serif; font-size:11px; color:#A79C96;">
                     LUCAS — SASU · 60 rue Française, 75000 Paris, France · lucas@lucaspropfirm.fr

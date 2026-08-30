@@ -1,0 +1,4 @@
+# Contient la clé API Brevo — ne doit jamais être versionné
+automation/config.php
+automation/logs/
+automation/state/

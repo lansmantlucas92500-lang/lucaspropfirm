@@ -66,14 +66,19 @@ Strictement **un short à la fois** : A→G terminé avant de relancer A pour le
 
 ## 4. Étape A — Narration + gate de débit
 1. `generate_audio` (JSON §1) → `job_id` → `jobs_wait` → URL audio.
-2. **Gate** dans le sandbox (le fichier TTS ment : silences en tête/queue ; on mesure la *parole*) :
+2. **Gate** dans le sandbox. ⚠️ **`speech_metrics.sh` seul MENT sur ce moteur.** Higgsfield renvoie un MP3 ElevenLabs de **longueur fixe** (mesuré : 15,386 s / 246 639 octets, identique quel que soit le texte), rempli en fin de piste par un bruit de fond **au-dessus de -35 dB**. `speech_metrics` compte ce remplissage comme de la parole et annonce systématiquement ~15,4 s. La mesure qui fait foi est le **rognage par énergie** :
 ```bash
-curl -fsSL "$VOICE_URL" -o voice.mp3 && \
-bash $HF_WORKFLOWS/narrator/scripts/speech_metrics.sh voice.mp3 --text "$NARRATION" --max-wps 2.9 --json
+curl -fsSL "$VOICE_URL" -o voice.mp3
+# durée de PAROLE réelle (rogne le remplissage de fin)
+ffmpeg -v error -i voice.mp3 -af "silenceremove=stop_periods=-1:stop_threshold=-40dB:stop_duration=0.1" -y voice_trim.wav
+ffprobe -v error -show_entries format=duration -of csv=p=0 voice_trim.wav   # <= 14,3 s
+# débit, à titre indicatif seulement
+bash $HF_WORKFLOWS/narrator/scripts/speech_metrics.sh voice.mp3 --words <N> --max-wps 2.9 --json
 ```
-   Critères : `speech` ≤ **14,3 s**, `rate` = `ok` (jamais `RUSHED`), `longest_pause` < 1 s.
-   - `speech` > 14,3 s ou `RUSHED` → **réécrire le script avec moins de mots** (jamais accélérer la voix), régénérer.
-   - `SLOW` → acceptable si `speech` ≤ 14,3 s.
+   Critères : durée de `voice_trim.wav` ≤ **14,3 s** ; débit dans la bande naturelle **2,4-2,6 mots/s**.
+   - Trop long ou `RUSHED` → **réécrire le script avec moins de mots** (jamais accélérer la voix), régénérer.
+   - **Toujours monter `voice_trim.wav`**, jamais le MP3 brut : sinon 2,5 s de bruit de fond audible traînent sur la fin du short.
+3. **Vérifier la prononciation** par transcription Whisper (les domaines surtout). Écrire les domaines **espacés** dans le texte TTS pour une lecture correcte en français : `Phidias propfirm point com` et `Lucas propfirm point F R`. Repère mesuré : le CTA parlé complet dure **~5 s**, soit un tiers du short.
 
 ## 5. Étape B — Vidéo muette
 1. `generate_video` avec `get_cost: true` → afficher le coût → OK utilisateur.
@@ -92,7 +97,11 @@ Préparer d'abord l'export : `media_upload {filename:"lp_short_<slug>_montage.mp
 set -e; mkdir -p /home/user/w && cd /home/user/w
 curl -fsSL "$VIDEO_URL" -o video.mp4 && curl -fsSL "$VOICE_URL" -o voice.mp3
 # voix sur vidéo : la piste audio native est ignorée, la voix est paddée à la durée vidéo
-ffmpeg -y -i video.mp4 -i voice.mp3 -filter_complex "[1:a]apad[a]" \
+# rognage de FIN uniquement : inverser, couper le silence de tete, re-inverser.
+# NE JAMAIS utiliser silenceremove stop_periods=-1 : il supprime AUSSI les pauses
+# entre les phrases et la narration devient hachee.
+ffmpeg -y -i voice.mp3 -af "areverse,silenceremove=start_periods=1:start_threshold=-40dB:start_duration=0.1,areverse" voice_tail.wav
+ffmpeg -y -i video.mp4 -i voice_tail.wav -filter_complex "[1:a]apad[a]" \
   -map 0:v:0 -map "[a]" -c:v copy -c:a aac -b:a 192k -ar 48000 -shortest \
   -movflags +faststart montage.mp4
 curl -f -X PUT --upload-file montage.mp4 "$UPLOAD_URL" && echo UPLOADED
@@ -100,7 +109,7 @@ curl -f -X PUT --upload-file montage.mp4 "$UPLOAD_URL" && echo UPLOADED
 Puis `media_confirm {media_id, type:"video"}`. (Encart de fin + logo : §9, à insérer ici une fois les assets fournis.)
 
 ## 8. Étape E — Sous-titres brûlés (sandbox, obligatoires)
-Écrire le manifest du script (un bloc par temps du script, texte **exact** de la narration) :
+Écrire le manifest du script, un bloc par temps. ⚠️ **Le manifest contient le texte ÉCRIT, pas le texte prononcé.** Le TTS reçoit `Phidias propfirm point com` (prononciation), le sous-titre doit afficher `Phidiaspropfirm.com`. Avec le texte prononcé dans le manifest, le script **refuse de brûler** (similarité Whisper/script sous 0,750) — c'est une protection, pas un bug : corriger le manifest, jamais baisser `--minimum-similarity`.
 ```json
 { "blocks": [ {"vo_line": "<hook>"}, {"vo_line": "<problème>"}, {"vo_line": "<explication>"},
               {"vo_line": "<règle>"}, {"vo_line": "<CTA oral>"} ] }
@@ -122,6 +131,8 @@ curl -f -X PUT --upload-file final_subbed.mp4 "$UPLOAD_URL" && echo UPLOADED
 - `--script` aligne les mots affichés sur le texte écrit (Whisper ne sert qu'au timing → zéro substitution).
 - **Vérifier `caps.srt` avant de valider** : toutes les phrases présentes, CTA oral inclus, aucun mot inventé.
 - Style `bold` = capitales blanches, contour noir, safe zone Reels (bas 16,7 %, côtés 11 %), 2 lignes max. Police TikTok Sans téléchargée par `fetch_fonts.sh` ; fallback automatique Montserrat.
+- Paramètres retenus : `--max-words 6 --max-chars 34` (avec 4/26 le texte se hache).
+- **Regrouper le CTA à la main avant de brûler.** Le tokeniseur coupe les domaines au point et affiche des blocs absurdes du type « COM, DÉTAILS SUR LUCASPROPFIRM. ». Après génération du SRT, fusionner la queue en **deux blocs** en réutilisant les timings mesurés : `Code LUCAS chez Phidiaspropfirm.com` puis `détails sur lucaspropfirm.fr`.
 - Code de sortie **2** = Whisper indisponible → livrer `montage.mp4` sans sous-titres **et le signaler** (ne jamais bloquer).
 - Premier run : Whisper télécharge le modèle `small` (lent) → `background:true` et poller le log ; `--model base` si trop lent.
 

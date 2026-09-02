@@ -41,6 +41,15 @@ description: |-
 ## Contrat de script (rappel — détail dans short-description)
 UNE idée par vidéo ; 34-38 mots CTA oral inclus ; durée verrouillée sur la parole mesurée (jamais accélérer la voix — réécrire) ; hook à 0-1,2 s compréhensible sans le son ; CTA oral fixe en fin, CTA écrit complet sur l'encart et la description. Zéro promesse de gains ; « jusqu'à -80 % » jamais garanti ; pas de nom de firme dans les vidéos éducatives.
 
+## Mode semaine (« programme ma semaine », « lance la semaine »)
+Un lot de **N shorts (défaut 7)** produit en **une session**, publié **étalé**.
+1. **Planification groupée (0 crédit)** : journal → recherche (protocole ci-dessus, une recherche par concept) → N fiches complètes : concept, hook avec **alternance pré-calculée sur le lot** (Q · CH · ER · CI · Q · CH · ER), **signature visuelle différente** pour chaque short, script, prompt (recette FR), description, 1 variable testée par post.
+2. **Coût total** préflighté (`get_cost` × N) → **UNE validation** pour tout le lot = mandat de production.
+3. **Exécution séquentielle** : short 1 de A à G, ligne de journal, livraison immédiate (fichier + description), puis short 2. Jamais deux vidéos en parallèle.
+4. **Échec en cours de lot** : 1 relance sur prompt corrigé ; 2ᵉ échec → `échec-IP` au journal, on passe au suivant sans casser la séquence ; un **concept de remplacement** est proposé en **fin de lot**.
+5. **Calendrier de publication** livré avec le lot : `jour · heure · plateforme · slug · patron hook` — l'alternance des hooks est respectée dans l'ordre de **publication**, pas seulement de production.
+6. **Publication** : TikTok en `UPLOAD_TO_DRAFT` par défaut (le MCP ne programme pas d'heure ; Lucas publie aux créneaux) — `DIRECT_POST` seulement si demandé ; IG/YouTube : fichiers + descriptions + calendrier (planification hors MCP).
+
 ## Journal — `shorts/production-log.md`
 Une ligne par short, écrite à l'étape 6 (et une ligne « échec » si un concept est abandonné) : date · slug · concept · patron hook (Q/CH/ER/CI) · famille de plan · source recherche · job_id voix · job_id vidéo · coût · statut · URL publiée · variable testée. **Sans journal, les règles d'alternance sont inapplicables.**
 

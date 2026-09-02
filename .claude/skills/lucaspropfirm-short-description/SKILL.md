@@ -1,7 +1,7 @@
 ---
 name: lucaspropfirm-short-description
 description: |
-  Source de vérité CRÉATIVE des shorts lucaspropfirm (trading Futures ES/NQ, prop firms, audience FR). Charger pour tout ce qui touche au CONTENU d'un short : format technique, univers visuel, règles anti-IP des prompts, structure de prompt vidéo, module hook, script de narration (CTA oral court + CTA écrit complet), zones sûres 9:16, description IG/TikTok/YouTube (bloc de liens 10 lignes). Pour la procédure d'exécution (génération, montage voix, sous-titres) → skill lucaspropfirm-shorts-generation. Pour l'orchestration, la recherche de concept et le journal → skill lucaspropfirm-shorts-pipeline.
+  Source de vérité CRÉATIVE des shorts lucaspropfirm (trading Futures ES/NQ, prop firms, audience FR). Charger pour tout ce qui touche au CONTENU d'un short : format technique, univers visuel, règles anti-IP des prompts, recette de prompt vidéo (8 blocs en français, anti-générique, exemple figé), module hook, script de narration (CTA oral court + CTA écrit complet), zones sûres 9:16, description IG/TikTok/YouTube (bloc de liens 10 lignes). Pour la procédure d'exécution (génération, montage voix, sous-titres) → skill lucaspropfirm-shorts-generation. Pour l'orchestration, la recherche de concept et le journal → skill lucaspropfirm-shorts-pipeline.
 ---
 
 # Spec créative des shorts lucaspropfirm
@@ -13,7 +13,7 @@ description: |
 @lucaspropfirm01 — trading **Futures ES/NQ**, prop firms, audience FR débutante/intermédiaire. Objectif : vues + commentaires → Discord gratuit → conversion Phidias (code **LUCAS**) et Discord Pro/Élite.
 
 ## FORMAT TECHNIQUE (non négociable)
-- Modèle : **Seedance 2.0 Mini**, 720p (son maximum), **9:16**, **15 secondes** (son maximum)
+- Modèle : **Seedance 2.0 Mini, 720p, 9:16, 15 secondes — FIGÉ, ne jamais proposer un autre modèle ni une autre résolution.** La qualité vient du prompt (recette ci-dessous), pas du modèle.
 - **Aucun texte lisible** à l'écran dans la vidéo générée
 - Narration TTS voix **"Julian"** en français (moteur ElevenLabs ; jamais `voice_change`)
 - La vidéo est générée **muette** (`generate_audio=false`) ; la voix est montée en post-prod (jamais en référence audio dans la génération).
@@ -43,8 +43,53 @@ Higgsfield/Seedance renvoie **"Rejected due to copyright restrictions."** dès q
 - **✅ AUTORISÉ — bougies/chandeliers en verre abstrait** (corps + mèches en verre lumineux doré/lime sur bleu nuit) : c'est **l'IDENTITÉ VISUELLE DU PROJET** (« océan de chandeliers », « mer de bougies de verre », « une bougie en verre »). Autorisées TANT QUE : aucun chiffre, aucune interface de trading réaliste, aucune valeur affichée. La bougie de verre SANS interface = autorisée ; la bougie DANS un graphique chiffré réaliste = refus.
 - Tout concept financier est formulé par **métaphore abstraite** (résistance → « plafond lumineux » ; support → « un sol » ; levier → balance sans montant ; news → tempête abstraite). Les chiffres/montants sont autorisés **uniquement en narration TTS**, jamais à l'écran.
 
-## STRUCTURE DE PROMPT VIDÉO (8 blocs, dans cet ordre)
-`SCENE CONTEXT → FIRST FRAME → OPTICS → CAMERA → LIGHTING → PHYSICS → ACTION TIMING → AUDIO` (design sonore ; la voix est ajoutée après en TTS). Le FIRST FRAME illustre le hook (compréhensible sans le son) ; l'ACTION TIMING suit les 5 temps du script.
+## PROMPT VIDÉO — RECETTE (8 blocs, en français, non générique)
+
+### Langue et forme
+- **Le prompt est écrit en français.** Narration en français. (Seedance est entraîné surtout en anglais/chinois : si un même prompt donne **deux** plans faibles, tester sa traduction anglaise à l'identique et noter le résultat au journal — le français reste la règle.)
+- **130-200 mots**, **8 blocs dans cet ordre, une ligne par bloc**, jamais de paragraphe libre :
+  `CONTEXTE DE SCÈNE → PREMIÈRE IMAGE → OPTIQUE → CAMÉRA → LUMIÈRE → PHYSIQUE → TIMING DE L'ACTION → AUDIO`
+- Seedance n'a **pas de negative prompt** : « aucune personne, aucun visage, aucun texte, aucun chiffre, aucun symbole » s'écrit **dans** le CONTEXTE, positivement.
+
+### Ce que chaque bloc doit contenir
+| Bloc | Attendu | À éviter |
+|---|---|---|
+| CONTEXTE DE SCÈNE | Le lieu, l'atmosphère, **3 matériaux nommés**, la phrase d'exclusion (personne/texte/chiffre) | Adjectifs vides (« magnifique », « futuriste » seul) |
+| PREMIÈRE IMAGE (0-1,2 s) | **Le hook en image** : un objet, un cadrage, un micro-événement lisible sans le son | Un plan d'ensemble neutre |
+| OPTIQUE | Focale, profondeur de champ, bokeh, flare | « cinématique » sans précision |
+| CAMÉRA | **Un** mouvement précis (travelling arrière, contre-plongée, tilt, plan fixe final) et sa révélation | Plusieurs mouvements empilés |
+| LUMIÈRE | Rim light bleu froid + halos or/lime, brume volumétrique, contraste | « bien éclairé », lumière plate |
+| PHYSIQUE | **Un événement physique** (empilement, fissure, chute, pulsation, ondulation) avec inertie et reflets cohérents | Mouvement flottant sans cause |
+| TIMING DE L'ACTION | Format imposé `0-1,2 s … / 1,2-4 s … / 4-8,5 s … / 8,5-12 s … / 12-15 s …` — **un événement visuel par temps** ; le temps **8,5-12 s porte la règle du script** par un signal fort | Une action continue sans temps |
+| AUDIO | Design sonore uniquement (bourdonnement, tintements) ; **pas de musique, pas de voix** (voix en TTS après) | Musique avec paroles |
+
+### Anti-générique (obligatoire)
+- **Une signature visuelle par short**, dérivée du concept après la recherche : un objet ou un phénomène qu'on ne retrouve dans **aucun** autre short du journal (`shorts/production-log.md`, colonne « famille de plan »). Ex. escalier de lumière, ligne rouge poursuivante, plafond de verre qui se fissure, balance de verre sans poids.
+- **Une seule métaphore** par short ; jamais deux univers mélangés.
+- **Test du sujet** : si le prompt pourrait servir tel quel à un autre sujet, il est générique → réécrire.
+- **Mots interdits (génériques)** : « magnifique », « futuriste » seul, « particules abstraites » seules, « ville futuriste », « hologramme » sans objet précis, « ambiance tech », « graphique », « données ».
+- **Obligatoires** : 3 matériaux nommés · 1 échelle assumée (intime ou monumentale) · 1 événement physique · 1 mouvement caméra · 1 point de lumière signature.
+- Le visuel **raconte** la règle du script (temps 8,5-12 s) — ce n'est pas une décoration derrière une voix.
+
+### Checklist avant lancement (toutes les cases)
+- [ ] Français · 130-200 mots · 8 blocs · une ligne par bloc
+- [ ] Scan anti-IP = 0 mot banni ; phrase d'exclusion présente dans CONTEXTE
+- [ ] Hook lisible en PREMIÈRE IMAGE sans le son
+- [ ] TIMING en 5 temps alignés sur le script ; règle portée à 8,5-12 s
+- [ ] Une seule métaphore ; signature visuelle absente du journal
+- [ ] Aucun mot de la liste « génériques »
+
+### Exemple de référence (style figé) — sujet « 1 tick »
+```
+CONTEXTE DE SCÈNE : Un océan sombre de bougies en verre lumineuses sous un ciel bleu nuit. Atmosphère de science-fiction financière haut de gamme : verre fumé, chrome brossé, reflets HDR. Aucune personne, aucun visage, aucun texte, aucun chiffre, aucun symbole dans l'image.
+PREMIÈRE IMAGE (0-1,2 s) : Très gros plan sur une seule bougie en verre qui brille or ; une minuscule marche de lumière se détache de son bord et s'élève.
+OPTIQUE : Rendu 35 mm anamorphique, faible profondeur de champ, bokeh doux, léger flare sur les reflets lime.
+CAMÉRA : Lent travelling arrière avec une légère contre-plongée, révélant que la marche est la première d'un escalier de lumière monumental qui s'élève de la mer de bougies ; fin sur un plan large en contre-plongée, caméra fixe.
+LUMIÈRE : Rim light bleu froid depuis l'horizon, halos or et lime chauds sur chaque marche, brume volumétrique, contraste cinématique, jamais plat.
+PHYSIQUE : Les marches se matérialisent une à une avec une ondulation de verre ; les particules montent avec une inertie réaliste ; les reflets restent physiquement cohérents.
+TIMING DE L'ACTION : 0-1,2 s bougie seule + première marche / 1,2-4 s trois marches s'empilent / 4-8,5 s l'escalier grandit pendant que la caméra recule / 8,5-12 s une marche pulse plus fort, un signal d'alerte / 12-15 s l'escalier se stabilise, caméra fixe.
+AUDIO : Bourdonnement ambiant profond, tintements de verre doux sur chaque marche, pas de musique, pas de voix.
+```
 
 ## MODULE HOOK (obligatoire avant toute production)
 Le hook est la phrase d'accroche des 0-1,2 s. Il doit être compréhensible **sans le son** (appuyé par le visuel). **Aucun short ne part en production sans hook validé.**

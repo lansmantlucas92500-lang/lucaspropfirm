@@ -37,7 +37,8 @@ Scripts préinstallés dans le sandbox : `$HF_WORKFLOWS/subtitles/scripts/` (`fe
 - **Aucun `medias`** (pas d'image, pas d'audio, pas de référence) : text-to-video pur. `audio_references` est l'ancienne méthode abandonnée.
 - Mini = 480p/720p max, 4-15 s. `bitrate_mode: high` = netteté à 720p pour un surcoût nul. `genre: drama` = ambiance cinématique (ou `epic`).
 - **Coût mesuré : 37,5 crédits** par vidéo 15 s (solde de référence 1 229 crédits ≈ 32 vidéos).
-- Alternative qualité si besoin (non par défaut) : `seedance_2_5` mode `t2v`, 1080p, 4-30 s.
+- Le `prompt` est **en français** (recette et exemple dans `short-description`).
+- **Modèle figé : `seedance_2_0_mini` 720p — ne jamais proposer `seedance_2_0`, `seedance_2_5` ni une autre résolution.** La qualité se joue dans le prompt.
 - `use_unlim: true` uniquement si l'allocation « unlimited » est active (`models_explore` → `unlim.available`) ; sinon omettre.
 
 ### Voix — `generate_audio`

@@ -131,7 +131,7 @@ Le hook est la phrase d'accroche des 0-1,2 s. Il doit être compréhensible **sa
 ## DESCRIPTION (format fixe, toutes plateformes)
 **CTA haut (4 lignes)** → accroche émoji → lignes "👉" → "🎓 abonne-toi" → **CTA écrit complet** → **bloc de liens complet (10 lignes)**. Dire « jusqu'à -80 % », jamais garanti.
 - Le **CTA haut** est en toute première position : il reste visible avant le « … plus » des plateformes.
-- **TikTok uniquement** : les liens ne sont pas cliquables → ajouter « 🔗 Tout est en bio » juste au-dessus du CTA haut.
+- **TikTok uniquement** : les liens ne sont pas cliquables → ajouter « 🔗 Tout est en bio » juste au-dessus du CTA haut. La bio de tous les comptes pointe vers la page de liens **https://lucaspropfirm.fr/liens.html** (fichier `liens.html` du site, les 10 liens + code LUCAS copiable).
 
 ### CTA haut (4 lignes — TOUJOURS en tête de description, texte exact)
 ```

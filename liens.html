@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liens | LUCAS PROPFIRM</title>
+    <meta name="description" content="Tous les liens LucasPropfirm : code LUCAS jusqu'à -80 % chez Phidias, Discord & formation, PropLog, newsletters, affiliation, Higgsfield, Limova, Wisewand.">
+    <meta property="og:title" content="Liens | LUCAS PROPFIRM">
+    <meta property="og:description" content="Code LUCAS → jusqu'à -80 % chez Phidias · Discord & formation · tous mes liens.">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#0a0a0a">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16213e);
+            background-attachment: fixed;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 40px 16px 60px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.12), transparent 50%);
+            animation: rotate 24s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes gradient { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.35); }
+            50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.75); }
+        }
+
+        .card {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 520px;
+            text-align: center;
+        }
+
+        .badge {
+            width: 96px; height: 96px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 36px; font-weight: 900; letter-spacing: 2px;
+            color: #0a0a0a;
+            background: linear-gradient(45deg, #FFD700, #FFA500, #FFD700);
+            background-size: 200% auto;
+            animation: gradient 3s linear infinite;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.45);
+        }
+
+        h1 {
+            font-size: 30px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            background: linear-gradient(45deg, #FFD700, #FFA500, #FFD700);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient 3s linear infinite;
+        }
+
+        .bio {
+            margin: 10px 0 22px;
+            color: #e0e0e0;
+            font-weight: 300;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .code-highlight {
+            display: inline-block;
+            background: rgba(255, 215, 0, 0.18);
+            padding: 12px 28px;
+            border-radius: 50px;
+            border: 2px solid #FFD700;
+            animation: pulse 2s ease-in-out infinite;
+            margin-bottom: 28px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .code-label {
+            display: block;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #ccc;
+            margin-bottom: 2px;
+        }
+
+        .code-text {
+            font-size: 26px;
+            font-weight: bold;
+            color: #FFD700;
+            letter-spacing: 4px;
+        }
+
+        .code-hint {
+            display: block;
+            font-size: 11px;
+            color: #aaa;
+            margin-top: 4px;
+        }
+
+        .links { display: flex; flex-direction: column; gap: 12px; }
+
+        .link {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 18px;
+            border-radius: 16px;
+            text-decoration: none;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(10px);
+            transition: transform 0.2s, border-color 0.2s, background 0.2s;
+            text-align: left;
+        }
+
+        .link:hover, .link:focus-visible {
+            transform: translateY(-2px);
+            border-color: #FFD700;
+            background: rgba(255, 215, 0, 0.10);
+            outline: none;
+        }
+
+        .link.primary {
+            border: 2px solid #FFD700;
+            background: rgba(255, 215, 0, 0.14);
+        }
+
+        .link .emoji { font-size: 24px; width: 32px; flex-shrink: 0; text-align: center; }
+        .link .txt { flex: 1; min-width: 0; }
+        .link .title { display: block; font-weight: 700; font-size: 15px; }
+        .link .sub { display: block; font-size: 12px; color: #bbb; margin-top: 2px; }
+        .link .arrow { color: #FFD700; font-weight: 700; flex-shrink: 0; }
+
+        .section {
+            margin: 26px 0 8px;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #999;
+        }
+
+        .socials {
+            display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .socials a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 9px 14px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        .socials a:hover { color: #FFD700; border-color: #FFD700; }
+
+        footer {
+            margin-top: 34px;
+            font-size: 11px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        footer a { color: #999; text-decoration: none; }
+        footer a:hover { color: #FFD700; }
+
+        @media (max-width: 380px) {
+            h1 { font-size: 24px; letter-spacing: 2px; }
+            .code-text { font-size: 22px; }
+            .link { padding: 14px; }
+        }
+    </style>
+</head>
+<body>
+    <main class="card">
+        <div class="badge" aria-hidden="true">LP</div>
+        <h1>LUCAS PROPFIRM</h1>
+        <p class="bio">Trading Futures ES/NQ · Prop firms<br>Formation, Discord &amp; outils — tous mes liens ici.</p>
+
+        <div class="code-highlight" id="copy-code" role="button" tabindex="0" title="Copier le code">
+            <span class="code-label">Code promo Phidias</span>
+            <span class="code-text">LUCAS</span>
+            <span class="code-hint" id="copy-hint">Appuie pour copier · jusqu'à -80 %</span>
+        </div>
+
+        <nav class="links" aria-label="Liens principaux">
+            <a class="link primary" href="https://phidiaspropfirm.com" target="_blank" rel="noopener">
+                <span class="emoji">🔑</span>
+                <span class="txt"><span class="title">Code LUCAS → jusqu'à -80 % chez Phidias</span><span class="sub">Prop firm futures · phidiaspropfirm.com</span></span>
+                <span class="arrow">›</span>
+            </a>
+            <a class="link primary" href="https://lucaspropfirm.fr" target="_blank" rel="noopener">
+                <span class="emoji">📌</span>
+                <span class="txt"><span class="title">Discord &amp; formation</span><span class="sub">lucaspropfirm.fr</span></span>
+                <span class="arrow">›</span>
+            </a>
+
+            <div class="section">Outils &amp; suivi</div>
+            <a class="link" href="https://www.proplog.fr/" target="_blank" rel="noopener">
+                <span class="emoji">📒</span>
+                <span class="txt"><span class="title">Journal de trading PropLog</span><span class="sub">proplog.fr</span></span>
+                <span class="arrow">›</span>
+            </a>
+            <a class="link" href="https://lucaspropfirm.fr/newsletters.html" target="_blank" rel="noopener">
+                <span class="emoji">📰</span>
+                <span class="txt"><span class="title">Newsletter lucaspropfirm</span><span class="sub">Les prop firms, chaque semaine</span></span>
+                <span class="arrow">›</span>
+            </a>
+            <a class="link" href="https://proplog.fr/newsletter/" target="_blank" rel="noopener">
+                <span class="emoji">📰</span>
+                <span class="txt"><span class="title">Newsletter Proplog</span><span class="sub">proplog.fr/newsletter</span></span>
+                <span class="arrow">›</span>
+            </a>
+            <a class="link" href="https://lucaspropfirm.fr/Affiliation.html" target="_blank" rel="noopener">
+                <span class="emoji">🤝</span>
+                <span class="txt"><span class="title">Programme d'affiliation</span><span class="sub">Gagne avec LucasPropfirm</span></span>
+                <span class="arrow">›</span>
+            </a>
+
+            <div class="section">Partenaires &amp; codes promo</div>
+            <a class="link" href="https://higgsfield.ai?fpr=lucas17" target="_blank" rel="noopener">
+                <span class="emoji">🎬</span>
+                <span class="txt"><span class="title">Higgsfield — génération vidéo IA</span><span class="sub">L'outil de mes shorts</span></span>
+                <span class="arrow">›</span>
+            </a>
+            <a class="link" href="https://limova.ai/?linkId=lp_079563&amp;sourceId=lucas-lansmant&amp;tenantId=limova" target="_blank" rel="noopener">
+                <span class="emoji">🎁</span>
+                <span class="txt"><span class="title">Limova — code PROFILM30</span><span class="sub">limova.ai</span></span>
+                <span class="arrow">›</span>
+            </a>
+            <a class="link" href="https://wisewand.ai/?fpr=lucas" target="_blank" rel="noopener">
+                <span class="emoji">🤖</span>
+                <span class="txt"><span class="title">Wisewand.ai — code LUCAS10 (-10 %)</span><span class="sub">Rédacteur IA optimisé SEO</span></span>
+                <span class="arrow">›</span>
+            </a>
+            <a class="link" href="https://wisewand.ai/en/?fpr=lucas" target="_blank" rel="noopener">
+                <span class="emoji">🤖</span>
+                <span class="txt"><span class="title">Wisewand.ai (EN) — code LUCAS10 (-10 %)</span><span class="sub">English version</span></span>
+                <span class="arrow">›</span>
+            </a>
+        </nav>
+
+        <div class="socials" aria-label="Réseaux sociaux">
+            <a href="https://www.instagram.com/lucaspropfirm01" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://www.tiktok.com/@lucaspropfirm01" target="_blank" rel="noopener">TikTok</a>
+            <a href="https://www.youtube.com/@lucasPropfirm2026" target="_blank" rel="noopener">YouTube</a>
+            <a href="https://x.com/LucasMoi12" target="_blank" rel="noopener">X</a>
+        </div>
+
+        <footer>
+            Réduction Phidias jusqu'à -80 % avec le code LUCAS, selon l'offre en cours. Le trading comporte un risque de perte en capital.<br>
+            © LucasPropfirm · <a href="https://lucaspropfirm.fr">lucaspropfirm.fr</a>
+        </footer>
+    </main>
+
+    <script>
+        (function () {
+            var el = document.getElementById('copy-code');
+            var hint = document.getElementById('copy-hint');
+            function copy() {
+                var done = function () {
+                    hint.textContent = 'Copié ✓ — colle-le chez Phidias';
+                    setTimeout(function () { hint.textContent = "Appuie pour copier · jusqu'à -80 %"; }, 2200);
+                };
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText('LUCAS').then(done, done);
+                } else { done(); }
+            }
+            el.addEventListener('click', copy);
+            el.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); copy(); } });
+        })();
+    </script>
+</body>
+</html>

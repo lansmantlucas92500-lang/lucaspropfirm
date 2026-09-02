@@ -12,10 +12,17 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        /* Le dégradé est posé sur html : le fond de la racine couvre tout le document,
+           quelle que soit la hauteur de page (background-attachment: fixed est
+           ignoré par iOS Safari et laissait un fond blanc sous le premier écran). */
+        html {
+            background: #0a0a0a linear-gradient(135deg, #0a0a0a, #1a1a2e, #16213e) no-repeat;
+            min-height: 100%;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16213e);
-            background-attachment: fixed;
+            background: transparent;
             color: #fff;
             min-height: 100vh;
             display: flex;

@@ -25,7 +25,7 @@ Style : animation 3D stylisée **futuriste de haute qualité** (rendu cinématiq
 - Même palette bleu nuit + or/lime sur tous les shorts ; rouge/vert = signaux uniquement.
 - Aucun texte lisible généré dans la vidéo (sous-titres ajoutés au montage).
 - Signature finale (au montage) : logo LP rond lime sur les **2 dernières secondes** + son de validation.
-- **Encart de fin (au montage, dernière seconde)** : « CODE : LUCAS chez phidiaspropfirm.com » et « Discord & formation : lucaspropfirm.fr ». C'est là que vit le **CTA écrit complet**.
+- **Encart de fin (au montage, dernière seconde)** : « CODE LUCAS chez Phidiaspropfirm.com » et « Discord & formation : lucaspropfirm.fr ». Nom de domaine **toujours en entier**, jamais « Phidias » seul. C'est là que vit le **CTA écrit complet**.
 
 ### Zones sûres 9:16 (720×1280) — rien d'important hors de ces zones
 - **Sous-titres** : bas de l'image, dans la safe zone Reels (bas 16,7 %, côtés 11 %), 2 lignes max.
@@ -110,18 +110,20 @@ Le hook est la phrase d'accroche des 0-1,2 s. Il doit être compréhensible **sa
 - [ ] Validé → production ; sinon → réécrire avec un autre patron
 
 ## SCRIPT NARRATION (15 s)
-**Budget : 34-38 mots au total, CTA oral inclus** (ElevenLabs lit à ≈ 2,4-2,6 mots/s ; la durée réelle est mesurée sur la voix par le gate de `shorts-generation` — c'est elle qui fait foi, pas le compte de mots).
+**Budget : 33-36 mots au total, CTA oral inclus** (ElevenLabs lit à ≈ 2,4-2,6 mots/s ; la durée réelle est mesurée sur la voix par le gate de `shorts-generation` — c'est elle qui fait foi, pas le compte de mots).
+⚠️ **Les deux noms de domaine du CTA sont lourds à l'oral** (« Phidiaspropfirm point com » ≈ 1,6 s, « lucaspropfirm point F R » ≈ 1,5 s) : le CTA parlé occupe **~4,5 s à lui seul**. Le contenu ne dispose donc que de **26-29 mots**. Ne jamais rogner le CTA pour gagner du temps — raccourcir le contenu.
 
 | Temps | Contenu | Mots |
 |---|---|---|
-| 0-1,2 s | **HOOK** (verrouillé par le module Hook) | 3-6 |
+| 0-1,2 s | **HOOK** (verrouillé par le module Hook) | 5-6 |
 | 1,2-4 s | problème / mise en situation | 6-8 |
-| 4-8,5 s | explication — **1 seule idée**, vocabulaire débutant | 10-12 |
-| 8,5-12 s | règle à retenir | 7-9 |
-| 12-15 s | **CTA ORAL FIXE** (7 mots, dit tel quel) | 7 |
+| 4-7,5 s | explication — **1 seule idée**, vocabulaire débutant | 7-9 |
+| 7,5-10,5 s | règle à retenir | 5-7 |
+| 10,5-15 s | **CTA ORAL FIXE** (7 mots, ~4,5 s, dit tel quel) | 7 |
 
 **CTA ORAL FIXE (fin de narration, jamais reformulé ni omis)** :
-« Code LUCAS chez Phidias, détails sur lucaspropfirm.fr. »
+« Code LUCAS chez Phidiaspropfirm.com, détails sur lucaspropfirm.fr. »
+> Toujours dire **Phidiaspropfirm.com** en entier — jamais « Phidias » seul. Idem à l'écrit (encart de fin, descriptions).
 
 **CTA ÉCRIT COMPLET (encart de fin + toutes les descriptions, jamais reformulé)** :
 « Pour avoir les détails des prop firms, rendez-vous sur lucaspropfirm.fr, pour le Discord et la formation. Code LUCAS chez Phidiaspropfirm.com. »
@@ -188,6 +190,7 @@ Proposer d'abord **concept + hook + script + prompt complet + description**, att
 
 ## Règles
 - Langue : français. Codes **LUCAS** et **PROFILM30** complets, jamais modifiés.
-- Réduction Phidias : toujours « jusqu'à -80 % » (jamais garanti), vérifier l'offre officielle avant publication.
+- La firme se nomme **Phidiaspropfirm.com** en entier partout (narration, encart, descriptions) — jamais « Phidias » seul.
+- Réduction Phidiaspropfirm.com : toujours « jusqu'à -80 % » (jamais garanti, dépend du type de compte), vérifier l'offre officielle avant publication.
 - Ne pas mélanger avec les liens Proplog-only (Proplog a son propre CTA : https://www.proplog.fr/ et https://proplog.fr/newsletter/).
 - Interdits transversaux : Limova sur le compte trading, contenu EN sur le compte FR, 16:9, chandeliers génériques sans contexte, fausses interfaces broker, lifestyle richesse.

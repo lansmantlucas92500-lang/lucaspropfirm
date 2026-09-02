@@ -132,7 +132,7 @@ curl -fsSL "$LOGO_URL" -o logo.png && curl -fsSL "$DING_URL" -o ding.wav
 ffmpeg -y -i video.mp4 -i voice.mp3 -i logo.png -i ding.wav -filter_complex "\
 [2:v]scale=120:-1[lg];\
 [0:v][lg]overlay=x=43:y=128:enable='between(t,13,15)'[v1];\
-[v1]drawtext=fontfile=/usr/share/fonts/truetype/higgsfield/Montserrat-ExtraBold.ttf:text='CODE LUCAS chez phidiaspropfirm.com':fontcolor=0xC8FF00:fontsize=38:x=(w-text_w)/2:y=190:enable='between(t,14,15)',\
+[v1]drawtext=fontfile=/usr/share/fonts/truetype/higgsfield/Montserrat-ExtraBold.ttf:text='CODE LUCAS chez Phidiaspropfirm.com':fontcolor=0xC8FF00:fontsize=34:x=(w-text_w)/2:y=190:enable='between(t,14,15)',\
 drawtext=fontfile=/usr/share/fonts/truetype/higgsfield/Montserrat-ExtraBold.ttf:text='Discord & formation : lucaspropfirm.fr':fontcolor=white:fontsize=30:x=(w-text_w)/2:y=240:enable='between(t,14,15)'[v];\
 [1:a]apad[voice];[3:a]adelay=13000|13000[ding];[voice][ding]amix=inputs=2:normalize=0[a]" \
 -map "[v]" -map "[a]" -c:v libx264 -preset medium -crf 18 -c:a aac -b:a 192k -ar 48000 -shortest -movflags +faststart montage.mp4

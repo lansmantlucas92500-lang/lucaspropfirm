@@ -69,15 +69,16 @@ Strictement **un short à la fois** : A→G terminé avant de relancer A pour le
 2. **Gate** dans le sandbox. ⚠️ **`speech_metrics.sh` seul MENT sur ce moteur.** Higgsfield renvoie un MP3 ElevenLabs de **longueur fixe** (mesuré : 15,386 s / 246 639 octets, identique quel que soit le texte), rempli en fin de piste par un bruit de fond **au-dessus de -35 dB**. `speech_metrics` compte ce remplissage comme de la parole et annonce systématiquement ~15,4 s. La mesure qui fait foi est le **rognage par énergie** :
 ```bash
 curl -fsSL "$VOICE_URL" -o voice.mp3
-# durée de PAROLE réelle (rogne le remplissage de fin)
-ffmpeg -v error -i voice.mp3 -af "silenceremove=stop_periods=-1:stop_threshold=-40dB:stop_duration=0.1" -y voice_trim.wav
-ffprobe -v error -show_entries format=duration -of csv=p=0 voice_trim.wav   # <= 14,3 s
+# durée de PAROLE réelle : rogne UNIQUEMENT le remplissage de fin.
+# Meme filtre qu'au montage (§7) pour mesurer exactement ce qui sera monte.
+ffmpeg -v error -i voice.mp3 -af "areverse,silenceremove=start_periods=1:start_threshold=-40dB:start_duration=0.1,areverse" -y voice_tail.wav
+ffprobe -v error -show_entries format=duration -of csv=p=0 voice_tail.wav   # <= 14,3 s
 # débit, à titre indicatif seulement
 bash $HF_WORKFLOWS/narrator/scripts/speech_metrics.sh voice.mp3 --words <N> --max-wps 2.9 --json
 ```
    Critères : durée de `voice_trim.wav` ≤ **14,3 s** ; débit dans la bande naturelle **2,4-2,6 mots/s**.
    - Trop long ou `RUSHED` → **réécrire le script avec moins de mots** (jamais accélérer la voix), régénérer.
-   - **Toujours monter `voice_trim.wav`**, jamais le MP3 brut : sinon 2,5 s de bruit de fond audible traînent sur la fin du short.
+   - **Toujours monter `voice_tail.wav`**, jamais le MP3 brut : sinon 2,5 s de bruit de fond audible traînent sur la fin du short.
 3. **Vérifier la prononciation** par transcription Whisper (les domaines surtout). Écrire les domaines **espacés** dans le texte TTS pour une lecture correcte en français : `Phidias propfirm point com` et `Lucas propfirm point F R`. Repère mesuré : le CTA parlé complet dure **~5 s**, soit un tiers du short.
 
 ## 5. Étape B — Vidéo muette

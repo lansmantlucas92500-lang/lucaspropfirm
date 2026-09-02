@@ -84,10 +84,19 @@ Le hook est la phrase d'accroche des 0-1,2 s. Il doit être compréhensible **sa
 > Pourquoi deux CTA : le CTA complet fait 20 mots ≈ 7-8 s de voix — impossible dans les 3 dernières secondes d'un 15 s sans couper. Il est donc **lu** (encart + description), et le CTA oral court porte le code + le site.
 
 ## DESCRIPTION (format fixe, toutes plateformes)
-accroche émoji → lignes "👉" → "🎓 abonne-toi" → **CTA écrit complet** → **bloc de liens complet**. Dire « jusqu'à -80 % », jamais garanti.
-- **TikTok uniquement** : les liens ne sont pas cliquables → ajouter en tête du bloc « 🔗 Tout est en bio ».
+**CTA haut (4 lignes)** → accroche émoji → lignes "👉" → "🎓 abonne-toi" → **CTA écrit complet** → **bloc de liens complet (10 lignes)**. Dire « jusqu'à -80 % », jamais garanti.
+- Le **CTA haut** est en toute première position : il reste visible avant le « … plus » des plateformes.
+- **TikTok uniquement** : les liens ne sont pas cliquables → ajouter « 🔗 Tout est en bio » juste au-dessus du CTA haut.
 
-### Bloc de liens (10 lignes — TOUJOURS COMPLET, chaque lien sur SA propre ligne)
+### CTA haut (4 lignes — TOUJOURS en tête de description, texte exact)
+```
+🔑 Code 𝗟𝗨𝗖𝗔𝗦 → jusqu'à -80 % chez Phidias : https://phidiaspropfirm.com
+📌 Discord & formation : https://lucaspropfirm.fr
+🎬 Higgsfield (génération vidéo IA) : https://higgsfield.ai?fpr=lucas17
+🤖 Wisewand.ai (rédacteur IA optimisé SEO) code promo LUCAS10 → -10 % : https://wisewand.ai/?fpr=lucas
+```
+
+### Bloc de liens (10 lignes — TOUJOURS COMPLET en bas, chaque lien sur SA propre ligne)
 ```
 🔑 Code 𝗟𝗨𝗖𝗔𝗦 → jusqu'à -80 % chez Phidias : https://phidiaspropfirm.com
 📌 Discord & formation : https://lucaspropfirm.fr
@@ -100,7 +109,33 @@ accroche émoji → lignes "👉" → "🎓 abonne-toi" → **CTA écrit complet
 🤖 Wisewand.ai (EN) (rédacteur IA optimisé SEO) code promo LUCAS10 → -10 % : https://wisewand.ai/en/?fpr=lucas
 🎬 Higgsfield (génération vidéo IA) : https://higgsfield.ai?fpr=lucas17
 ```
-Structure : accroche → ligne vide → contenu (1-2 lignes) → ligne vide → CTA écrit complet → ligne vide → bloc de liens (10 lignes). Ne jamais tronquer ni coller les liens sur une seule ligne.
+Structure : CTA haut (4 lignes) → ligne vide → accroche → contenu (1-2 lignes) → 🎓 abonne-toi → ligne vide → CTA écrit complet → ligne vide → bloc de liens (10 lignes). Ne jamais tronquer ni coller les liens sur une seule ligne. Le CTA haut et le bloc de liens se répètent volontairement (haut = visible sans dérouler ; bas = complet).
+
+### Exemple complet — Éducation
+```
+🔑 Code 𝗟𝗨𝗖𝗔𝗦 → jusqu'à -80 % chez Phidias : https://phidiaspropfirm.com
+📌 Discord & formation : https://lucaspropfirm.fr
+🎬 Higgsfield (génération vidéo IA) : https://higgsfield.ai?fpr=lucas17
+🤖 Wisewand.ai (rédacteur IA optimisé SEO) code promo LUCAS10 → -10 % : https://wisewand.ai/?fpr=lucas
+
+📉 Un tick, c'est combien, vraiment ?
+👉 Chaque petit mouvement du marché a une valeur fixe. Et elle s'additionne vite.
+👉 Connais la valeur du tick avant de cliquer.
+🎓 On reconstruit les bases, une brique par jour — abonne-toi.
+
+Pour avoir les détails des prop firms, rendez-vous sur lucaspropfirm.fr, pour le Discord et la formation. Code LUCAS chez Phidiaspropfirm.com.
+
+🔑 Code 𝗟𝗨𝗖𝗔𝗦 → jusqu'à -80 % chez Phidias : https://phidiaspropfirm.com
+📌 Discord & formation : https://lucaspropfirm.fr
+📒 Journal de trading PropLog : https://www.proplog.fr/
+📰 Newsletter lucaspropfirm : https://lucaspropfirm.fr/newsletters.html
+📰 Newsletter Proplog : https://proplog.fr/newsletter/
+🤝 Affiliation : https://lucaspropfirm.fr/Affiliation.html
+🎁 Limova code promo PROFILM30 : https://limova.ai/?linkId=lp_079563&sourceId=lucas-lansmant&tenantId=limova
+🤖 Wisewand.ai (rédacteur IA optimisé SEO) code promo LUCAS10 → -10 % : https://wisewand.ai/?fpr=lucas
+🤖 Wisewand.ai (EN) (rédacteur IA optimisé SEO) code promo LUCAS10 → -10 % : https://wisewand.ai/en/?fpr=lucas
+🎬 Higgsfield (génération vidéo IA) : https://higgsfield.ai?fpr=lucas17
+```
 
 ## RÈGLE DE VALIDATION
 Proposer d'abord **concept + hook + script + prompt complet + description**, attendre la **validation utilisateur**, puis **confirmer le coût (`get_cost`) AVANT toute génération**. Jamais de génération sans double validation.

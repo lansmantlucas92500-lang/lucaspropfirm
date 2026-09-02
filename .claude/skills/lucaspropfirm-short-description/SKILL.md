@@ -131,7 +131,8 @@ Le hook est la phrase d'accroche des 0-1,2 s. Il doit être compréhensible **sa
 ## DESCRIPTION (format fixe, toutes plateformes)
 **CTA haut (4 lignes)** → accroche émoji → lignes "👉" → "🎓 abonne-toi" → **CTA écrit complet** → **bloc de liens complet (10 lignes)**. Dire « jusqu'à -80 % », jamais garanti.
 - Le **CTA haut** est en toute première position : il reste visible avant le « … plus » des plateformes.
-- **TikTok uniquement** : les liens ne sont pas cliquables → ajouter « 🔗 Tout est en bio » juste au-dessus du CTA haut. La bio de tous les comptes pointe vers la page de liens **https://lucaspropfirm.fr/liens.html** (fichier `liens.html` du site, les 10 liens + code LUCAS copiable).
+- **TikTok uniquement** : les liens ne sont pas cliquables → ajouter « 🔗 Tout est en bio » juste au-dessus du CTA haut.
+- **Lien en bio de tous les comptes (IG, TikTok, YouTube, X)** : le SmartLink Metricool **https://t.mtrbio.com/lucaspropfirm** (10 boutons trackés, stats par bouton dans Metricool → Analytics → SmartLinks). Page de secours sur le domaine : `liens.html` du site (https://lucaspropfirm.fr/liens.html). Quand un post est programmé via Metricool, attacher le SmartLink (`smartLinkData`) pour le tracking.
 
 ### CTA haut (4 lignes — TOUJOURS en tête de description, texte exact)
 ```

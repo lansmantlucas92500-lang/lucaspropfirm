@@ -133,6 +133,7 @@ Le hook est la phrase d'accroche des 0-1,2 s. Il doit être compréhensible **sa
 ## DESCRIPTION (format fixe, toutes plateformes)
 **CTA haut (4 lignes)** → accroche émoji → lignes "👉" → "🎓 abonne-toi" → **CTA écrit complet** → **bloc de liens complet (10 lignes)**. Dire « jusqu'à -80 % », jamais garanti.
 - Le **CTA haut** est en toute première position : il reste visible avant le « … plus » des plateformes.
+- **JAMAIS de tiret cadratin (—) ni de tiret demi-cadratin (–) dans une description.** C'est la signature typographique la plus reconnaissable d'un texte écrit par une IA. Utiliser un point, une virgule, un deux-points ou un point médian (·). Même règle pour les scripts de narration et les légendes.
 - **TikTok uniquement** : les liens ne sont pas cliquables → ajouter « 🔗 Tout est en bio » juste au-dessus du CTA haut.
 - **Lien en bio de tous les comptes (IG, TikTok, YouTube, X)** : le SmartLink Metricool **https://t.mtrbio.com/lucaspropfirm** (URL courte à utiliser partout ; redirige vers la page finale https://t-sml.mtrbio.com/public/smartlink/lucaspropfirm — 10 boutons trackés, stats par bouton dans Metricool → Analytics → SmartLinks). Page de secours sur le domaine : `liens.html` du site (https://lucaspropfirm.fr/liens.html). Quand un post est programmé via Metricool, attacher le SmartLink (`smartLinkData`) pour le tracking.
 
@@ -169,7 +170,7 @@ Structure : CTA haut (4 lignes) → ligne vide → accroche → contenu (1-2 lig
 📉 Un tick, c'est combien, vraiment ?
 👉 Chaque petit mouvement du marché a une valeur fixe. Et elle s'additionne vite.
 👉 Connais la valeur du tick avant de cliquer.
-🎓 On reconstruit les bases, une brique par jour — abonne-toi.
+🎓 On reconstruit les bases, une brique par jour. Abonne-toi.
 
 Pour avoir les détails des prop firms, rendez-vous sur lucaspropfirm.fr, pour le Discord et la formation. Code LUCAS chez Phidiaspropfirm.com.
 

@@ -1,53 +1,162 @@
 ---
 name: lucaspropfirm-shorts-generation
-description: "Procédure d'EXÉCUTION des shorts lucaspropfirm sur Higgsfield/Seedance 2.0 Mini : loi anti-échecs (1 job à la fois), génération muette, montage voix Julian obligatoire, sous-titres, gestion des échecs. Charger pour générer, relancer ou débuguer un short. Règles créatives (anti-IP, prompt, script) → skill lucaspropfirm-short-description."
+description: "Procédure d'EXÉCUTION des shorts lucaspropfirm sur Higgsfield (MCP) : paramètres figés Seedance 2.0 Mini + voix Julian, loi anti-échecs (1 job à la fois), génération muette, gate de débit TTS, montage voix + sous-titres dans le sandbox Higgsfield (scripts $HF_WORKFLOWS), vérifications, gestion des échecs. Charger pour générer, relancer ou débuguer un short. Règles créatives (anti-IP, prompt, script, CTA) → skill lucaspropfirm-short-description."
 ---
 
 # lucaspropfirm — génération des shorts (procédure d'exécution)
 
-> Périmètre : ce skill décrit **COMMENT produire** un short techniquement. Les règles de CONTENU (anti-IP, structure de prompt 8 blocs, script + CTA, description IG) vivent dans `lucaspropfirm-short-description` — s'y référer, ne pas les redupliquer ici.
+> Périmètre : **COMMENT produire** un short avec les outils réels du MCP Higgsfield. Les règles de CONTENU (anti-IP, prompt 8 blocs, script + CTA, description) sont dans `lucaspropfirm-short-description` ; l'orchestration et le journal dans `lucaspropfirm-shorts-pipeline`.
 
-## 1. Pipeline (un short, de bout en bout)
+## 0. Outils réels (noms exacts du MCP Higgsfield)
+
+| Besoin | Outil | Note |
+|---|---|---|
+| Voix Julian (TTS) | `generate_audio` | 1 seule ligne par appel |
+| Vidéo | `generate_video` | 1 seul job par appel |
+| Attendre un job | `jobs_wait` (≤ 15 s par appel, reboucler) | puis `show_generation_by_ids` |
+| Coût sans dépenser | `get_cost: true` dans les params | **obligatoire avant chaque génération** |
+| Shell média (ffmpeg, ffprobe, faster-whisper, polices) | `sandbox_exec` | sandbox distant Higgsfield — **jamais le shell local** |
+| Exporter un fichier du sandbox | `media_upload` (avant) → `curl PUT` (dans la commande) → `media_confirm` (après HTTP 200) | |
+| Gate viralité / force du hook | `virality_predictor` (action `create`, media = job_id vidéo) | |
+| QC IA scène par scène | `video_analysis_create` (media_id **uploadé**) → `video_analysis_status` | 3-5 min |
+| Publier TikTok | `tiktok_prepare_publish` → `tiktok_publish` | URL Higgsfield obligatoire |
+| Solde | `balance` | |
+
+Scripts préinstallés dans le sandbox : `$HF_WORKFLOWS/subtitles/scripts/` (`fetch_fonts.sh`, `audio_to_captions.py`, `subtitle_paper_burn.py`, `burn_caps_clean.sh`) et `$HF_WORKFLOWS/narrator/scripts/speech_metrics.sh`. Polices système : `/usr/share/fonts/truetype/higgsfield/Montserrat-ExtraBold.ttf`, `Metropolis-ExtraBold.ttf`.
+
+## 1. Paramètres figés (vérifiés sur le catalogue)
+
+### Vidéo — `generate_video`
+```json
+{ "model": "seedance_2_0_mini", "prompt": "<prompt 8 blocs, anti-IP>",
+  "aspect_ratio": "9:16", "resolution": "720p", "duration": 15,
+  "bitrate_mode": "high", "genre": "drama",
+  "generate_audio": false, "get_cost": true }
+```
+- `generate_audio: false` **obligatoire** (défaut backend = `true` → si omis, audio natif + risque de rejet IP).
+- **Aucun `medias`** (pas d'image, pas d'audio, pas de référence) : text-to-video pur. `audio_references` est l'ancienne méthode abandonnée.
+- Mini = 480p/720p max, 4-15 s. `bitrate_mode: high` = netteté à 720p pour un surcoût nul. `genre: drama` = ambiance cinématique (ou `epic`).
+- **Coût mesuré : 37,5 crédits** par vidéo 15 s (solde de référence 1 229 crédits ≈ 32 vidéos).
+- Alternative qualité si besoin (non par défaut) : `seedance_2_5` mode `t2v`, 1080p, 4-30 s.
+- `use_unlim: true` uniquement si l'allocation « unlimited » est active (`models_explore` → `unlim.available`) ; sinon omettre.
+
+### Voix — `generate_audio`
+```json
+{ "model": "text2speech_v2", "variant": "elevenlabs",
+  "voice_type": "preset", "voice_id": "95429266-c0ac-4137-a209-63b8812b0f23",
+  "prompt": "<narration complète, CTA oral inclus>", "get_cost": true }
+```
+- **Julian = preset `95429266-c0ac-4137-a209-63b8812b0f23`** (masculin). Coût mesuré : **0,15 crédit** (ElevenLabs) / 0,3 (`seed_audio`).
+- Moteur principal : **ElevenLabs** (meilleur FR, débit naturel ≈ 2,4-2,6 mots/s). Fallback : `model: "seed_audio"` + même `voice_type`/`voice_id` (débit ≈ 3,3 mots/s, param `speech_rate` disponible).
+- Jamais `voice_change` (mauvaise prononciation FR).
+
+## 2. Séquence (un short, de bout en bout)
 
 ```
-script (voir short-description) → narration Julian (TTS FR) → vidéo Seedance 2.0 Mini muette
-→ MONTAGE ffmpeg (voix + vidéo) → VÉRIF audio → SOUS-TITRES burn → vérif → livrable
+A narration Julian → gate débit (speech_metrics) → B vidéo muette → C gate viralité
+→ D montage voix (sandbox) → E sous-titres (sandbox) → F vérifs → G livraison + journal
 ```
+Strictement **un short à la fois** : A→G terminé avant de relancer A pour le suivant. Un short n'est PAS un livrable tant que la voix n'est pas fusionnée ET vérifiée.
 
-Séquence stricte, un short à la fois :
-**narration(i) → vidéo muette(i) → montage voix(i) → vérif(i) → sous-titres(i) → livraison(i) → narration(i+1).**
-Un short n'est PAS un livrable tant que la voix Julian n'est pas fusionnée ET vérifiée.
+## 3. Loi anti-échecs (non négociable)
+- **Jamais de batch** (`generate_video_batch` / `generate_audio_batch` interdits) : compte plafonné ≈ 8 jobs simultanés, un batch → `429` en cascade et crédits brûlés sur échec.
+- Toujours `get_cost: true` d'abord, montrer le coût, **attendre le OK**, puis relancer sans `get_cost`.
+- Attendre le `completed` (`jobs_wait` en boucle, `poll_after_seconds` respecté) avant tout autre job.
 
-## 2. Loi de génération anti-échecs (non négociable)
-- **JAMAIS de batch.** Lancer **1 seule vidéo à la fois** via `generate_video` avec un seul job, puis attendre le résultat (`job_status` / `jobs_wait`) AVANT la suivante.
-- **Pourquoi :** compte plafonné à **~8 jobs simultanés** ; lancer plusieurs vidéos d'un coup → `429 rate_limit` en cascade et crédits brûlés sur échec.
-- **Même règle pour l'audio** : narration TTS générée 1 voix à la fois.
-- Paramètres de soumission : `model=seedance_2_0_mini`, `aspect_ratio=9:16`, `resolution=720p`, `duration=15`, **`params.generate_audio=false` OBLIGATOIRE** (booléen littéral ; défaut backend = true → si omis → rejet IP). **Aucune image / audio / référence** dans `medias` (text-to-video pur).
+## 4. Étape A — Narration + gate de débit
+1. `generate_audio` (JSON §1) → `job_id` → `jobs_wait` → URL audio.
+2. **Gate** dans le sandbox (le fichier TTS ment : silences en tête/queue ; on mesure la *parole*) :
+```bash
+curl -fsSL "$VOICE_URL" -o voice.mp3 && \
+bash $HF_WORKFLOWS/narrator/scripts/speech_metrics.sh voice.mp3 --text "$NARRATION" --max-wps 2.9 --json
+```
+   Critères : `speech` ≤ **14,3 s**, `rate` = `ok` (jamais `RUSHED`), `longest_pause` < 1 s.
+   - `speech` > 14,3 s ou `RUSHED` → **réécrire le script avec moins de mots** (jamais accélérer la voix), régénérer.
+   - `SLOW` → acceptable si `speech` ≤ 14,3 s.
 
-## 3. Montage voix Julian (obligatoire, jamais sauté)
-1. Générer la narration **TTS Julian** (voice_id Julian, script 38-42 mots + CTA exact).
-2. Générer la vidéo **muette**.
-3. **Monter la voix sur la vidéo** (ffmpeg, mapper uniquement la piste TTS).
-4. **Vérifier** (audio_analyze) : stream `aac` présent, narration audible et non coupée (pas de silence).
-5. Seulement alors → passer aux sous-titres.
+## 5. Étape B — Vidéo muette
+1. `generate_video` avec `get_cost: true` → afficher le coût → OK utilisateur.
+2. Relancer sans `get_cost` → `job_id` → `jobs_wait` jusqu'à `completed` → URL vidéo.
+3. Rejet « copyright restrictions » = **problème de prompt**, voir §10.
 
-## 4. Sous-titres automatiques (obligatoires, après le montage voix)
-Chaque short livré DOIT avoir ses sous-titres brûlés (skill `video-subtitler`) :
-1. **Transcrire** l'audio monté (jamais estimer les timings). Passer le texte narré en `--script` pour un match exact :
-   `python3 scripts/audio_to_captions.py video.mp4 --srt caps.srt --mixed --language fr`
-2. **Vérifier la transcription** (spot-check 3 phrases) avant de brûler ; jamais brûler une transcription incomplète.
-3. **Brûler** (style UGC/TikTok) :
-   `python3 scripts/subtitle_paper_burn.py --in video.mp4 --srt caps.srt --out final_subbed.mp4 --style bold --font-key tiktok`
-4. **Vérifier le burn** : durée audio == durée vidéo (±0,2 s), sous-titres lisibles sur frames d'échantillon.
-5. Livrable final = `final_subbed.mp4` (+ `.srt` à côté).
-- Si Whisper indisponible : livrer sans sous-titres et le signaler — jamais bloquer la livraison.
+## 6. Étape C — Gate viralité (avant de dépenser du temps de montage)
+`virality_predictor` `{action:"create", params:{model:"virality_predictor", medias:[{role:"video", id:"<job_id vidéo>"}]}}`.
+Lire *hook strength* et *retention risk*. Hook faible → revoir le premier plan / le prompt avant montage (la vidéo est à 37,5 crédits : mieux vaut régénérer qu'habiller un plan mou).
 
-## 5. Gestion des échecs — STOP, ne pas boucler
-- Un rejet est d'abord un **problème d'IP/prompt**, pas un rate-limit. Vérifier le prompt contre les règles anti-IP de `short-description` (terme monétaire ? marque ? interface réaliste ?).
-- **Ne jamais auto-retenter en boucle** : ça brûle des crédits sans résultat.
-- En cas d'échec d'un job : attendre **40-60 s**, corriger le prompt si besoin, puis **retenter UNE fois**. En cas de `429` : pause **90 s**.
-- Si le même concept échoue de façon répétée : le noter et passer à autre chose, ne pas s'acharner.
-- Ne déclarer un short terminé que si son job vidéo est `completed` ET la voix vérifiée.
+## 7. Étape D — Montage voix (sandbox)
+Le sandbox est **détruit ~10 s après chaque appel** : une seule commande chaînée, en `background:true` (bail 15 min), résultats exportés dans la même commande.
 
-## 6. Validation
-Double validation utilisateur (idée + coût affiché) avant tout crédit — voir la règle de validation dans `short-description`. Une fois le mandat de production donné, exécuter la séquence sans re-demander à chaque étape.
+Préparer d'abord l'export : `media_upload {filename:"lp_short_<slug>_montage.mp4"}` → `upload_url` + `media_id`.
+```bash
+set -e; mkdir -p /home/user/w && cd /home/user/w
+curl -fsSL "$VIDEO_URL" -o video.mp4 && curl -fsSL "$VOICE_URL" -o voice.mp3
+# voix sur vidéo : la piste audio native est ignorée, la voix est paddée à la durée vidéo
+ffmpeg -y -i video.mp4 -i voice.mp3 -filter_complex "[1:a]apad[a]" \
+  -map 0:v:0 -map "[a]" -c:v copy -c:a aac -b:a 192k -ar 48000 -shortest \
+  -movflags +faststart montage.mp4
+curl -f -X PUT --upload-file montage.mp4 "$UPLOAD_URL" && echo UPLOADED
+```
+Puis `media_confirm {media_id, type:"video"}`. (Encart de fin + logo : §9, à insérer ici une fois les assets fournis.)
+
+## 8. Étape E — Sous-titres brûlés (sandbox, obligatoires)
+Écrire le manifest du script (un bloc par temps du script, texte **exact** de la narration) :
+```json
+{ "blocks": [ {"vo_line": "<hook>"}, {"vo_line": "<problème>"}, {"vo_line": "<explication>"},
+              {"vo_line": "<règle>"}, {"vo_line": "<CTA oral>"} ] }
+```
+Préparer l'export : `media_upload {filename:"lp_short_<slug>_final_subbed.mp4"}`.
+```bash
+set -e; cd /home/user/w   # (ou re-télécharger montage.mp4 si nouveau sandbox)
+cat > script_manifest.json <<'EOF'
+<manifest JSON>
+EOF
+bash $HF_WORKFLOWS/subtitles/scripts/fetch_fonts.sh --quiet
+python3 $HF_WORKFLOWS/subtitles/scripts/audio_to_captions.py montage.mp4 \
+  --srt caps.srt --language fr --script script_manifest.json --max-words 4 --max-chars 26
+cat caps.srt
+python3 $HF_WORKFLOWS/subtitles/scripts/subtitle_paper_burn.py \
+  --in montage.mp4 --srt caps.srt --out final_subbed.mp4 --style bold --font-key tiktok
+curl -f -X PUT --upload-file final_subbed.mp4 "$UPLOAD_URL" && echo UPLOADED
+```
+- `--script` aligne les mots affichés sur le texte écrit (Whisper ne sert qu'au timing → zéro substitution).
+- **Vérifier `caps.srt` avant de valider** : toutes les phrases présentes, CTA oral inclus, aucun mot inventé.
+- Style `bold` = capitales blanches, contour noir, safe zone Reels (bas 16,7 %, côtés 11 %), 2 lignes max. Police TikTok Sans téléchargée par `fetch_fonts.sh` ; fallback automatique Montserrat.
+- Code de sortie **2** = Whisper indisponible → livrer `montage.mp4` sans sous-titres **et le signaler** (ne jamais bloquer).
+- Premier run : Whisper télécharge le modèle `small` (lent) → `background:true` et poller le log ; `--model base` si trop lent.
+
+## 9. Encart de fin + logo (assets, voir `shorts/assets/README.md`)
+Une fois `logo_lp.png` et `ding.wav` uploadés sur Higgsfield (URLs permanentes notées dans le README), ajouter dans la commande du §7 (720×1280) :
+```bash
+curl -fsSL "$LOGO_URL" -o logo.png && curl -fsSL "$DING_URL" -o ding.wav
+ffmpeg -y -i video.mp4 -i voice.mp3 -i logo.png -i ding.wav -filter_complex "\
+[2:v]scale=120:-1[lg];\
+[0:v][lg]overlay=x=43:y=128:enable='between(t,13,15)'[v1];\
+[v1]drawtext=fontfile=/usr/share/fonts/truetype/higgsfield/Montserrat-ExtraBold.ttf:text='CODE LUCAS chez phidiaspropfirm.com':fontcolor=0xC8FF00:fontsize=38:x=(w-text_w)/2:y=190:enable='between(t,14,15)',\
+drawtext=fontfile=/usr/share/fonts/truetype/higgsfield/Montserrat-ExtraBold.ttf:text='Discord & formation : lucaspropfirm.fr':fontcolor=white:fontsize=30:x=(w-text_w)/2:y=240:enable='between(t,14,15)'[v];\
+[1:a]apad[voice];[3:a]adelay=13000|13000[ding];[voice][ding]amix=inputs=2:normalize=0[a]" \
+-map "[v]" -map "[a]" -c:v libx264 -preset medium -crf 18 -c:a aac -b:a 192k -ar 48000 -shortest -movflags +faststart montage.mp4
+```
+Positions = zones sûres 9:16 (logo haut-gauche, encart centré dans le tiers haut, sous-titres en bas). **Tester une fois sur frames, puis figer.**
+
+## 10. Étape F — Vérifications (sandbox, avant livraison)
+```bash
+ffprobe -v error -show_entries format=duration -of csv=p=0 final_subbed.mp4            # 15.0 ± 0.2
+ffprobe -v error -select_streams a:0 -show_entries stream=codec_name -of csv=p=0 final_subbed.mp4   # aac
+ffmpeg -i final_subbed.mp4 -af silencedetect=n=-35dB:d=1.0 -f null - 2>&1 | grep silence_start   # aucun silence ≥ 1 s avant la fin de la parole
+ffmpeg -y -i final_subbed.mp4 -vf "select='eq(n,20)+eq(n,200)+eq(n,430)'" -vsync vfr f_%02d.jpg   # 3 frames
+```
+Uploader les 3 frames (`media_upload` image) et les afficher : **aucun texte généré, aucun chiffre, aucun visage, aucune interface réaliste ; sous-titres lisibles ; logo/encart dans les zones sûres.** QC IA optionnel : `video_analysis_create` sur le `media_id` final (3-5 min).
+
+## 11. Étape G — Livraison + journal
+- Livrable = `final_subbed.mp4` (URL Higgsfield) + `caps.srt` + narration texte + description (skill `short-description`).
+- Écrire la ligne dans `shorts/production-log.md` (date, slug, concept, patron hook, job_ids, coût, statut, URL) — c'est ce qui rend applicables les règles de variété.
+- Publication TikTok : `tiktok_accounts` → `tiktok_prepare_publish {connector_id, mode:"DIRECT_POST"|"UPLOAD_TO_DRAFT", media_type:"VIDEO", video_url:<URL Higgsfield>, title, description, is_aigc:true}` → choix utilisateur → `tiktok_publish`.
+
+## 12. Gestion des échecs — STOP, ne pas boucler
+- Rejet vidéo = **d'abord un problème de prompt** : relire contre les règles anti-IP (`short-description`) — terme monétaire ? marque ? interface réaliste ? chiffre ? Corriger, **montrer le prompt reformulé**, relancer **une fois**.
+- Échec technique : attendre 40-60 s puis retenter une fois. `429` : pause 90 s.
+- Même concept échoue 2 fois → le noter dans le journal et passer au suivant.
+- Un job n'est « terminé » que `completed` ET voix vérifiée (§10).
+
+## 13. Validation & crédits
+Double validation (idée → coût via `get_cost`) avant tout crédit — règle dans `short-description`. Mandat de production donné = exécuter A→G sans re-demander à chaque étape. Ne pas lancer une vidéo si le solde restant après coût < 3 vidéos (≈ 115 crédits) sans l'avoir dit.

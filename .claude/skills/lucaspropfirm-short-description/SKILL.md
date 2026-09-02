@@ -1,21 +1,22 @@
 ---
 name: lucaspropfirm-short-description
 description: |
-  Source de vérité CRÉATIVE des shorts lucaspropfirm (trading Futures ES/NQ, prop firms, audience FR). Charger pour tout ce qui touche au CONTENU d'un short : format technique, univers visuel, règles anti-IP des prompts, structure de prompt vidéo, module hook, script de narration + CTA, description IG (émojis + bloc de liens). Pour la procédure d'exécution (génération, montage voix, sous-titres) → skill lucaspropfirm-shorts-generation. Pour l'orchestration et le choix du concept par recherche → skill lucaspropfirm-shorts-pipeline.
+  Source de vérité CRÉATIVE des shorts lucaspropfirm (trading Futures ES/NQ, prop firms, audience FR). Charger pour tout ce qui touche au CONTENU d'un short : format technique, univers visuel, règles anti-IP des prompts, structure de prompt vidéo, module hook, script de narration (CTA oral court + CTA écrit complet), zones sûres 9:16, description IG/TikTok/YouTube (bloc de liens 10 lignes). Pour la procédure d'exécution (génération, montage voix, sous-titres) → skill lucaspropfirm-shorts-generation. Pour l'orchestration, la recherche de concept et le journal → skill lucaspropfirm-shorts-pipeline.
 ---
 
 # Spec créative des shorts lucaspropfirm
 
-> Périmètre : ce skill est la **source de vérité pour tout le contenu** (visuel, prompt, narration, description). Il ne décrit PAS la procédure d'exécution (voir `lucaspropfirm-shorts-generation`) ni l'orchestration (voir `lucaspropfirm-shorts-pipeline`).
+> Périmètre : **source de vérité pour tout le contenu** (visuel, prompt, narration, description). Il ne décrit PAS l'exécution (voir `lucaspropfirm-shorts-generation`) ni l'orchestration (voir `lucaspropfirm-shorts-pipeline`).
+> **Précédence** : les skills LP généralistes (`hook-generator-lp`, `reels-scripter-lp`, `legendes-ig-lp`, `createur-de-poste`) peuvent servir à **générer des candidats** (hooks, scripts, légendes). En cas de conflit, **ce skill gagne** : checklist hook, CTA, bloc de liens, anti-IP.
 
 ## CONTEXTE COMPTE
 @lucaspropfirm01 — trading **Futures ES/NQ**, prop firms, audience FR débutante/intermédiaire. Objectif : vues + commentaires → Discord gratuit → conversion Phidias (code **LUCAS**) et Discord Pro/Élite.
 
 ## FORMAT TECHNIQUE (non négociable)
-- Modèle : **Seedance 2.0 Mini**, 720p, **9:16**, **15 secondes maximum**
+- Modèle : **Seedance 2.0 Mini**, 720p (son maximum), **9:16**, **15 secondes** (son maximum)
 - **Aucun texte lisible** à l'écran dans la vidéo générée
-- Narration TTS voix **"Julian"** en français (jamais change_voice — Mini prononce mal le FR)
-- La vidéo est générée **muette** (`generate_audio=false`) ; la voix Julian est montée en post-prod (jamais en référence audio dans la génération).
+- Narration TTS voix **"Julian"** en français (moteur ElevenLabs ; jamais `voice_change`)
+- La vidéo est générée **muette** (`generate_audio=false`) ; la voix est montée en post-prod (jamais en référence audio dans la génération).
 
 ## UNIVERS VISUEL — "marché financier vivant" · FUTURISTE PREMIUM
 Style : animation 3D stylisée **futuriste de haute qualité** (rendu cinématique, type film de science-fiction financier), bleu nuit profond + accents or/lime, **SANS visage humain**, ambiance premium fintech. **Matériaux riches** (verre fumé, métal brossé, chrome, surfaces réfléchissantes, lumières HDR), **éclairage cinématique** (rim light bleu froid + halos or/lime + bokeh, jamais plat), **détails fintech** (micro-textures, particules lumineuses, hologrammes abstraits, HUD flottants sans texte lisible), **échelle et profondeur** (volumes monumentaux ou intimes avec profondeur de champ et couches FG/MG/BG), **mouvement fluide** (dolly lent, transitions organiques). Cohérent avec la charte branding (bleu nuit + lime-jaune, logo LP rond).
@@ -23,8 +24,14 @@ Style : animation 3D stylisée **futuriste de haute qualité** (rendu cinématiq
 ### Cohérence transversale
 - Même palette bleu nuit + or/lime sur tous les shorts ; rouge/vert = signaux uniquement.
 - Aucun texte lisible généré dans la vidéo (sous-titres ajoutés au montage).
-- Signature finale : logo LP rond lime sur les 2 dernières secondes + son de validation.
-- **Encart de fin (au montage, dernière seconde)** : "CODE : LUCAS chez phidiaspropfirm.com" et "Discord & formation : lucaspropfirm.fr".
+- Signature finale (au montage) : logo LP rond lime sur les **2 dernières secondes** + son de validation.
+- **Encart de fin (au montage, dernière seconde)** : « CODE : LUCAS chez phidiaspropfirm.com » et « Discord & formation : lucaspropfirm.fr ». C'est là que vit le **CTA écrit complet**.
+
+### Zones sûres 9:16 (720×1280) — rien d'important hors de ces zones
+- **Sous-titres** : bas de l'image, dans la safe zone Reels (bas 16,7 %, côtés 11 %), 2 lignes max.
+- **Logo LP** : haut-gauche (≈ 6 % de marge, ≈ 10 % du haut).
+- **Encart de fin** : centré dans le **tiers haut** (≈ 14-24 % du haut) — jamais en bas (UI TikTok/Reels + sous-titres).
+- Colonne droite (≈ 12 %) réservée aux icônes plateforme ; **hook visuel centré**.
 
 ## RÈGLES ANTI-IP / ANTI-REFUS (obligatoires dans TOUT prompt visuel)
 Higgsfield/Seedance renvoie **"Rejected due to copyright restrictions."** dès qu'un prompt évoque l'argent ou un élément réel. C'est un vrai rejet IP, pas un rate-limit.
@@ -37,12 +44,12 @@ Higgsfield/Seedance renvoie **"Rejected due to copyright restrictions."** dès q
 - Tout concept financier est formulé par **métaphore abstraite** (résistance → « plafond lumineux » ; support → « un sol » ; levier → balance sans montant ; news → tempête abstraite). Les chiffres/montants sont autorisés **uniquement en narration TTS**, jamais à l'écran.
 
 ## STRUCTURE DE PROMPT VIDÉO (8 blocs, dans cet ordre)
-`SCENE CONTEXT → FIRST FRAME → OPTICS → CAMERA → LIGHTING → PHYSICS → ACTION TIMING → AUDIO` (design sonore ; la voix est ajoutée après en TTS).
+`SCENE CONTEXT → FIRST FRAME → OPTICS → CAMERA → LIGHTING → PHYSICS → ACTION TIMING → AUDIO` (design sonore ; la voix est ajoutée après en TTS). Le FIRST FRAME illustre le hook (compréhensible sans le son) ; l'ACTION TIMING suit les 5 temps du script.
 
 ## MODULE HOOK (obligatoire avant toute production)
 Le hook est la phrase d'accroche des 0-1,2 s. Il doit être compréhensible **sans le son** (appuyé par le visuel). **Aucun short ne part en production sans hook validé.**
 
-### Les 4 patrons (choisir UN, alterner d'un post à l'autre)
+### Les 4 patrons (choisir UN, alterner d'un post à l'autre — vérifier dans `shorts/production-log.md`)
 1. **Question (Q)** : « Tu sais lire ce que le marché dit VRAIMENT ? »
 2. **Chiffre choc (CH)** : « 1 tick = 12,50 $ » (vérifié)
 3. **Erreur courante (ER)** : « ES + NQ en même temps ? Tu doubles ton risque »
@@ -51,21 +58,34 @@ Le hook est la phrase d'accroche des 0-1,2 s. Il doit être compréhensible **sa
 ### Check-list de validation du hook (toutes les cases)
 - [ ] **1,2 s max** à l'oral
 - [ ] **Compréhensible sans le son** (le premier plan illustre le hook)
-- [ ] **Un seul patron** (Q, CH, ER ou CI)
+- [ ] **Un seul patron** (Q, CH, ER ou CI), **différent du post précédent** (journal)
 - [ ] **Zéro promesse de gain**, **zéro stat non sourcée** (banni : « 90 % des traders… »)
 - [ ] **Sans jargon** non expliqué ; **pas de marque ni de firme** dans le hook
 - [ ] **Émotion ou curiosité** (crée un manque)
 - [ ] Validé → production ; sinon → réécrire avec un autre patron
 
-## SCRIPT NARRATION (15 s, 38-42 mots max)
-- **0-1,2 s** : HOOK choc (verrouillé par le module Hook)
-- **1,2-4 s** : problème / mise en situation
-- **4-9 s** : explication — 1 seule idée, vocabulaire débutant
-- **9-13 s** : règle à retenir
-- **13-15 s** : **CTA UNIQUE FIXE (exact, jamais reformulé ni omis)** — « Pour avoir les détails des prop firms, rendez-vous sur lucaspropfirm.fr, pour le Discord et la formation. Code LUCAS chez Phidiaspropfirm.com. »
+## SCRIPT NARRATION (15 s)
+**Budget : 34-38 mots au total, CTA oral inclus** (ElevenLabs lit à ≈ 2,4-2,6 mots/s ; la durée réelle est mesurée sur la voix par le gate de `shorts-generation` — c'est elle qui fait foi, pas le compte de mots).
 
-## DESCRIPTION IG (format fixe)
-accroche émoji → lignes "👉" → "🎓 abonne-toi" → **bloc de liens complet**. Dire « jusqu'à -80 % », jamais garanti.
+| Temps | Contenu | Mots |
+|---|---|---|
+| 0-1,2 s | **HOOK** (verrouillé par le module Hook) | 3-6 |
+| 1,2-4 s | problème / mise en situation | 6-8 |
+| 4-8,5 s | explication — **1 seule idée**, vocabulaire débutant | 10-12 |
+| 8,5-12 s | règle à retenir | 7-9 |
+| 12-15 s | **CTA ORAL FIXE** (7 mots, dit tel quel) | 7 |
+
+**CTA ORAL FIXE (fin de narration, jamais reformulé ni omis)** :
+« Code LUCAS chez Phidias, détails sur lucaspropfirm.fr. »
+
+**CTA ÉCRIT COMPLET (encart de fin + toutes les descriptions, jamais reformulé)** :
+« Pour avoir les détails des prop firms, rendez-vous sur lucaspropfirm.fr, pour le Discord et la formation. Code LUCAS chez Phidiaspropfirm.com. »
+
+> Pourquoi deux CTA : le CTA complet fait 20 mots ≈ 7-8 s de voix — impossible dans les 3 dernières secondes d'un 15 s sans couper. Il est donc **lu** (encart + description), et le CTA oral court porte le code + le site.
+
+## DESCRIPTION (format fixe, toutes plateformes)
+accroche émoji → lignes "👉" → "🎓 abonne-toi" → **CTA écrit complet** → **bloc de liens complet**. Dire « jusqu'à -80 % », jamais garanti.
+- **TikTok uniquement** : les liens ne sont pas cliquables → ajouter en tête du bloc « 🔗 Tout est en bio ».
 
 ### Bloc de liens (10 lignes — TOUJOURS COMPLET, chaque lien sur SA propre ligne)
 ```
@@ -80,12 +100,13 @@ accroche émoji → lignes "👉" → "🎓 abonne-toi" → **bloc de liens comp
 🤖 Wisewand.ai (EN) (rédacteur IA optimisé SEO) code promo LUCAS10 → -10 % : https://wisewand.ai/en/?fpr=lucas
 🎬 Higgsfield (génération vidéo IA) : https://higgsfield.ai?fpr=lucas17
 ```
-Structure : accroche → ligne vide → contenu (1-2 lignes) → ligne vide → bloc de liens (10 lignes). Ne jamais tronquer ni coller les liens sur une seule ligne.
+Structure : accroche → ligne vide → contenu (1-2 lignes) → ligne vide → CTA écrit complet → ligne vide → bloc de liens (10 lignes). Ne jamais tronquer ni coller les liens sur une seule ligne.
 
 ## RÈGLE DE VALIDATION
-Proposer d'abord **concept + script + prompt complet**, attendre la **validation utilisateur**, puis **confirmer les crédits AVANT toute génération**. Jamais de génération sans double validation.
+Proposer d'abord **concept + hook + script + prompt complet + description**, attendre la **validation utilisateur**, puis **confirmer le coût (`get_cost`) AVANT toute génération**. Jamais de génération sans double validation.
 
 ## Règles
 - Langue : français. Codes **LUCAS** et **PROFILM30** complets, jamais modifiés.
 - Réduction Phidias : toujours « jusqu'à -80 % » (jamais garanti), vérifier l'offre officielle avant publication.
 - Ne pas mélanger avec les liens Proplog-only (Proplog a son propre CTA : https://www.proplog.fr/ et https://proplog.fr/newsletter/).
+- Interdits transversaux : Limova sur le compte trading, contenu EN sur le compte FR, 16:9, chandeliers génériques sans contexte, fausses interfaces broker, lifestyle richesse.

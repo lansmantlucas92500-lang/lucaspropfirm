@@ -1,7 +1,7 @@
 ---
 name: lucaspropfirm-short-description
 description: |
-  Source de vérité CRÉATIVE des shorts lucaspropfirm (trading Futures ES/NQ, prop firms, audience FR). Charger pour tout ce qui touche au CONTENU d'un short : format technique, univers visuel, règles anti-IP des prompts, LEXIQUE VISUEL TRADING obligatoire (chandeliers, courbes, murs d'écrans, salle de marchés — le short doit se voir comme du trading), recette de prompt vidéo (8 blocs en français, anti-générique, exemple figé), module hook, script de narration (CTA oral court + CTA écrit complet), règles ANTI-IA et ancrage trading obligatoire (mots interdits, marqueurs concrets), zones sûres 9:16, description IG/TikTok/YouTube (bloc de liens 11 lignes). Pour la procédure d'exécution (génération, montage voix, sous-titres) → skill lucaspropfirm-shorts-generation. Pour l'orchestration, la recherche de concept et le journal → skill lucaspropfirm-shorts-pipeline.
+  Source de vérité CRÉATIVE des shorts lucaspropfirm (trading Futures ES/NQ, prop firms, audience FR). Charger pour tout ce qui touche au CONTENU d'un short : format technique, univers visuel, règles anti-IP des prompts, LEXIQUE VISUEL TRADING obligatoire (chandeliers, courbes, murs d'écrans, salle de marchés — le short doit se voir comme du trading), AVATAR LUCAS présent par défaut dans tous les shorts, recette de prompt vidéo (8 blocs en français, anti-générique, exemple figé), module hook, script de narration (CTA oral court + CTA écrit complet), règles ANTI-IA et ancrage trading obligatoire (mots interdits, marqueurs concrets), zones sûres 9:16, description IG/TikTok/YouTube (bloc de liens 11 lignes). Pour la procédure d'exécution (génération, montage voix, sous-titres) → skill lucaspropfirm-shorts-generation. Pour l'orchestration, la recherche de concept et le journal → skill lucaspropfirm-shorts-pipeline.
 ---
 
 # Spec créative des shorts lucaspropfirm
@@ -51,7 +51,9 @@ littéralement (une mécanique invisible, un seuil, une règle).
 ### PERSONNAGE RÉCURRENT « LUCAS » (décision du 03/09)
 Le personnage central des shorts est **Lucas, 23 ans, jeune trader en costume bleu nuit et
 cravate**, allure sobre et assurée. Personnage **généré et validé le 03/09** : il ne ressemble pas
-au vrai Lucas, il le joue. Références figées dans `shorts-generation` § « Personnage récurrent ». Il est le fil conducteur d'un short à l'autre, pas une
+au vrai Lucas, il le joue. **Il apparaît dans TOUS les shorts par défaut** — quand Lucas demande
+un short, l'avatar y est, sans qu'il ait à le préciser et sans lui poser la question. Un short
+sans personnage est l'exception et relève d'une demande explicite de sa part. Références figées dans `shorts-generation` § « Personnage récurrent ». Il est le fil conducteur d'un short à l'autre, pas une
 figuration : c'est lui qui traverse la salle de marchés, qui s'arrête devant le mur d'écrans, qui
 marche dans le parc au petit matin pendant que la courbe de lumière court au-dessus des arbres.
 
@@ -174,8 +176,8 @@ par rangée), pas du remplacement du trading par une métaphore de développemen
 - [ ] Si le plan contient des chandeliers : **géométrie décrite** (corps rectangulaire + tige), jamais « bougie » seul
 - [ ] Registre choisi (scène réelle **ou** abstrait fintech), jamais les deux
 - [ ] Charte lumineuse respectée : dominante bleu nuit + or/lime, jamais plein soleil de midi
-- [ ] Si personnage : pas de gros plan visage, il ne parle pas, aucune marque visible
-- [ ] Si c'est Lucas : `image_references` jointes, costume sombre, désigné par sa fonction et non par ses traits
+- [ ] **Personnage Lucas présent** (défaut de tous les shorts) : `image_references` jointes, costume bleu nuit, désigné par sa fonction et non par ses traits
+- [ ] Cadrage du personnage : pas de gros plan visage, il ne parle pas, aucune marque visible
 
 ### Exemple de référence (style figé) — sujet « 1 tick »
 ```

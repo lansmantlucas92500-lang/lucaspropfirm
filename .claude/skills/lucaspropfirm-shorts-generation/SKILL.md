@@ -1,6 +1,6 @@
 ---
 name: lucaspropfirm-shorts-generation
-description: "Procédure d'EXÉCUTION des shorts lucaspropfirm sur Higgsfield (MCP) : paramètres figés Seedance 2.0 Mini + voix Julian, loi anti-échecs (1 job à la fois), génération muette, gate de débit TTS, montage voix + sous-titres dans le sandbox Higgsfield (scripts $HF_WORKFLOWS), vérifications, gestion des échecs. Charger pour générer, relancer ou débuguer un short. Règles créatives (anti-IP, prompt, script, CTA) → skill lucaspropfirm-short-description."
+description: "Procédure d'EXÉCUTION des shorts lucaspropfirm sur Higgsfield (MCP) : paramètres figés Seedance 2.0 Mini + voix Julian + avatar Lucas (référence d'identité jointe à chaque short par défaut), loi anti-échecs (1 job à la fois), génération muette, gate de débit TTS, montage voix + sous-titres dans le sandbox Higgsfield (scripts $HF_WORKFLOWS), vérifications, gestion des échecs. Charger pour générer, relancer ou débuguer un short. Règles créatives (anti-IP, prompt, script, CTA) → skill lucaspropfirm-short-description."
 ---
 
 # lucaspropfirm — génération des shorts (procédure d'exécution)
@@ -31,10 +31,14 @@ Scripts préinstallés dans le sandbox : `$HF_WORKFLOWS/subtitles/scripts/` (`fe
 { "model": "seedance_2_0_mini", "prompt": "<prompt 8 blocs, anti-IP>",
   "aspect_ratio": "9:16", "resolution": "720p", "duration": 15,
   "bitrate_mode": "high", "genre": "drama",
-  "generate_audio": false, "get_cost": true }
+  "generate_audio": false,
+  "medias": [ { "role": "image_references",
+                "id": "b5fb893b-ee5a-43de-82f3-d785f478f20e" } ],
+  "get_cost": true }
 ```
 - `generate_audio: false` **obligatoire** (défaut backend = `true` → si omis, audio natif + risque de rejet IP).
-- **`medias` uniquement pour le personnage Lucas** (§ Personnage récurrent ci-dessous). Sinon text-to-video pur. `audio_references` reste l'ancienne méthode abandonnée : jamais de référence audio.
+- **Le bloc `medias` fait partie de la soumission par défaut** : le personnage Lucas est dans **tous** les shorts, sans avoir à le demander (§ Personnage récurrent ci-dessous). Ne le retirer que si Lucas demande explicitement un short sans personnage — et le noter au journal.
+- `audio_references` reste l'ancienne méthode abandonnée : jamais de référence audio.
 - Mini = 480p/720p max, 4-15 s. `bitrate_mode: high` = netteté à 720p pour un surcoût nul. `genre: drama` = ambiance cinématique (ou `epic`).
 - **Coût mesuré : 37,5 crédits** par vidéo 15 s (solde de référence 1 229 crédits ≈ 32 vidéos).
 - Le `prompt` est **en français** (recette et exemple dans `short-description`).
@@ -52,6 +56,9 @@ génération, ce qui est pire que pas de personnage du tout.
 `consistent`). C'est la voie retenue.
 
 **Le personnage est déjà créé et validé par Lucas (03/09) — ne pas le régénérer.**
+**Il est présent par défaut dans TOUS les shorts.** Aucune question à poser, aucune option à
+proposer : quand Lucas demande un short, l'avatar y est. Son absence est l'exception, et elle
+doit venir d'une demande explicite de sa part.
 
 | | |
 |---|---|

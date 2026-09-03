@@ -1,7 +1,7 @@
 ---
 name: lucaspropfirm-short-description
 description: |
-  Source de vérité CRÉATIVE des shorts lucaspropfirm (trading Futures ES/NQ, prop firms, audience FR). Charger pour tout ce qui touche au CONTENU d'un short : format technique, univers visuel, règles anti-IP des prompts, recette de prompt vidéo (8 blocs en français, anti-générique, exemple figé), module hook, script de narration (CTA oral court + CTA écrit complet), zones sûres 9:16, description IG/TikTok/YouTube (bloc de liens 10 lignes). Pour la procédure d'exécution (génération, montage voix, sous-titres) → skill lucaspropfirm-shorts-generation. Pour l'orchestration, la recherche de concept et le journal → skill lucaspropfirm-shorts-pipeline.
+  Source de vérité CRÉATIVE des shorts lucaspropfirm (trading Futures ES/NQ, prop firms, audience FR). Charger pour tout ce qui touche au CONTENU d'un short : format technique, univers visuel, règles anti-IP des prompts, recette de prompt vidéo (8 blocs en français, anti-générique, exemple figé), module hook, script de narration (CTA oral court + CTA écrit complet), zones sûres 9:16, description IG/TikTok/YouTube (bloc de liens 11 lignes). Pour la procédure d'exécution (génération, montage voix, sous-titres) → skill lucaspropfirm-shorts-generation. Pour l'orchestration, la recherche de concept et le journal → skill lucaspropfirm-shorts-pipeline.
 ---
 
 # Spec créative des shorts lucaspropfirm
@@ -131,23 +131,24 @@ Le hook est la phrase d'accroche des 0-1,2 s. Il doit être compréhensible **sa
 > Pourquoi deux CTA : le CTA complet fait 20 mots ≈ 7-8 s de voix — impossible dans les 3 dernières secondes d'un 15 s sans couper. Il est donc **lu** (encart + description), et le CTA oral court porte le code + le site.
 
 ## DESCRIPTION (format fixe, toutes plateformes)
-**CTA haut (4 lignes)** → accroche émoji → lignes "👉" → "🎓 abonne-toi" → **CTA écrit complet** → **bloc de liens complet (10 lignes)**. Dire « jusqu'à -80 % », jamais garanti.
+**CTA haut (5 lignes)** → accroche émoji → lignes "👉" → "🎓 abonne-toi" → **CTA écrit complet** → **bloc de liens complet (11 lignes)**. Dire « jusqu'à -80 % », jamais garanti.
 - Le **CTA haut** est en toute première position : il reste visible avant le « … plus » des plateformes.
 - **JAMAIS de tiret cadratin (—) ni de tiret demi-cadratin (–) dans une description.** C'est la signature typographique la plus reconnaissable d'un texte écrit par une IA. Utiliser un point, une virgule, un deux-points ou un point médian (·). Même règle pour les scripts de narration et les légendes.
 - **TikTok uniquement** : les liens ne sont pas cliquables → ajouter « 🔗 Tout est en bio » juste au-dessus du CTA haut.
 - **Lien en bio de tous les comptes (IG, TikTok, YouTube, X)** : le SmartLink Metricool **https://t.mtrbio.com/lucaspropfirm** (URL courte à utiliser partout ; redirige vers la page finale https://t-sml.mtrbio.com/public/smartlink/lucaspropfirm — 10 boutons trackés, stats par bouton dans Metricool → Analytics → SmartLinks). Page de secours sur le domaine : `liens.html` du site (https://lucaspropfirm.fr/liens.html). Quand un post est programmé via Metricool, attacher le SmartLink (`smartLinkData`) pour le tracking.
 
-### CTA haut (4 lignes — TOUJOURS en tête de description, texte exact)
+### CTA haut (5 lignes — TOUJOURS en tête de description, texte exact)
 ```
-🔑 Code 𝗟𝗨𝗖𝗔𝗦 → jusqu'à -80 % chez Phidias : https://phidiaspropfirm.com
+🔑 Code 𝗟𝗨𝗖𝗔𝗦 → jusqu'à -80 % chez Phidiaspropfirm.com : https://phidiaspropfirm.com
 📌 Discord & formation : https://lucaspropfirm.fr
 🎬 Higgsfield (génération vidéo IA) : https://higgsfield.ai?fpr=lucas17
+📊 Metricool (gestion de réseaux sociaux) : https://i.mtr.cool/lucas
 🤖 Wisewand.ai (rédacteur IA optimisé SEO) code promo LUCAS10 → -10 % : https://wisewand.ai/?fpr=lucas
 ```
 
-### Bloc de liens (10 lignes — TOUJOURS COMPLET en bas, chaque lien sur SA propre ligne)
+### Bloc de liens (11 lignes — TOUJOURS COMPLET en bas, chaque lien sur SA propre ligne)
 ```
-🔑 Code 𝗟𝗨𝗖𝗔𝗦 → jusqu'à -80 % chez Phidias : https://phidiaspropfirm.com
+🔑 Code 𝗟𝗨𝗖𝗔𝗦 → jusqu'à -80 % chez Phidiaspropfirm.com : https://phidiaspropfirm.com
 📌 Discord & formation : https://lucaspropfirm.fr
 📒 Journal de trading PropLog : https://www.proplog.fr/
 📰 Newsletter lucaspropfirm : https://lucaspropfirm.fr/newsletters.html
@@ -157,14 +158,16 @@ Le hook est la phrase d'accroche des 0-1,2 s. Il doit être compréhensible **sa
 🤖 Wisewand.ai (rédacteur IA optimisé SEO) code promo LUCAS10 → -10 % : https://wisewand.ai/?fpr=lucas
 🤖 Wisewand.ai (EN) (rédacteur IA optimisé SEO) code promo LUCAS10 → -10 % : https://wisewand.ai/en/?fpr=lucas
 🎬 Higgsfield (génération vidéo IA) : https://higgsfield.ai?fpr=lucas17
+📊 Metricool (gestion de réseaux sociaux) : https://i.mtr.cool/lucas
 ```
-Structure : CTA haut (4 lignes) → ligne vide → accroche → contenu (1-2 lignes) → 🎓 abonne-toi → ligne vide → CTA écrit complet → ligne vide → bloc de liens (10 lignes). Ne jamais tronquer ni coller les liens sur une seule ligne. Le CTA haut et le bloc de liens se répètent volontairement (haut = visible sans dérouler ; bas = complet).
+Structure : CTA haut (5 lignes) → ligne vide → accroche → contenu (1-2 lignes) → 🎓 abonne-toi → ligne vide → CTA écrit complet → ligne vide → bloc de liens (11 lignes). Ne jamais tronquer ni coller les liens sur une seule ligne. Le CTA haut et le bloc de liens se répètent volontairement (haut = visible sans dérouler ; bas = complet).
 
 ### Exemple complet — Éducation
 ```
-🔑 Code 𝗟𝗨𝗖𝗔𝗦 → jusqu'à -80 % chez Phidias : https://phidiaspropfirm.com
+🔑 Code 𝗟𝗨𝗖𝗔𝗦 → jusqu'à -80 % chez Phidiaspropfirm.com : https://phidiaspropfirm.com
 📌 Discord & formation : https://lucaspropfirm.fr
 🎬 Higgsfield (génération vidéo IA) : https://higgsfield.ai?fpr=lucas17
+📊 Metricool (gestion de réseaux sociaux) : https://i.mtr.cool/lucas
 🤖 Wisewand.ai (rédacteur IA optimisé SEO) code promo LUCAS10 → -10 % : https://wisewand.ai/?fpr=lucas
 
 📉 Un tick, c'est combien, vraiment ?
@@ -174,7 +177,7 @@ Structure : CTA haut (4 lignes) → ligne vide → accroche → contenu (1-2 lig
 
 Pour avoir les détails des prop firms, rendez-vous sur lucaspropfirm.fr, pour le Discord et la formation. Code LUCAS chez Phidiaspropfirm.com.
 
-🔑 Code 𝗟𝗨𝗖𝗔𝗦 → jusqu'à -80 % chez Phidias : https://phidiaspropfirm.com
+🔑 Code 𝗟𝗨𝗖𝗔𝗦 → jusqu'à -80 % chez Phidiaspropfirm.com : https://phidiaspropfirm.com
 📌 Discord & formation : https://lucaspropfirm.fr
 📒 Journal de trading PropLog : https://www.proplog.fr/
 📰 Newsletter lucaspropfirm : https://lucaspropfirm.fr/newsletters.html
@@ -184,6 +187,7 @@ Pour avoir les détails des prop firms, rendez-vous sur lucaspropfirm.fr, pour l
 🤖 Wisewand.ai (rédacteur IA optimisé SEO) code promo LUCAS10 → -10 % : https://wisewand.ai/?fpr=lucas
 🤖 Wisewand.ai (EN) (rédacteur IA optimisé SEO) code promo LUCAS10 → -10 % : https://wisewand.ai/en/?fpr=lucas
 🎬 Higgsfield (génération vidéo IA) : https://higgsfield.ai?fpr=lucas17
+📊 Metricool (gestion de réseaux sociaux) : https://i.mtr.cool/lucas
 ```
 
 ## RÈGLE DE VALIDATION

@@ -22,7 +22,7 @@ description: |-
 | 2 | **Contenu** — hook, script (34-38 mots, CTA oral), prompt 8 blocs, description | `short-description` | checklist hook ✔ |
 | 3 | **Validation utilisateur** — concept + hook + script + prompt + description, puis **coût** (`get_cost`) | ici | OK explicite ×2 |
 | 4 | **Exécution** — narration → gate débit → vidéo muette → gate viralité → montage → sous-titres → vérifs | `shorts-generation` | `speech` ≤ 14,3 s ; `completed` ; frames propres |
-| 5 | **Publication / programmation** — Metricool : **UN post par short, sur TOUS les réseaux du brand** (§ Programmation Metricool) ; TikTok direct via `tiktok_prepare_publish`/`tiktok_publish` seulement si Lucas le demande | `shorts-generation` §11 + § ci-dessous | description complète (CTA haut 4 lignes + CTA écrit + 10 liens) ; tous les réseaux du brand couverts |
+| 5 | **Publication / programmation** — Metricool : **UN post par short, sur TOUS les réseaux du brand** (§ Programmation Metricool) ; TikTok direct via `tiktok_prepare_publish`/`tiktok_publish` seulement si Lucas le demande | `shorts-generation` §11 + § ci-dessous | description complète (CTA haut 5 lignes + CTA écrit + 11 liens) ; tous les réseaux du brand couverts |
 | 6 | **Journal + mesure** — écrire la ligne du journal ; noter la variable testée | ici | ligne écrite |
 
 ## Choix du concept — protocole de recherche (aucun catalogue, aucune rotation)

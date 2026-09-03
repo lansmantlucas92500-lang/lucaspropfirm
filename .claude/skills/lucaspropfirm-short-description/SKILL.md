@@ -79,7 +79,7 @@ Ils s'appliquent au personnage Lucas comme à toute autre présence humaine.
 - **Contre-jour, profil, trois-quarts** plutôt que face pleine lumière : le modèle s'en sort
   mieux et l'image est plus cinématographique.
 - **Aucune marque visible** sur les vêtements, aucun logo, aucun écran de téléphone lisible.
-- **Aucune célébrité, aucun sosie, aucune personne réelle autre que Lucas lui-même** (dont l'effigie est utilisée avec son accord, c'est son propre compte). Les figurants restent des silhouettes génériques.
+- **Aucune célébrité, aucun sosie, aucune personne réelle.** Le personnage Lucas est un personnage **généré**, pas le visage du vrai Lucas. Les figurants restent des silhouettes génériques.
 - **Contrôle qualité obligatoire** (`shorts-generation`) : inspecter les frames où le visage est
   visible. Yeux, bouche ou mains déformés → relancer avec le personnage plus loin ou de dos.
   Ne jamais livrer un visage raté en pensant que ça passera sur mobile.
@@ -87,7 +87,7 @@ Ils s'appliquent au personnage Lucas comme à toute autre présence humaine.
 ### Cohérence transversale
 - Même palette bleu nuit + or/lime sur tous les shorts ; rouge/vert = signaux uniquement.
 - Aucun texte lisible généré dans la vidéo (sous-titres ajoutés au montage).
-- Signature finale (au montage) : logo LP rond lime sur les **2 dernières secondes** + son de validation.
+- Signature finale (au montage) : logo LP rond lime sur les **2 dernières secondes** + son de validation. ⚠️ **Inapplicable tant que `logo_lp.png` et `ding.wav` ne sont pas fournis** (voir `shorts/assets/README.md`) : les shorts sortent sans encart ni logo, et il faut le dire à Lucas à la livraison.
 - **Encart de fin (au montage, dernière seconde)** : « CODE LUCAS chez Phidiaspropfirm.com » et « Discord & formation : lucaspropfirm.fr ». Nom de domaine **toujours en entier**, jamais « Phidias » seul. C'est là que vit le **CTA écrit complet**.
 
 ### Zones sûres 9:16 (720×1280) — rien d'important hors de ces zones
@@ -99,12 +99,12 @@ Ils s'appliquent au personnage Lucas comme à toute autre présence humaine.
 ## RÈGLES ANTI-IP / ANTI-REFUS (obligatoires dans TOUT prompt visuel)
 Higgsfield/Seedance renvoie **"Rejected due to copyright restrictions."** dès qu'un prompt évoque l'argent ou un élément réel. C'est un vrai rejet IP, pas un rate-limit.
 - **AUCUNE évocation d'argent, gain, paiement, retrait, versement, profit, pièce, monnaie, récompense, salaire, capital.** Remplacer par un objet abstrait : « colis abstrait de verre », « objet qui se déplie », « escalier de lumière », « flux de particules ».
-- **AUCUNE marque, firme, société, site, personne** (interdit : Phidias, LucasPropfirm, prop firm, nom d'échange, plateforme). Visuel 100 % abstrait et générique.
-- **AUCUNE référence réelle précise** : pas de « Futures ES/NQ », pas de tick value chiffrée, pas d'horaires boursiers, pas de chiffres de marché. Tout est métaphorique.
+- **AUCUNE marque, firme, société, site ni personnalité réelle** (interdit : Phidias, LucasPropfirm, prop firm, nom d'échange, nom de plateforme, célébrité). En revanche **les lieux réels et le personnage Lucas sont autorisés** : ce qui déclenche un refus, c'est la marque et l'argent, pas la présence humaine ni le décor.
+- **AUCUNE référence chiffrée ou nommée** : pas de « Futures ES/NQ », pas de tick value chiffrée, pas d'horaire boursier, pas de chiffre de marché **à l'écran**. Ces éléments vivent dans la narration et les sous-titres.
 - **AUCUN texte, chiffre, logo ou UI simulée** généré par le modèle (texte en post-prod uniquement).
 - **MOTS DÉCLENCHEURS À BANNIR** : trader, broker, trading floor, candlestick (EN), Bloomberg, terminal, market data, exchange, portfolio, payout, payment, withdrawal, money, coin, gain, profit, price tag, reward, salaire, capital, argent. → remplacer par les formulations françaises du **LEXIQUE VISUEL TRADING** ci-dessous (« blocs verticaux de verre à corps rectangulaire et tige fine », « longue ligne de lumière qui monte par paliers », « salle sombre aux rangées de pupitres face à un mur de panneaux lumineux », « colonnes de tuiles de verre »). Le mot anglais déclenche, la description française passe.
 - **✅ AUTORISÉ — tout le LEXIQUE VISUEL TRADING** (chandeliers de verre, courbes de lumière, grilles et niveaux, murs d'écrans, salle de marchés vide, carnet abstrait) décrit comme **objet physique**, jamais comme capture d'écran. C'est **l'IDENTITÉ VISUELLE DU PROJET**. Autorisé TANT QUE : aucun chiffre, aucune valeur affichée, aucune interface de courtier réaliste, aucun nom de marché. Une rangée de chandeliers de verre = autorisée ; la même rangée dans une fenêtre de logiciel chiffrée = refus.
-- Tout concept financier est formulé par **métaphore abstraite** (résistance → « plafond lumineux » ; support → « un sol » ; levier → balance sans montant ; news → tempête abstraite). Les chiffres/montants sont autorisés **uniquement en narration TTS**, jamais à l'écran.
+- Tout concept financier se montre par un **objet physique** du LEXIQUE VISUEL TRADING, ou à défaut par une métaphore (résistance → « plafond lumineux » ; support → « un sol » ; levier → balance sans montant ; news → tempête abstraite). Les chiffres et montants sont autorisés **uniquement en narration TTS**, jamais à l'écran.
 
 ## LEXIQUE VISUEL TRADING (obligatoire — le short doit SE VOIR comme du trading)
 
@@ -141,7 +141,7 @@ par rangée), pas du remplacement du trading par une métaphore de développemen
 
 ### Langue et forme
 - **Le prompt est écrit en français.** Narration en français. (Seedance est entraîné surtout en anglais/chinois : si un même prompt donne **deux** plans faibles, tester sa traduction anglaise à l'identique et noter le résultat au journal — le français reste la règle.)
-- **130-200 mots**, **8 blocs dans cet ordre, une ligne par bloc**, jamais de paragraphe libre :
+- **200-260 mots**, **8 blocs dans cet ordre, une ligne par bloc**, jamais de paragraphe libre. (L'ancienne borne 130-200 n'a jamais ete tenue : les 8 blocs avec un TIMING en 5 temps n'y rentrent pas, l'exemple fige lui-meme faisait 275 mots.) :
   `CONTEXTE DE SCÈNE → PREMIÈRE IMAGE → OPTIQUE → CAMÉRA → LUMIÈRE → PHYSIQUE → TIMING DE L'ACTION → AUDIO`
 - Seedance n'a **pas de negative prompt** : les exclusions s'écrivent **dans** le CONTEXTE, positivement. Phrase type sans personnage : « Aucune personne, aucun texte, aucun chiffre, aucun symbole dans l'image. » Avec personnage : « Aucun texte, aucun chiffre, aucun logo, aucune marque dans l'image ; le personnage ne parle pas. »
 
@@ -166,7 +166,7 @@ par rangée), pas du remplacement du trading par une métaphore de développemen
 - Le visuel **raconte** la règle du script (temps 8,5-12 s) — ce n'est pas une décoration derrière une voix.
 
 ### Checklist avant lancement (toutes les cases)
-- [ ] Français · 130-200 mots · 8 blocs · une ligne par bloc
+- [ ] Français · 200-260 mots · 8 blocs · une ligne par bloc
 - [ ] Scan anti-IP = 0 mot banni ; phrase d'exclusion présente dans CONTEXTE
 - [ ] Hook lisible en PREMIÈRE IMAGE sans le son
 - [ ] TIMING en 5 temps alignés sur le script ; règle portée à 8,5-12 s
@@ -181,14 +181,14 @@ par rangée), pas du remplacement du trading par une métaphore de développemen
 
 ### Exemple de référence (style figé) — sujet « 1 tick »
 ```
-CONTEXTE DE SCÈNE : Une plaine sombre couverte de blocs verticaux de verre lumineux, corps rectangulaire large et fine tige verticale au-dessus et en dessous, alignés en rangées serrées sur une grille lumineuse, sous un ciel bleu nuit. Atmosphère de science-fiction financière haut de gamme : verre fumé, chrome brossé, reflets HDR. Aucune personne, aucun visage, aucun texte, aucun chiffre, aucun symbole dans l'image.
-PREMIÈRE IMAGE (0-1,2 s) : Très gros plan sur un seul bloc de verre doré, corps rectangulaire et tige fine, posé sur la grille ; une minuscule marche de lumière se détache de son bord et s'élève.
-OPTIQUE : Rendu 35 mm anamorphique, faible profondeur de champ, bokeh doux, léger flare sur les reflets lime.
-CAMÉRA : Lent travelling arrière avec une légère contre-plongée, révélant que la marche est la première d'un escalier de lumière monumental qui s'élève de la plaine de blocs de verre ; fin sur un plan large en contre-plongée, caméra fixe.
-LUMIÈRE : Rim light bleu froid depuis l'horizon, halos or et lime chauds sur chaque marche, brume volumétrique, contraste cinématique, jamais plat.
-PHYSIQUE : Les marches se matérialisent une à une avec une ondulation de verre ; les particules montent avec une inertie réaliste ; les reflets restent physiquement cohérents.
-TIMING DE L'ACTION : 0-1,2 s bloc de verre seul + première marche / 1,2-4 s trois marches s'empilent / 4-8,5 s l'escalier grandit pendant que la caméra recule / 8,5-12 s une marche pulse plus fort, un signal d'alerte / 12-15 s l'escalier se stabilise, caméra fixe.
-AUDIO : Bourdonnement ambiant profond, tintements de verre doux sur chaque marche, pas de musique, pas de voix.
+CONTEXTE DE SCÈNE : Salle de marchés sombre, rangées de pupitres face à un mur incurvé de panneaux lumineux aux contenus abstraits. Verre fumé, métal brossé, béton lissé. Dominante bleu nuit, halos or et lime. Un homme en costume bleu nuit et cravate se tient de trois-quarts dans l'allée, en plan large. Aucun texte, aucun chiffre, aucune marque dans l'image ; il ne parle pas.
+PREMIÈRE IMAGE (0-1,2 s) : Devant lui, un bloc vertical de verre doré, corps rectangulaire large et fine tige au-dessus et en dessous, flotte à hauteur de regard et pulse une fois.
+OPTIQUE : 35 mm anamorphique, faible profondeur de champ, bokeh sur le mur, léger flare lime.
+CAMÉRA : Lent travelling avant dans l'allée, l'homme maintenu à gauche du cadre, révélant une rangée entière de blocs alignés sur une grille lumineuse ; fin en plan large fixe.
+LUMIÈRE : Rim light bleu froid depuis le mur, halos or et lime sur les arêtes, brume volumétrique, contraste cinématique.
+PHYSIQUE : Les blocs se matérialisent un à un avec une ondulation de verre ; l'homme tourne lentement la tête ; reflets cohérents sur les pupitres.
+TIMING DE L'ACTION : 0-1,2 s l'homme et un bloc qui pulse / 1,2-4 s trois blocs s'alignent / 4-8,5 s la rangée s'étend / 8,5-12 s un bloc vire au rouge et s'enfonce sous la grille / 12-15 s la rangée se stabilise, caméra fixe.
+AUDIO : Bourdonnement profond, tintements de verre, pas de musique, pas de voix.
 ```
 
 ## MODULE HOOK (obligatoire avant toute production)
@@ -210,7 +210,7 @@ Le hook est la phrase d'accroche des 0-1,2 s. Il doit être compréhensible **sa
 - [ ] Validé → production ; sinon → réécrire avec un autre patron
 
 ## SCRIPT NARRATION (15 s)
-**Budget : 33-36 mots au total, CTA oral inclus** (ElevenLabs lit à ≈ 2,4-2,6 mots/s ; la durée réelle est mesurée sur la voix par le gate de `shorts-generation` — c'est elle qui fait foi, pas le compte de mots).
+**Budget : 36 mots MAXIMUM au total, CTA oral inclus** (ElevenLabs lit à ≈ 2,4-2,6 mots/s ; la durée réelle est mesurée sur la voix par le gate de `shorts-generation` — c'est elle qui fait foi, pas le compte de mots).
 ⚠️ **Les deux noms de domaine du CTA sont lourds à l'oral** (« Phidiaspropfirm point com » ≈ 1,6 s, « lucaspropfirm point F R » ≈ 1,5 s) : le CTA parlé occupe **~4,5 s à lui seul**. Le contenu ne dispose donc que de **26-29 mots**. Ne jamais rogner le CTA pour gagner du temps — raccourcir le contenu.
 
 | Temps | Contenu | Mots |
@@ -218,7 +218,7 @@ Le hook est la phrase d'accroche des 0-1,2 s. Il doit être compréhensible **sa
 | 0-1,2 s | **HOOK** (verrouillé par le module Hook) | 5-6 |
 | 1,2-4 s | problème / mise en situation | 6-8 |
 | 4-7,5 s | explication — **1 seule idée**, vocabulaire débutant | 7-9 |
-| 7,5-10,5 s | règle à retenir | 5-7 |
+| 7,5-10,5 s | règle à retenir | 5-6 |
 | 10,5-15 s | **CTA ORAL FIXE** (7 mots, ~4,5 s, dit tel quel) | 7 |
 
 **Ancrage** : sur les 26-29 mots de contenu, au moins **un marqueur concret** (instrument, chiffre, plateforme, moment de séance ou mécanique prop firm nommée) — voir « ANTI-IA & ANCRAGE TRADING ». Les mots interdits de cette liste valent aussi pour la narration.

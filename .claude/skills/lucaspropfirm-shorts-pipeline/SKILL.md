@@ -10,7 +10,7 @@ description: |-
 
 ## Contexte fixe
 - Comptes : TikTok/IG @lucaspropfirm01, YouTube @lucasPropfirm2026.
-- Univers : « marché financier vivant », faceless premium, bleu nuit + lime/or (détaillé dans `short-description`).
+- Univers : « marché financier vivant », bleu nuit + lime/or, **avatar Lucas en costume dans chaque short** (détaillé dans `short-description`). Le compte n'est plus « faceless » depuis le 03/09.
 - Journal de production : `shorts/production-log.md` (à la racine du repo). Assets de marque : `shorts/assets/`.
 - Baselines : recalculer à chaque nouvel audit — ne jamais réutiliser d'anciennes stats comme actuelles.
 
@@ -19,7 +19,7 @@ description: |-
 |---|---|---|---|
 | 0 | **Lire le journal** `shorts/production-log.md` : derniers concepts, dernier patron de hook, échecs IP récents | ici | — |
 | 1 | **Choix du concept** par recherche en ligne (protocole ci-dessous) | ici | concept ≠ des 10 derniers ; patron hook ≠ du précédent |
-| 2 | **Contenu** — hook, script (34-38 mots, CTA oral), prompt 8 blocs, description | `short-description` | checklist hook ✔ ; **test d'ancrage trading ✔** (≥ 2 marqueurs concrets hors CTA) ; zéro mot de la liste interdite ; **≥ 1 élément du lexique visuel trading dès la première image** ; **avatar Lucas présent** |
+| 2 | **Contenu** — hook, script (**36 mots max**, CTA oral inclus), prompt 8 blocs, description | `short-description` | checklist hook ✔ ; **test d'ancrage trading ✔** (≥ 2 marqueurs concrets hors CTA) ; zéro mot de la liste interdite ; **≥ 1 élément du lexique visuel trading dès la première image** ; **avatar Lucas présent** |
 | 3 | **Validation utilisateur** — concept + hook + script + prompt + description, puis **coût** (`get_cost`) | ici | OK explicite ×2 |
 | 4 | **Exécution** — narration → gate débit → vidéo muette → gate viralité → montage → sous-titres → vérifs | `shorts-generation` | `speech` ≤ 14,3 s ; `completed` ; frames propres ; **visage de l'avatar inspecté** |
 | 5 | **Publication / programmation** — Metricool : **UN post par short, sur TOUS les réseaux du brand** (§ Programmation Metricool) ; TikTok direct via `tiktok_prepare_publish`/`tiktok_publish` seulement si Lucas le demande | `shorts-generation` §11 + § ci-dessous | description complète (CTA haut 5 lignes + CTA écrit + 11 liens) ; tous les réseaux du brand couverts |
@@ -39,7 +39,7 @@ description: |-
 **Règle de variété** : jamais 2 posts consécutifs de la même famille de plan ni du même patron de hook ; jamais 2 vidéos identiques (le journal fait foi).
 
 ## Contrat de script (rappel — détail dans short-description)
-UNE idée par vidéo ; 34-38 mots CTA oral inclus ; durée verrouillée sur la parole mesurée (jamais accélérer la voix — réécrire) ; hook à 0-1,2 s compréhensible sans le son ; CTA oral fixe en fin, CTA écrit complet sur l'encart et la description. Zéro promesse de gains ; « jusqu'à -80 % » jamais garanti ; pas de nom de firme dans les vidéos éducatives.
+UNE idée par vidéo ; **36 mots maximum**, CTA oral inclus ; durée verrouillée sur la parole mesurée (jamais accélérer la voix — réécrire) ; hook à 0-1,2 s compréhensible sans le son ; CTA oral fixe en fin, CTA écrit complet sur l'encart et la description. Zéro promesse de gains ; « jusqu'à -80 % » jamais garanti ; pas de nom de firme dans les vidéos éducatives.
 
 ## Mode semaine (« programme ma semaine », « lance la semaine »)
 Un lot de **N shorts (défaut 7)** produit en **une session**, publié **étalé**.
@@ -83,7 +83,7 @@ les réseaux qu'il veut — et dans ce cas seulement pour ce lot-là, ça ne cha
    contrôler que chaque post porte bien la liste complète des réseaux en `PENDING`.
 
 ## Journal — `shorts/production-log.md`
-Une ligne par short, écrite à l'étape 6 (et une ligne « échec » si un concept est abandonné) : date · slug · concept · patron hook (Q/CH/ER/CI) · famille de plan · source recherche · job_id voix · job_id vidéo · coût · statut · URL publiée · variable testée. **Sans journal, les règles d'alternance sont inapplicables.**
+Une ligne par short, écrite à l'étape 6 (et une ligne « échec » si un concept est abandonné). Colonnes réelles du fichier : date de publication · slug · concept · patron hook (Q/CH/ER/CI) · **registre** (scène réelle / abstrait) · famille de plan · source recherche · job_id voix · job_id vidéo · coût · statut · variable testée. Les **uuid Metricool** vont dans la section « Programmation Metricool » du même fichier, pas dans le tableau. **Sans journal, les règles d'alternance sont inapplicables.**
 
 ## Mesure
 - Tester **UNE seule variable par post** (patron de hook, famille de plan, heure, longueur du hook) ; seuils relatifs à la médiane du compte.

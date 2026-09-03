@@ -8,12 +8,12 @@ Familles de plan utilisées : puits + ligne rouge poursuivante · portail + sol 
 > chandelier de verre (géométrie décrite), une courbe de lumière, une grille de niveaux, un mur
 > d'écrans ou une salle de marchés, visible dès la première image.
 
-| Date pub | Slug | Concept (1 idée) | Hook | Famille de plan | Source recherche | Job voix | Job vidéo | Coût | Statut | Variable testée |
-|---|---|---|---|---|---|---|---|---|---|---|
-| 2026-09-03 10h | drawdown-trailing | Le seuil d'échec monte avec les gains | CI | puits + ligne rouge poursuivante | PropFirmsCompared, CerclePPM | 41b31435 | 3adc7729 | 37,80 | programmé | patron hook |
-| 2026-09-04 10h | promo-phidias-e2l | Le prix d'apprendre sur son propre argent (PROMO) | Q | portail + sol stable | MaPropFirm guide Phidias 2026 | cc6d5179 | 31cfbb0e | 37,80 | programmé | patron hook |
-| 2026-09-05 10h | points-vs-ticks-nq | 20 points NQ = 400 $, pas 100 $ | CH | fragmentation de verre | Nexural, TestMax (tick values) | da912b90 | e8011d6e | 37,65 | programmé | patron hook |
-| 2026-09-06 10h | regle-coherence | Le meilleur jour bloque le retrait | ER | balance de verre | Thor, Portail Propfirm | 500a1bc6 | 5a1fd7f9 | 37,65 | programmé | patron hook |
+| Date pub | Slug | Concept (1 idée) | Hook | Registre | Famille de plan | Source recherche | Job voix | Job vidéo | Coût | Statut | Variable testée |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 2026-09-03 10h | drawdown-trailing | Le seuil d'échec monte avec les gains | CI | abstrait | puits + ligne rouge poursuivante | PropFirmsCompared, CerclePPM | 41b31435 | 3adc7729 | 37,80 | programmé | patron hook |
+| 2026-09-04 10h | promo-phidias-e2l | Le prix d'apprendre sur son propre argent (PROMO) | Q | abstrait | portail + sol stable | MaPropFirm guide Phidias 2026 | cc6d5179 | 31cfbb0e | 37,80 | programmé | patron hook |
+| 2026-09-05 10h | points-vs-ticks-nq | 20 points NQ = 400 $, pas 100 $ | CH | abstrait | fragmentation de verre | Nexural, TestMax (tick values) | da912b90 | e8011d6e | 37,65 | programmé | patron hook |
+| 2026-09-06 10h | regle-coherence | Le meilleur jour bloque le retrait | ER | abstrait | balance de verre | Thor, Portail Propfirm | 500a1bc6 | 5a1fd7f9 | 37,65 | programmé | patron hook |
 
 Statuts : `livré` · `programmé` · `publié` · `échec-IP` (prompt rejeté 2×) · `échec-tech` · `abandonné`.
 

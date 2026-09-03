@@ -40,16 +40,17 @@ Scripts préinstallés dans le sandbox : `$HF_WORKFLOWS/subtitles/scripts/` (`fe
 - **Le bloc `medias` fait partie de la soumission par défaut** : le personnage Lucas est dans **tous** les shorts, sans avoir à le demander (§ Personnage récurrent ci-dessous). Ne le retirer que si Lucas demande explicitement un short sans personnage — et le noter au journal.
 - `audio_references` reste l'ancienne méthode abandonnée : jamais de référence audio.
 - Mini = 480p/720p max, 4-15 s. `bitrate_mode: high` = netteté à 720p pour un surcoût nul. `genre: drama` = ambiance cinématique (ou `epic`).
-- **Coût mesuré : 37,5 crédits** par vidéo 15 s (solde de référence 1 229 crédits ≈ 32 vidéos).
+- **Coût mesuré : 37,5 crédits** par vidéo 15 s (solde constaté **1 073 crédits le 03/09 ≈ 28 vidéos** — relire `balance` à chaque session, ce chiffre vieillit).
 - Le `prompt` est **en français** (recette et exemple dans `short-description`).
 - **Modèle figé : `seedance_2_0_mini` 720p — ne jamais proposer `seedance_2_0`, `seedance_2_5` ni une autre résolution.** La qualité se joue dans le prompt.
-- `use_unlim: true` uniquement si l'allocation « unlimited » est active (`models_explore` → `unlim.available`) ; sinon omettre.
+- `use_unlim` : ne l'envoyer que si **Lucas le demande explicitement**, jamais de sa propre initiative pour lui économiser des crédits. Et alors **sans pré-filtrer sur `unlim.available`** : la doc Higgsfield est formelle, une demande non couverte revient en refus typé et jamais en débit silencieux, donc retirer le drapeau « par prudence » est précisément ce qui facture.
 
 ### Personnage récurrent « Lucas » — références d'identité
 
-Le personnage à l'effigie de Lucas est verrouillé par **référence d'image**, pas par description
-textuelle : décrire « homme de 25 ans en costume » redonne un visage différent à chaque
-génération, ce qui est pire que pas de personnage du tout.
+Le personnage est verrouillé par **référence d'image**, pas par description textuelle : écrire
+« homme de 23 ans en costume » redonne un visage différent à chaque génération, ce qui est pire
+que pas de personnage du tout. Ce n'est pas le vrai visage de Lucas : c'est un personnage généré
+qui le joue.
 
 `seedance_2_0_mini` accepte nativement les rôles `start_image`, `end_image`, `image_references`,
 `video_references` (vérifié sur `models_explore action=get`, tags `reference` · `identity` ·
@@ -79,31 +80,11 @@ est routé vers `nano_banana_2` et échoue sans message ; Marketing Studio est u
 gabarits publicitaires partant d'une image produit, pas un créateur de personnage.
 La fiche retenue vient de `seedream_v4_5`, 16:9, 1 crédit.
 
-**Si Lucas fournit un jour ses vraies photos** (elles remplacent la fiche générée) :
-1. Lucas fournit **4 à 8 photos** de lui : plan taille et plan large, de face, de trois-quarts et
-   de profil, lumières différentes, **en costume**, visage net, sans lunettes de soleil, sans
-   autre personne dans le cadre. Le cadrage des photos conditionne le rendu : des photos serrées
-   donnent des plans serrés, donc en fournir au moins deux en pied ou à mi-corps.
-2. Upload : `media_upload_widget` (surface d'upload officielle) ou `media_upload` → PUT des
-   octets → `media_confirm`. Conserver les `media_id` **dans `shorts/assets/README.md`** : ils
-   sont réutilisés à chaque short, ce n'est pas à refaire.
-3. Génération : ajouter le bloc `medias` à la soumission figée, sans rien changer d'autre.
-```json
-{ "model": "seedance_2_0_mini", "prompt": "<prompt 8 blocs>",
-  "aspect_ratio": "9:16", "resolution": "720p", "duration": 15,
-  "bitrate_mode": "high", "genre": "drama", "generate_audio": false,
-  "medias": [ { "role": "image_references", "id": "<media_id Lucas 1>" },
-              { "role": "image_references", "id": "<media_id Lucas 2>" } ],
-  "get_cost": true }
-```
-4. Dans le prompt, le personnage se désigne par sa **fonction dans le plan**, jamais par une
-   description physique qui entrerait en concurrence avec la référence : « l'homme en costume
-   sombre s'avance vers le mur d'écrans », pas « un homme brun de 25 ans, mâchoire carrée… ».
-
-**Piste alternative à tester une fois** : `show_reference_elements action=create` crée un Element
-réutilisable appelé par `<<<uuid>>>` directement dans le prompt. La documentation de l'outil liste
-« Seedance 2.0 » parmi les modèles compatibles **sans préciser la variante Mini** : à valider sur
-un short avant d'en faire la méthode par défaut. En cas de doute, `image_references` fait foi.
+**Si Lucas fournit un jour ses vraies photos**, elles remplacent la fiche générée : 4 à 8 clichés
+en costume (plan taille et plan large, face, trois-quarts, profil, lumières variées, visage net,
+personne d'autre dans le cadre, dont deux en pied sinon le modèle ne produit que des plans
+serrés) → `media_upload_widget`, puis leurs `media_id` remplacent celui du tableau ci-dessus dans
+`shorts/assets/README.md`. Rien d'autre ne change dans la soumission.
 
 **Limites à connaître, et à ne pas masquer à Lucas :**
 - La ressemblance est **approchante, pas identique**, et peut dériver sur 15 s. Contrôler le
@@ -147,7 +128,7 @@ ffprobe -v error -show_entries format=duration -of csv=p=0 voice_tail.wav   # <=
 # débit, à titre indicatif seulement
 bash $HF_WORKFLOWS/narrator/scripts/speech_metrics.sh voice.mp3 --words <N> --max-wps 2.9 --json
 ```
-   Critères : durée de `voice_trim.wav` ≤ **14,3 s** ; débit dans la bande naturelle **2,4-2,6 mots/s**.
+   Critères : durée de `voice_tail.wav` ≤ **14,3 s** ; débit dans la bande naturelle **2,4-2,6 mots/s**.
    - Trop long ou `RUSHED` → **réécrire le script avec moins de mots** (jamais accélérer la voix), régénérer.
    - **Toujours monter `voice_tail.wav`**, jamais le MP3 brut : sinon 2,5 s de bruit de fond audible traînent sur la fin du short.
 3. **Vérifier la prononciation** par transcription Whisper (les domaines surtout). Écrire les domaines **espacés** dans le texte TTS pour une lecture correcte en français : `Phidias propfirm point com` et `Lucas propfirm point F R`. Repère mesuré : le CTA parlé complet dure **~5 s**, soit un tiers du short.
@@ -194,7 +175,7 @@ cat > script_manifest.json <<'EOF'
 EOF
 bash $HF_WORKFLOWS/subtitles/scripts/fetch_fonts.sh --quiet
 python3 $HF_WORKFLOWS/subtitles/scripts/audio_to_captions.py montage.mp4 \
-  --srt caps.srt --language fr --script script_manifest.json --max-words 4 --max-chars 26
+  --srt caps.srt --language fr --script script_manifest.json --max-words 6 --max-chars 34
 cat caps.srt
 python3 $HF_WORKFLOWS/subtitles/scripts/subtitle_paper_burn.py \
   --in montage.mp4 --srt caps.srt --out final_subbed.mp4 --style bold --font-key tiktok
@@ -203,16 +184,22 @@ curl -f -X PUT --upload-file final_subbed.mp4 "$UPLOAD_URL" && echo UPLOADED
 - `--script` aligne les mots affichés sur le texte écrit (Whisper ne sert qu'au timing → zéro substitution).
 - **Vérifier `caps.srt` avant de valider** : toutes les phrases présentes, CTA oral inclus, aucun mot inventé.
 - Style `bold` = capitales blanches, contour noir, safe zone Reels (bas 16,7 %, côtés 11 %), 2 lignes max. Police TikTok Sans téléchargée par `fetch_fonts.sh` ; fallback automatique Montserrat.
-- Paramètres retenus : `--max-words 6 --max-chars 34` (avec 4/26 le texte se hache).
+- Pourquoi 6/34 : avec `--max-words 4 --max-chars 26` le texte se hache. Ne jamais revenir en arrière.
 - **Regrouper le CTA à la main avant de brûler.** Le tokeniseur coupe les domaines au point et affiche des blocs absurdes du type « COM, DÉTAILS SUR LUCASPROPFIRM. ». Après génération du SRT, fusionner la queue en **deux blocs** en réutilisant les timings mesurés : `Code LUCAS chez Phidiaspropfirm.com` puis `détails sur lucaspropfirm.fr`.
 - Code de sortie **2** = Whisper indisponible → livrer `montage.mp4` sans sous-titres **et le signaler** (ne jamais bloquer).
 - Premier run : Whisper télécharge le modèle `small` (lent) → `background:true` et poller le log ; `--model base` si trop lent.
 
-## 9. Encart de fin + logo (assets, voir `shorts/assets/README.md`)
+## 9. Encart de fin + logo — ⚠️ INACTIF (assets manquants, voir `shorts/assets/README.md`)
+
+`logo_lp.png` et `ding.wav` n'ont jamais été fournis : cette étape ne s'exécute pas et les shorts
+sortent **sans encart de fin ni logo**. Le signaler à chaque livraison plutôt que de le taire.
+
 Une fois `logo_lp.png` et `ding.wav` uploadés sur Higgsfield (URLs permanentes notées dans le README), ajouter dans la commande du §7 (720×1280) :
 ```bash
 curl -fsSL "$LOGO_URL" -o logo.png && curl -fsSL "$DING_URL" -o ding.wav
-ffmpeg -y -i video.mp4 -i voice.mp3 -i logo.png -i ding.wav -filter_complex "\
+# meme rognage de fin qu au paragraphe 7 : ne JAMAIS repartir du MP3 brut (2,5 s de bruit).
+ffmpeg -y -i voice.mp3 -af "areverse,silenceremove=start_periods=1:start_threshold=-40dB:start_duration=0.1,areverse" voice_tail.wav
+ffmpeg -y -i video.mp4 -i voice_tail.wav -i logo.png -i ding.wav -filter_complex "\
 [2:v]scale=120:-1[lg];\
 [0:v][lg]overlay=x=43:y=128:enable='between(t,13,15)'[v1];\
 [v1]drawtext=fontfile=/usr/share/fonts/truetype/higgsfield/Montserrat-ExtraBold.ttf:text='CODE LUCAS chez Phidiaspropfirm.com':fontcolor=0xC8FF00:fontsize=34:x=(w-text_w)/2:y=190:enable='between(t,14,15)',\
@@ -231,8 +218,8 @@ ffmpeg -y -i final_subbed.mp4 -vf "select='eq(n,20)+eq(n,200)+eq(n,430)'" -vsync
 ```
 Uploader les 3 frames (`media_upload` image) et les afficher : **aucun texte généré, aucun chiffre, aucune interface de courtier réaliste, aucune marque ; sous-titres lisibles ; logo/encart dans les zones sûres.** QC IA optionnel : `video_analysis_create` sur le `media_id` final (3-5 min).
 
-**Si le plan contient un personnage** (autorisé depuis le 03/09, visage compris), extraire en plus
-une frame où le visage est visible et l'inspecter :
+**L'avatar est présent dans tous les shorts**, donc ce contrôle est systématique. Extraire deux
+frames où le visage est visible et les inspecter :
 ```bash
 ffmpeg -y -i final_subbed.mp4 -vf "select='eq(n,110)+eq(n,320)'" -vsync vfr face_%02d.jpg
 ```

@@ -19,7 +19,7 @@ description: |-
 |---|---|---|---|
 | 0 | **Lire le journal** `shorts/production-log.md` : derniers concepts, dernier patron de hook, échecs IP récents | ici | — |
 | 1 | **Choix du concept** par recherche en ligne (protocole ci-dessous) | ici | concept ≠ des 10 derniers ; patron hook ≠ du précédent |
-| 2 | **Contenu** — hook, script (34-38 mots, CTA oral), prompt 8 blocs, description | `short-description` | checklist hook ✔ ; **test d'ancrage trading ✔** (≥ 2 marqueurs concrets hors CTA) ; zéro mot de la liste interdite |
+| 2 | **Contenu** — hook, script (34-38 mots, CTA oral), prompt 8 blocs, description | `short-description` | checklist hook ✔ ; **test d'ancrage trading ✔** (≥ 2 marqueurs concrets hors CTA) ; zéro mot de la liste interdite ; **≥ 1 élément du lexique visuel trading dès la première image** |
 | 3 | **Validation utilisateur** — concept + hook + script + prompt + description, puis **coût** (`get_cost`) | ici | OK explicite ×2 |
 | 4 | **Exécution** — narration → gate débit → vidéo muette → gate viralité → montage → sous-titres → vérifs | `shorts-generation` | `speech` ≤ 14,3 s ; `completed` ; frames propres |
 | 5 | **Publication / programmation** — Metricool : **UN post par short, sur TOUS les réseaux du brand** (§ Programmation Metricool) ; TikTok direct via `tiktok_prepare_publish`/`tiktok_publish` seulement si Lucas le demande | `shorts-generation` §11 + § ci-dessous | description complète (CTA haut 5 lignes + CTA écrit + 11 liens) ; tous les réseaux du brand couverts |
@@ -34,7 +34,7 @@ description: |-
 2. **Extraire 3 hooks performants** observés + l'angle qui les différencie (peur, surprise, erreur, chiffre).
 3. **Choisir UN angle** pour UNE idée ; le reformuler dans le patron de hook imposé par l'alternance.
 4. **Noter la source** (URL/compte) dans le journal. Jamais copier un hook mot pour mot.
-5. Le visuel reste une métaphore abstraite (anti-IP dans `short-description`) : le terme technique est porté par la narration, jamais par l'image.
+5. Le visuel reste **anti-IP** (pas d'argent, pas de marque, pas de chiffre, pas d'interface de courtier) mais **doit se lire comme du trading** : au moins un élément du LEXIQUE VISUEL TRADING de `short-description` (chandeliers de verre à géométrie décrite, courbe de lumière, grille de niveaux, mur d'écrans, salle de marchés), visible dès la première image. Le terme technique est porté par la narration ; l'univers, lui, est porté par l'image.
 
 **Règle de variété** : jamais 2 posts consécutifs de la même famille de plan ni du même patron de hook ; jamais 2 vidéos identiques (le journal fait foi).
 

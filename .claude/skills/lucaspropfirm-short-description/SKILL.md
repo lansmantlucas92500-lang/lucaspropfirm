@@ -48,10 +48,25 @@ littéralement (une mécanique invisible, un seuil, une règle).
 > marchés, doivent se reconnaître comme venant du même compte. Si ce n'est pas le cas, c'est la
 > lumière qui a dérivé, pas le lieu.
 
-### PERSONNAGES (autorisés, visages compris — décision du 03/09)
-Les humains sont autorisés à l'image, visages visibles. Seedance 2.0 Mini en 720p rend mal les
-visages : les garde-fous ci-dessous ne sont pas du confort, ce sont eux qui évitent le rendu
-« vidéo IA » que ces shorts cherchent justement à fuir.
+### PERSONNAGE RÉCURRENT « LUCAS » (décision du 03/09)
+Le personnage central des shorts est **à l'effigie de Lucas** : homme d'environ 25 ans, **en
+costume sombre**, allure sobre et assurée. Il est le fil conducteur d'un short à l'autre, pas une
+figuration : c'est lui qui traverse la salle de marchés, qui s'arrête devant le mur d'écrans, qui
+marche dans le parc au petit matin pendant que la courbe de lumière court au-dessus des arbres.
+
+**Son identité est verrouillée par référence photo**, jamais par description écrite : une
+description physique produit un visage différent à chaque génération. La procédure technique
+(`image_references`, `media_id` à conserver, alternative Element) est dans `shorts-generation`
+§ « Personnage récurrent ». Dans le prompt, il se désigne par sa fonction dans le plan
+(« l'homme en costume sombre s'avance vers le mur d'écrans »), jamais par ses traits.
+
+**Cohérence entre shorts** : même costume sombre, même registre de posture, même façon d'occuper
+le cadre. C'est ce qui crée la reconnaissance, au même titre que la charte lumineuse.
+
+### CADRAGE DES PERSONNAGES (garde-fous techniques)
+Seedance 2.0 Mini en 720p rend mal les visages : les garde-fous ci-dessous ne sont pas du
+confort, ce sont eux qui évitent le rendu « vidéo IA » que ces shorts cherchent justement à fuir.
+Ils s'appliquent au personnage Lucas comme à toute autre présence humaine.
 - **Cadrage** : plan large, plan taille ou plan américain. **Jamais de gros plan serré sur un
   visage** — c'est là que le modèle échoue le plus visiblement.
 - **Le personnage ne parle pas face caméra.** La vidéo est générée muette et la voix est montée
@@ -61,7 +76,7 @@ visages : les garde-fous ci-dessous ne sont pas du confort, ce sont eux qui évi
 - **Contre-jour, profil, trois-quarts** plutôt que face pleine lumière : le modèle s'en sort
   mieux et l'image est plus cinématographique.
 - **Aucune marque visible** sur les vêtements, aucun logo, aucun écran de téléphone lisible.
-- **Aucune personne réelle, aucun sosie, aucune célébrité.** Personnages génériques uniquement.
+- **Aucune célébrité, aucun sosie, aucune personne réelle autre que Lucas lui-même** (dont l'effigie est utilisée avec son accord, c'est son propre compte). Les figurants restent des silhouettes génériques.
 - **Contrôle qualité obligatoire** (`shorts-generation`) : inspecter les frames où le visage est
   visible. Yeux, bouche ou mains déformés → relancer avec le personnage plus loin ou de dos.
   Ne jamais livrer un visage raté en pensant que ça passera sur mobile.
@@ -159,6 +174,7 @@ par rangée), pas du remplacement du trading par une métaphore de développemen
 - [ ] Registre choisi (scène réelle **ou** abstrait fintech), jamais les deux
 - [ ] Charte lumineuse respectée : dominante bleu nuit + or/lime, jamais plein soleil de midi
 - [ ] Si personnage : pas de gros plan visage, il ne parle pas, aucune marque visible
+- [ ] Si c'est Lucas : `image_references` jointes, costume sombre, désigné par sa fonction et non par ses traits
 
 ### Exemple de référence (style figé) — sujet « 1 tick »
 ```

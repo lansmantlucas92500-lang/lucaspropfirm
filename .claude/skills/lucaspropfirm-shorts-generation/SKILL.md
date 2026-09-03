@@ -34,12 +34,55 @@ Scripts préinstallés dans le sandbox : `$HF_WORKFLOWS/subtitles/scripts/` (`fe
   "generate_audio": false, "get_cost": true }
 ```
 - `generate_audio: false` **obligatoire** (défaut backend = `true` → si omis, audio natif + risque de rejet IP).
-- **Aucun `medias`** (pas d'image, pas d'audio, pas de référence) : text-to-video pur. `audio_references` est l'ancienne méthode abandonnée.
+- **`medias` uniquement pour le personnage Lucas** (§ Personnage récurrent ci-dessous). Sinon text-to-video pur. `audio_references` reste l'ancienne méthode abandonnée : jamais de référence audio.
 - Mini = 480p/720p max, 4-15 s. `bitrate_mode: high` = netteté à 720p pour un surcoût nul. `genre: drama` = ambiance cinématique (ou `epic`).
 - **Coût mesuré : 37,5 crédits** par vidéo 15 s (solde de référence 1 229 crédits ≈ 32 vidéos).
 - Le `prompt` est **en français** (recette et exemple dans `short-description`).
 - **Modèle figé : `seedance_2_0_mini` 720p — ne jamais proposer `seedance_2_0`, `seedance_2_5` ni une autre résolution.** La qualité se joue dans le prompt.
 - `use_unlim: true` uniquement si l'allocation « unlimited » est active (`models_explore` → `unlim.available`) ; sinon omettre.
+
+### Personnage récurrent « Lucas » — références d'identité
+
+Le personnage à l'effigie de Lucas est verrouillé par **référence d'image**, pas par description
+textuelle : décrire « homme de 25 ans en costume » redonne un visage différent à chaque
+génération, ce qui est pire que pas de personnage du tout.
+
+`seedance_2_0_mini` accepte nativement les rôles `start_image`, `end_image`, `image_references`,
+`video_references` (vérifié sur `models_explore action=get`, tags `reference` · `identity` ·
+`consistent`). C'est la voie retenue.
+
+**Mise en place, une seule fois :**
+1. Lucas fournit **4 à 8 photos** de lui : plan taille et plan large, de face, de trois-quarts et
+   de profil, lumières différentes, **en costume**, visage net, sans lunettes de soleil, sans
+   autre personne dans le cadre. Le cadrage des photos conditionne le rendu : des photos serrées
+   donnent des plans serrés, donc en fournir au moins deux en pied ou à mi-corps.
+2. Upload : `media_upload_widget` (surface d'upload officielle) ou `media_upload` → PUT des
+   octets → `media_confirm`. Conserver les `media_id` **dans `shorts/assets/README.md`** : ils
+   sont réutilisés à chaque short, ce n'est pas à refaire.
+3. Génération : ajouter le bloc `medias` à la soumission figée, sans rien changer d'autre.
+```json
+{ "model": "seedance_2_0_mini", "prompt": "<prompt 8 blocs>",
+  "aspect_ratio": "9:16", "resolution": "720p", "duration": 15,
+  "bitrate_mode": "high", "genre": "drama", "generate_audio": false,
+  "medias": [ { "role": "image_references", "id": "<media_id Lucas 1>" },
+              { "role": "image_references", "id": "<media_id Lucas 2>" } ],
+  "get_cost": true }
+```
+4. Dans le prompt, le personnage se désigne par sa **fonction dans le plan**, jamais par une
+   description physique qui entrerait en concurrence avec la référence : « l'homme en costume
+   sombre s'avance vers le mur d'écrans », pas « un homme brun de 25 ans, mâchoire carrée… ».
+
+**Piste alternative à tester une fois** : `show_reference_elements action=create` crée un Element
+réutilisable appelé par `<<<uuid>>>` directement dans le prompt. La documentation de l'outil liste
+« Seedance 2.0 » parmi les modèles compatibles **sans préciser la variante Mini** : à valider sur
+un short avant d'en faire la méthode par défaut. En cas de doute, `image_references` fait foi.
+
+**Limites à connaître, et à ne pas masquer à Lucas :**
+- La ressemblance est **approchante, pas identique**, et peut dériver sur 15 s. Contrôler le
+  visage sur les frames (§ 10) à chaque short.
+- Le personnage **ne parle pas face caméra** : la vidéo est muette et la voix est montée après.
+  Un avatar qui parle relève d'un autre pipeline (lip-sync), pas de celui-ci.
+- Coût inchangé : **37,5 crédits** par short. Les références n'ajoutent rien.
 
 ### Voix — `generate_audio`
 ```json

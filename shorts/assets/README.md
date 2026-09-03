@@ -24,3 +24,21 @@ Le sandbox Higgsfield ne lit pas ce dépôt : chaque asset doit être **uploadé
 - Encart de fin : centré, y ≈ 190-240 px (tiers haut).
 - Sous-titres : bas 16,7 % (géré par `subtitle_paper_burn.py --style bold`).
 - Colonne droite ≈ 12 % : réservée aux icônes plateforme.
+
+## Références d'identité — personnage Lucas
+
+Photos de Lucas servant de `image_references` à `seedance_2_0_mini` (voir `shorts-generation`
+§ « Personnage récurrent »). À fournir : **4 à 8 photos**, plan taille et plan large, de face,
+trois-quarts et profil, lumières variées, **en costume sombre**, visage net, sans lunettes de
+soleil, personne d'autre dans le cadre. Au moins deux photos en pied ou à mi-corps, sinon le
+modèle ne produit que des plans serrés.
+
+Une fois uploadées (`media_upload_widget`, ou `media_upload` → PUT → `media_confirm`), inscrire
+ici les `media_id` : ils sont réutilisés à chaque short et ne se régénèrent pas.
+
+| # | Cadrage | media_id | Date |
+|---|---|---|---|
+| 1 | | _à remplir_ | |
+| 2 | | _à remplir_ | |
+| 3 | | _à remplir_ | |
+| 4 | | _à remplir_ | |

@@ -3,6 +3,10 @@
 Une ligne par short (ou par concept abandonné). Lu à l'étape 0 du pipeline, écrit à l'étape 6.
 Patrons de hook : **Q** question · **CH** chiffre choc · **ER** erreur courante · **CI** contre-intuitif — jamais deux fois le même patron d'affilée.
 Familles de plan utilisées : puits + ligne rouge poursuivante · portail + sol stable · fragmentation de verre · balance de verre.
+> ⚠️ Ces 4 familles sont **trop abstraites** : aucune ne se lit comme du trading. Depuis le
+> LEXIQUE VISUEL TRADING (skill `short-description`), chaque plan doit contenir au moins un
+> chandelier de verre (géométrie décrite), une courbe de lumière, une grille de niveaux, un mur
+> d'écrans ou une salle de marchés, visible dès la première image.
 
 | Date pub | Slug | Concept (1 idée) | Hook | Famille de plan | Source recherche | Job voix | Job vidéo | Coût | Statut | Variable testée |
 |---|---|---|---|---|---|---|---|---|---|---|

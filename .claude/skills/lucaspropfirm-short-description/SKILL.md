@@ -1,7 +1,7 @@
 ---
 name: lucaspropfirm-short-description
 description: |
-  Source de vérité CRÉATIVE des shorts lucaspropfirm (trading Futures ES/NQ, prop firms, audience FR). Charger pour tout ce qui touche au CONTENU d'un short : format technique, univers visuel, règles anti-IP des prompts, recette de prompt vidéo (8 blocs en français, anti-générique, exemple figé), module hook, script de narration (CTA oral court + CTA écrit complet), règles ANTI-IA et ancrage trading obligatoire (mots interdits, marqueurs concrets), zones sûres 9:16, description IG/TikTok/YouTube (bloc de liens 11 lignes). Pour la procédure d'exécution (génération, montage voix, sous-titres) → skill lucaspropfirm-shorts-generation. Pour l'orchestration, la recherche de concept et le journal → skill lucaspropfirm-shorts-pipeline.
+  Source de vérité CRÉATIVE des shorts lucaspropfirm (trading Futures ES/NQ, prop firms, audience FR). Charger pour tout ce qui touche au CONTENU d'un short : format technique, univers visuel, règles anti-IP des prompts, LEXIQUE VISUEL TRADING obligatoire (chandeliers, courbes, murs d'écrans, salle de marchés — le short doit se voir comme du trading), recette de prompt vidéo (8 blocs en français, anti-générique, exemple figé), module hook, script de narration (CTA oral court + CTA écrit complet), règles ANTI-IA et ancrage trading obligatoire (mots interdits, marqueurs concrets), zones sûres 9:16, description IG/TikTok/YouTube (bloc de liens 11 lignes). Pour la procédure d'exécution (génération, montage voix, sous-titres) → skill lucaspropfirm-shorts-generation. Pour l'orchestration, la recherche de concept et le journal → skill lucaspropfirm-shorts-pipeline.
 ---
 
 # Spec créative des shorts lucaspropfirm
@@ -39,9 +39,40 @@ Higgsfield/Seedance renvoie **"Rejected due to copyright restrictions."** dès q
 - **AUCUNE marque, firme, société, site, personne** (interdit : Phidias, LucasPropfirm, prop firm, nom d'échange, plateforme). Visuel 100 % abstrait et générique.
 - **AUCUNE référence réelle précise** : pas de « Futures ES/NQ », pas de tick value chiffrée, pas d'horaires boursiers, pas de chiffres de marché. Tout est métaphorique.
 - **AUCUN texte, chiffre, logo ou UI simulée** généré par le modèle (texte en post-prod uniquement).
-- **MOTS DÉCLENCHEURS À BANNIR** : trader, broker, trading floor, candlestick (EN), Bloomberg, terminal, market data, exchange, portfolio, payout, payment, withdrawal, money, coin, gain, profit, price tag, reward, salaire, capital, argent. → remplacer par « bougies de verre », « écrans abstraits », « ville de verre », « mécanisme », « flux », « colonnes lumineuses », « colis abstrait », « structure qui se révèle ».
-- **✅ AUTORISÉ — bougies/chandeliers en verre abstrait** (corps + mèches en verre lumineux doré/lime sur bleu nuit) : c'est **l'IDENTITÉ VISUELLE DU PROJET** (« océan de chandeliers », « mer de bougies de verre », « une bougie en verre »). Autorisées TANT QUE : aucun chiffre, aucune interface de trading réaliste, aucune valeur affichée. La bougie de verre SANS interface = autorisée ; la bougie DANS un graphique chiffré réaliste = refus.
+- **MOTS DÉCLENCHEURS À BANNIR** : trader, broker, trading floor, candlestick (EN), Bloomberg, terminal, market data, exchange, portfolio, payout, payment, withdrawal, money, coin, gain, profit, price tag, reward, salaire, capital, argent. → remplacer par les formulations françaises du **LEXIQUE VISUEL TRADING** ci-dessous (« blocs verticaux de verre à corps rectangulaire et tige fine », « longue ligne de lumière qui monte par paliers », « salle sombre aux rangées de pupitres face à un mur de panneaux lumineux », « colonnes de tuiles de verre »). Le mot anglais déclenche, la description française passe.
+- **✅ AUTORISÉ — tout le LEXIQUE VISUEL TRADING** (chandeliers de verre, courbes de lumière, grilles et niveaux, murs d'écrans, salle de marchés vide, carnet abstrait) décrit comme **objet physique**, jamais comme capture d'écran. C'est **l'IDENTITÉ VISUELLE DU PROJET**. Autorisé TANT QUE : aucun chiffre, aucune valeur affichée, aucune interface de courtier réaliste, aucun nom de marché. Une rangée de chandeliers de verre = autorisée ; la même rangée dans une fenêtre de logiciel chiffrée = refus.
 - Tout concept financier est formulé par **métaphore abstraite** (résistance → « plafond lumineux » ; support → « un sol » ; levier → balance sans montant ; news → tempête abstraite). Les chiffres/montants sont autorisés **uniquement en narration TTS**, jamais à l'écran.
+
+## LEXIQUE VISUEL TRADING (obligatoire — le short doit SE VOIR comme du trading)
+
+Les règles anti-IP ci-dessus poussent naturellement vers l'abstraction pure, et c'est un piège :
+un puits, un portail, une balance ne disent **rien** du trading. Un spectateur doit reconnaître
+l'univers en une demi-seconde, sans le son. **Ce qui déclenche un refus IP, c'est l'argent, les
+marques, les tickers réels et les interfaces de courtier réalistes — pas la forme d'un graphique.**
+On peut donc montrer des chandeliers, des courbes, des murs d'écrans et une salle de marchés,
+à condition de les décrire comme des **objets physiques**, jamais comme une capture d'écran.
+
+**Règle bloquante : au moins UN élément de ce lexique dans chaque short, et il apparaît dans la
+PREMIÈRE IMAGE (0-1,2 s).** Un short sans aucun de ces éléments ne part pas en production.
+
+| Élément | Comment l'écrire (français, sûr) | Piège |
+|---|---|---|
+| **Chandeliers** | « blocs verticaux de verre lumineux, **corps rectangulaire large**, **fine tige verticale au-dessus et en dessous**, alignés en rangée sur une grille » | **Ne jamais écrire « bougie » seul** : le modèle rend une bougie de cire avec une flamme (erreur constatée le 05/09). Toujours décrire la géométrie. |
+| **Courbe / ligne de prix** | « longue ligne de lumière continue qui monte par paliers puis retombe brutalement, tracée dans le vide, épaisseur constante » | Pas « courbe de prix », pas « cours » : décrire le tracé et son mouvement. |
+| **Grille et niveaux** | « grille lumineuse fine au sol et en fond, lignes horizontales de niveau qui traversent le cadre », « un plafond lumineux horizontal », « un sol lumineux horizontal » | Pas d'axes chiffrés, pas de graduation lisible. |
+| **Mur d'écrans** | « mur incurvé de panneaux lumineux empilés du sol au plafond, contenus abstraits, aucun texte, aucun chiffre » | Ne pas nommer une plateforme ni un terminal. |
+| **Salle de marchés** | « grande salle sombre aux longues rangées de pupitres alignés face à un mur de panneaux lumineux, reflets sur les surfaces, salle vide » — ou avec « silhouettes sombres de dos, hors focus, aucun visage » | En anglais « trading floor » est un mot déclencheur. En français, décrire le lieu. |
+| **Carnet / flux d'ordres** | « deux colonnes verticales de tuiles de verre qui s'empilent et se vident en alternance, l'une froide l'autre chaude » | Pas de chiffres, pas de niveaux affichés. |
+| **Bandeau défilant** | « long bandeau lumineux horizontal qui défile lentement, motifs abstraits, aucun texte lisible » | Pas de ticker nommé. |
+| **Horloge de séance** | « grand cadran de verre sans chiffres dont un seul repère lumineux avance » | Pas d'heure affichée, pas d'horaire réel. |
+
+**Rouge et vert** : autorisés uniquement comme signaux ponctuels (une bougie qui vire, une ligne
+de perte), jamais comme palette dominante. La palette reste bleu nuit + or/lime.
+
+**La signature visuelle unique de chaque short se construit DANS ce lexique, pas à côté.**
+La variété vient de l'angle, de l'échelle et de l'événement physique (une rangée de chandeliers
+vue du sol · une seule courbe traversant une salle vide · un mur d'écrans qui s'éteint rangée
+par rangée), pas du remplacement du trading par une métaphore de développement personnel.
 
 ## PROMPT VIDÉO — RECETTE (8 blocs, en français, non générique)
 
@@ -64,10 +95,10 @@ Higgsfield/Seedance renvoie **"Rejected due to copyright restrictions."** dès q
 | AUDIO | Design sonore uniquement (bourdonnement, tintements) ; **pas de musique, pas de voix** (voix en TTS après) | Musique avec paroles |
 
 ### Anti-générique (obligatoire)
-- **Une signature visuelle par short**, dérivée du concept après la recherche : un objet ou un phénomène qu'on ne retrouve dans **aucun** autre short du journal (`shorts/production-log.md`, colonne « famille de plan »). Ex. escalier de lumière, ligne rouge poursuivante, plafond de verre qui se fissure, balance de verre sans poids.
+- **Une signature visuelle par short**, dérivée du concept après la recherche : un objet ou un phénomène qu'on ne retrouve dans **aucun** autre short du journal (`shorts/production-log.md`, colonne « famille de plan »). Ex. une rangée de chandeliers de verre vue du sol · une courbe unique qui traverse une salle de marchés vide · un mur d'écrans qui s'éteint rangée par rangée · un plafond lumineux qui se fissure au-dessus d'une grille. **La signature doit rester lisible comme du trading** (voir LEXIQUE VISUEL TRADING) : une métaphore qui n'évoque plus le marché est rejetée, même si elle est belle.
 - **Une seule métaphore** par short ; jamais deux univers mélangés.
 - **Test du sujet** : si le prompt pourrait servir tel quel à un autre sujet, il est générique → réécrire.
-- **Mots interdits (génériques)** : « magnifique », « futuriste » seul, « particules abstraites » seules, « ville futuriste », « hologramme » sans objet précis, « ambiance tech », « graphique », « données ».
+- **Mots interdits (génériques)** : « magnifique », « futuriste » seul, « particules abstraites » seules, « ville futuriste », « hologramme » sans objet précis, « ambiance tech », « graphique » ou « données » **posés seuls sans géométrie décrite** (un graphique s'écrit avec le LEXIQUE VISUEL TRADING : forme, matière, disposition).
 - **Obligatoires** : 3 matériaux nommés · 1 échelle assumée (intime ou monumentale) · 1 événement physique · 1 mouvement caméra · 1 point de lumière signature.
 - Le visuel **raconte** la règle du script (temps 8,5-12 s) — ce n'est pas une décoration derrière une voix.
 
@@ -78,16 +109,18 @@ Higgsfield/Seedance renvoie **"Rejected due to copyright restrictions."** dès q
 - [ ] TIMING en 5 temps alignés sur le script ; règle portée à 8,5-12 s
 - [ ] Une seule métaphore ; signature visuelle absente du journal
 - [ ] Aucun mot de la liste « génériques »
+- [ ] **Au moins un élément du LEXIQUE VISUEL TRADING, présent dès la PREMIÈRE IMAGE**
+- [ ] Si le plan contient des chandeliers : **géométrie décrite** (corps rectangulaire + tige), jamais « bougie » seul
 
 ### Exemple de référence (style figé) — sujet « 1 tick »
 ```
-CONTEXTE DE SCÈNE : Un océan sombre de bougies en verre lumineuses sous un ciel bleu nuit. Atmosphère de science-fiction financière haut de gamme : verre fumé, chrome brossé, reflets HDR. Aucune personne, aucun visage, aucun texte, aucun chiffre, aucun symbole dans l'image.
-PREMIÈRE IMAGE (0-1,2 s) : Très gros plan sur une seule bougie en verre qui brille or ; une minuscule marche de lumière se détache de son bord et s'élève.
+CONTEXTE DE SCÈNE : Une plaine sombre couverte de blocs verticaux de verre lumineux, corps rectangulaire large et fine tige verticale au-dessus et en dessous, alignés en rangées serrées sur une grille lumineuse, sous un ciel bleu nuit. Atmosphère de science-fiction financière haut de gamme : verre fumé, chrome brossé, reflets HDR. Aucune personne, aucun visage, aucun texte, aucun chiffre, aucun symbole dans l'image.
+PREMIÈRE IMAGE (0-1,2 s) : Très gros plan sur un seul bloc de verre doré, corps rectangulaire et tige fine, posé sur la grille ; une minuscule marche de lumière se détache de son bord et s'élève.
 OPTIQUE : Rendu 35 mm anamorphique, faible profondeur de champ, bokeh doux, léger flare sur les reflets lime.
-CAMÉRA : Lent travelling arrière avec une légère contre-plongée, révélant que la marche est la première d'un escalier de lumière monumental qui s'élève de la mer de bougies ; fin sur un plan large en contre-plongée, caméra fixe.
+CAMÉRA : Lent travelling arrière avec une légère contre-plongée, révélant que la marche est la première d'un escalier de lumière monumental qui s'élève de la plaine de blocs de verre ; fin sur un plan large en contre-plongée, caméra fixe.
 LUMIÈRE : Rim light bleu froid depuis l'horizon, halos or et lime chauds sur chaque marche, brume volumétrique, contraste cinématique, jamais plat.
 PHYSIQUE : Les marches se matérialisent une à une avec une ondulation de verre ; les particules montent avec une inertie réaliste ; les reflets restent physiquement cohérents.
-TIMING DE L'ACTION : 0-1,2 s bougie seule + première marche / 1,2-4 s trois marches s'empilent / 4-8,5 s l'escalier grandit pendant que la caméra recule / 8,5-12 s une marche pulse plus fort, un signal d'alerte / 12-15 s l'escalier se stabilise, caméra fixe.
+TIMING DE L'ACTION : 0-1,2 s bloc de verre seul + première marche / 1,2-4 s trois marches s'empilent / 4-8,5 s l'escalier grandit pendant que la caméra recule / 8,5-12 s une marche pulse plus fort, un signal d'alerte / 12-15 s l'escalier se stabilise, caméra fixe.
 AUDIO : Bourdonnement ambiant profond, tintements de verre doux sur chaque marche, pas de musique, pas de voix.
 ```
 

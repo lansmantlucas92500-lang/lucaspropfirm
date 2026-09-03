@@ -43,7 +43,9 @@ Lucas. Fiche générée le 03/09, à réutiliser telle quelle comme `image_refer
 
 | Élément | Valeur |
 |---|---|
-| Fiche validée | `b5fb893b-ee5a-43de-82f3-d785f478f20e` (job_id, utilisable directement en `image_references`) |
+| Statut | **VALIDÉ par Lucas le 03/09 — figé, ne pas régénérer sans son accord** |
+| Fiche | `b5fb893b-ee5a-43de-82f3-d785f478f20e` (job_id, utilisable directement en `image_references`) |
+| Element réutilisable | `3b929346-d7ab-4590-b5d6-a090681e6ffe` · nom `lucas-trader` · appelé par `<<<3b929346-d7ab-4590-b5d6-a090681e6ffe>>>` dans le prompt |
 | Modèle | `seedream_v4_5`, 16:9, 2560×1440, 1 crédit |
 | Contenu | 3 vues : plan pied de face · plan pied trois-quarts · portrait poitrine |
 | Signalement | homme de 23 ans, costume bleu nuit deux pièces, chemise blanche, cravate soie bleu nuit, ceinture cuir brun, derbies noires, montre acier |

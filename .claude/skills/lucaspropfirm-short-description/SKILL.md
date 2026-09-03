@@ -49,8 +49,9 @@ littéralement (une mécanique invisible, un seuil, une règle).
 > lumière qui a dérivé, pas le lieu.
 
 ### PERSONNAGE RÉCURRENT « LUCAS » (décision du 03/09)
-Le personnage central des shorts est **à l'effigie de Lucas** : homme d'environ 25 ans, **en
-costume sombre**, allure sobre et assurée. Il est le fil conducteur d'un short à l'autre, pas une
+Le personnage central des shorts est **Lucas, 23 ans, jeune trader en costume bleu nuit et
+cravate**, allure sobre et assurée. Personnage **généré et validé le 03/09** : il ne ressemble pas
+au vrai Lucas, il le joue. Références figées dans `shorts-generation` § « Personnage récurrent ». Il est le fil conducteur d'un short à l'autre, pas une
 figuration : c'est lui qui traverse la salle de marchés, qui s'arrête devant le mur d'écrans, qui
 marche dans le parc au petit matin pendant que la courbe de lumière court au-dessus des arbres.
 
@@ -60,8 +61,8 @@ description physique produit un visage différent à chaque génération. La pro
 § « Personnage récurrent ». Dans le prompt, il se désigne par sa fonction dans le plan
 (« l'homme en costume sombre s'avance vers le mur d'écrans »), jamais par ses traits.
 
-**Cohérence entre shorts** : même costume sombre, même registre de posture, même façon d'occuper
-le cadre. C'est ce qui crée la reconnaissance, au même titre que la charte lumineuse.
+**Cohérence entre shorts** : toujours le costume bleu nuit, chemise blanche, cravate soie bleu
+nuit, montre acier ; même registre de posture, même façon d'occuper le cadre. C'est ce qui crée la reconnaissance, au même titre que la charte lumineuse.
 
 ### CADRAGE DES PERSONNAGES (garde-fous techniques)
 Seedance 2.0 Mini en 720p rend mal les visages : les garde-fous ci-dessous ne sont pas du

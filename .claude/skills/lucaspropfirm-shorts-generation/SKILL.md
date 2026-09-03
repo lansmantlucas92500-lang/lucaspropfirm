@@ -51,7 +51,28 @@ génération, ce qui est pire que pas de personnage du tout.
 `video_references` (vérifié sur `models_explore action=get`, tags `reference` · `identity` ·
 `consistent`). C'est la voie retenue.
 
-**Mise en place, une seule fois :**
+**Le personnage est déjà créé et validé par Lucas (03/09) — ne pas le régénérer.**
+
+| | |
+|---|---|
+| Fiche 3 vues (`image_references`) | `b5fb893b-ee5a-43de-82f3-d785f478f20e` |
+| Element réutilisable | `3b929346-d7ab-4590-b5d6-a090681e6ffe` (`lucas-trader`) |
+| Signalement | 23 ans, costume bleu nuit deux pièces, chemise blanche, cravate soie bleu nuit, ceinture cuir brun, derbies noires, montre acier |
+
+Deux voies d'appel, **essayer `image_references` en premier** (documenté pour la variante Mini) :
+```json
+"medias": [ { "role": "image_references", "id": "b5fb893b-ee5a-43de-82f3-d785f478f20e" } ]
+```
+ou, en repli, le placeholder Element inséré directement dans le texte du prompt :
+`<<<3b929346-d7ab-4590-b5d6-a090681e6ffe>>>`. Ne jamais combiner les deux dans une même soumission.
+
+**Modèles écartés pour la création de personnage** (ne pas réessayer sans raison) : `soul_cast`
+ignore le prompt et rend un personnage de 40-45 ans avec sa propre biographie ; `nano_banana_pro`
+est routé vers `nano_banana_2` et échoue sans message ; Marketing Studio est une galerie de
+gabarits publicitaires partant d'une image produit, pas un créateur de personnage.
+La fiche retenue vient de `seedream_v4_5`, 16:9, 1 crédit.
+
+**Si Lucas fournit un jour ses vraies photos** (elles remplacent la fiche générée) :
 1. Lucas fournit **4 à 8 photos** de lui : plan taille et plan large, de face, de trois-quarts et
    de profil, lumières différentes, **en costume**, visage net, sans lunettes de soleil, sans
    autre personne dans le cadre. Le cadrage des photos conditionne le rendu : des photos serrées

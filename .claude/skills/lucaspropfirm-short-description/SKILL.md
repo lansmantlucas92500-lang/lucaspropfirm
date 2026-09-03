@@ -1,7 +1,7 @@
 ---
 name: lucaspropfirm-short-description
 description: |
-  Source de vérité CRÉATIVE des shorts lucaspropfirm (trading Futures ES/NQ, prop firms, audience FR). Charger pour tout ce qui touche au CONTENU d'un short : format technique, univers visuel, règles anti-IP des prompts, recette de prompt vidéo (8 blocs en français, anti-générique, exemple figé), module hook, script de narration (CTA oral court + CTA écrit complet), zones sûres 9:16, description IG/TikTok/YouTube (bloc de liens 11 lignes). Pour la procédure d'exécution (génération, montage voix, sous-titres) → skill lucaspropfirm-shorts-generation. Pour l'orchestration, la recherche de concept et le journal → skill lucaspropfirm-shorts-pipeline.
+  Source de vérité CRÉATIVE des shorts lucaspropfirm (trading Futures ES/NQ, prop firms, audience FR). Charger pour tout ce qui touche au CONTENU d'un short : format technique, univers visuel, règles anti-IP des prompts, recette de prompt vidéo (8 blocs en français, anti-générique, exemple figé), module hook, script de narration (CTA oral court + CTA écrit complet), règles ANTI-IA et ancrage trading obligatoire (mots interdits, marqueurs concrets), zones sûres 9:16, description IG/TikTok/YouTube (bloc de liens 11 lignes). Pour la procédure d'exécution (génération, montage voix, sous-titres) → skill lucaspropfirm-shorts-generation. Pour l'orchestration, la recherche de concept et le journal → skill lucaspropfirm-shorts-pipeline.
 ---
 
 # Spec créative des shorts lucaspropfirm
@@ -121,6 +121,8 @@ Le hook est la phrase d'accroche des 0-1,2 s. Il doit être compréhensible **sa
 | 7,5-10,5 s | règle à retenir | 5-7 |
 | 10,5-15 s | **CTA ORAL FIXE** (7 mots, ~4,5 s, dit tel quel) | 7 |
 
+**Ancrage** : sur les 26-29 mots de contenu, au moins **un marqueur concret** (instrument, chiffre, plateforme, moment de séance ou mécanique prop firm nommée) — voir « ANTI-IA & ANCRAGE TRADING ». Les mots interdits de cette liste valent aussi pour la narration.
+
 **CTA ORAL FIXE (fin de narration, jamais reformulé ni omis)** :
 « Code LUCAS chez Phidiaspropfirm.com, détails sur lucaspropfirm.fr. »
 > Toujours dire **Phidiaspropfirm.com** en entier — jamais « Phidias » seul. Idem à l'écrit (encart de fin, descriptions).
@@ -134,6 +136,67 @@ Le hook est la phrase d'accroche des 0-1,2 s. Il doit être compréhensible **sa
 **CTA haut (5 lignes)** → accroche émoji → lignes "👉" → "🎓 abonne-toi" → **CTA écrit complet** → **bloc de liens complet (11 lignes)**. Dire « jusqu'à -80 % », jamais garanti.
 - Le **CTA haut** est en toute première position : il reste visible avant le « … plus » des plateformes.
 - **JAMAIS de tiret cadratin (—) ni de tiret demi-cadratin (–) dans une description.** C'est la signature typographique la plus reconnaissable d'un texte écrit par une IA. Utiliser un point, une virgule, un deux-points ou un point médian (·). Même règle pour les scripts de narration et les légendes.
+### ANTI-IA & ANCRAGE TRADING (bloc bloquant — une description qui échoue ici se réécrit)
+
+Deux défauts vont ensemble et se corrigent ensemble : ça **sonne IA**, et ça **ne parle pas de trading**.
+Une description abstraite est toujours une description qui sonne IA, parce que l'IA écrit à vide.
+La cure est la même : mettre du concret dedans.
+
+**1. Ancrage obligatoire — au moins 2 marqueurs concrets DIFFÉRENTS par description**, dont au
+moins un dans l'accroche ou la première ligne « 👉 ». Piocher dans :
+- **instrument nommé** : ES · NQ · MES · MNQ · CL · GC (pas « le marché », pas « ton actif ») ;
+- **chiffre vérifiable** : valeur du tick (ES 12,50 $ · NQ 5 $ · MES 1,25 $ · MNQ 0,50 $),
+  taille du drawdown, seuil de profit, nombre de contrats, montant d'un stop en dollars ;
+- **plateforme réelle** : Tradovate · ATAS · DeepCharts · Sierra Chart · NinjaTrader ;
+- **moment de séance** : ouverture NY 15h30, cash open, RTH, overnight, jour de rollover ;
+- **mécanique prop firm nommée précisément** : drawdown EOD / intraday / trailing, seuil de
+  profit, jours minimums, règle de cohérence, délai de payout.
+
+> **Test de l'ancrage** : masquer le CTA haut, le CTA écrit et le bloc de liens. S'il ne reste
+> ni instrument, ni chiffre, ni plateforme, ni mécanique nommée → la description est creuse,
+> on la réécrit. Une description qui pourrait servir à un compte de développement personnel
+> n'est pas une description de trading.
+
+**2. Mots et tournures interdits** (signature IA en français) :
+- *Ouvertures* : « Bienvenue dans », « Découvre », « Plongeons dans », « Parlons de »,
+  « Spoiler », « Et devine quoi », « Voici pourquoi ».
+- *Liants de dissertation* : « en effet », « de plus », « par ailleurs », « ainsi »,
+  « en conclusion », « pour résumer », « il est important de », « il est essentiel de »,
+  « n'oublie pas que ».
+- *Superlatifs creux* : « incontournable », « révolutionnaire », « game changer », « la clé »,
+  « le secret », « ultime », « puissant », « redoutable », « imparable », « véritable ».
+- *Verbes marketing* : « booster », « maîtriser », « débloquer », « libérer ton potentiel »,
+  « passer au niveau supérieur », « optimiser », « maximiser ».
+- *Adjectifs jetables* : « crucial », « essentiel », « fondamental », « incroyable », « énorme ».
+- *Stats inventées* : « 90 % des traders », « la plupart des traders », « beaucoup de traders »
+  sans source. Si le chiffre n'est pas sourçable, écrire la mécanique, pas la statistique.
+- *Tournure « ce n'est pas X, c'est Y »* : interdite comme effet de style. **Autorisée
+  uniquement quand les deux côtés sont des chiffres réels** (« ce n'est pas 100 $, c'est 400 $ »).
+
+**3. Rythme non robotique.** L'IA écrit des phrases de même longueur, parfaitement parallèles.
+Casser ça : les deux lignes « 👉 » ne font pas la même longueur, une phrase courte (3-5 mots)
+au moins par description, tutoiement systématique, une phrase nominale ou incomplète autorisée.
+Zéro symétrie décorative.
+
+**4. La ligne « 🎓 » annonce un contenu, pas un slogan.** Elle nomme le sujet du prochain post
+ou ce que le spectateur saura faire. Bannis : « Chaque jour, une règle décortiquée »,
+« Les bases qui sauvent un compte », « Les règles qu'on découvre trop tard » — ce sont des
+slogans interchangeables. Écrire plutôt : « 🎓 Demain : pourquoi le drawdown EOD se gère à la
+clôture, pas en séance. Abonne-toi. »
+
+**5. Même exigence pour la narration** (`SCRIPT NARRATION`) : sur les 26-29 mots de contenu,
+au moins **un** marqueur concret. Un short de 15 s sans instrument, sans chiffre et sans
+mécanique nommée ne se distingue d'aucun autre compte.
+
+**Avant / après** (cas réels du lot du 03-06/09) :
+
+| Creux (rejeté) | Ancré (accepté) |
+|---|---|
+| Plus tu gagnes, plus tu es proche de l'échec. | Tu passes de 50 000 à 52 000 $. Ton seuil d'échec vient de monter de 2 000 $ avec toi. |
+| Ta marge d'erreur rétrécit à mesure que tu réussis. | En trailing, le seuil suit ton plus haut. À +2 000 $, la même perte qui passait hier te ferme le compte. |
+| Tu es rentable, ton retrait est refusé. Bienvenue dans la règle de cohérence. | Ton retrait est refusé alors que tu es à +3 000 $ : un seul jour pèse 60 % de tes gains, la règle de cohérence plafonne souvent à 30-50 %. |
+| Les bases qui sauvent un compte. Abonne-toi. | Demain : la valeur du tick sur MES et MNQ, pour dimensionner un stop en micro. Abonne-toi. |
+
 - **TikTok uniquement** : les liens ne sont pas cliquables → ajouter « 🔗 Tout est en bio » juste au-dessus du CTA haut.
 - **Lien en bio de tous les comptes (IG, TikTok, YouTube, X)** : le SmartLink Metricool **https://t.mtrbio.com/lucaspropfirm** (URL courte à utiliser partout ; redirige vers la page finale https://t-sml.mtrbio.com/public/smartlink/lucaspropfirm — 10 boutons trackés, stats par bouton dans Metricool → Analytics → SmartLinks). Page de secours sur le domaine : `liens.html` du site (https://lucaspropfirm.fr/liens.html). Quand un post est programmé via Metricool, attacher le SmartLink (`smartLinkData`) pour le tracking.
 
@@ -170,10 +233,10 @@ Structure : CTA haut (5 lignes) → ligne vide → accroche → contenu (1-2 lig
 📊 Metricool (gestion de réseaux sociaux) : https://i.mtr.cool/lucas
 🤖 Wisewand.ai (rédacteur IA optimisé SEO) code promo LUCAS10 → -10 % : https://wisewand.ai/?fpr=lucas
 
-📉 Un tick, c'est combien, vraiment ?
-👉 Chaque petit mouvement du marché a une valeur fixe. Et elle s'additionne vite.
-👉 Connais la valeur du tick avant de cliquer.
-🎓 On reconstruit les bases, une brique par jour. Abonne-toi.
+📉 Un tick sur ES, c'est 12,50 $. Sur NQ, 5 $.
+👉 Même stop de 8 ticks : 100 $ sur ES, 40 $ sur NQ. Ce n'est pas le même trade.
+👉 Regarde la valeur du tick de TON contrat avant de poser le stop, pas celle du gars qui poste son setup.
+🎓 Demain : la valeur du tick sur MES et MNQ, pour dimensionner un stop en micro. Abonne-toi.
 
 Pour avoir les détails des prop firms, rendez-vous sur lucaspropfirm.fr, pour le Discord et la formation. Code LUCAS chez Phidiaspropfirm.com.
 

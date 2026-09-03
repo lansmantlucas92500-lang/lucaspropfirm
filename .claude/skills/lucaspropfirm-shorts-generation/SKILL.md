@@ -158,7 +158,19 @@ ffprobe -v error -select_streams a:0 -show_entries stream=codec_name -of csv=p=0
 ffmpeg -i final_subbed.mp4 -af silencedetect=n=-35dB:d=1.0 -f null - 2>&1 | grep silence_start   # aucun silence ≥ 1 s avant la fin de la parole
 ffmpeg -y -i final_subbed.mp4 -vf "select='eq(n,20)+eq(n,200)+eq(n,430)'" -vsync vfr f_%02d.jpg   # 3 frames
 ```
-Uploader les 3 frames (`media_upload` image) et les afficher : **aucun texte généré, aucun chiffre, aucun visage, aucune interface réaliste ; sous-titres lisibles ; logo/encart dans les zones sûres.** QC IA optionnel : `video_analysis_create` sur le `media_id` final (3-5 min).
+Uploader les 3 frames (`media_upload` image) et les afficher : **aucun texte généré, aucun chiffre, aucune interface de courtier réaliste, aucune marque ; sous-titres lisibles ; logo/encart dans les zones sûres.** QC IA optionnel : `video_analysis_create` sur le `media_id` final (3-5 min).
+
+**Si le plan contient un personnage** (autorisé depuis le 03/09, visage compris), extraire en plus
+une frame où le visage est visible et l'inspecter :
+```bash
+ffmpeg -y -i final_subbed.mp4 -vf "select='eq(n,110)+eq(n,320)'" -vsync vfr face_%02d.jpg
+```
+- Yeux, bouche, dents ou mains déformés → **relancer** avec le personnage plus loin, de profil ou
+  de dos. Un visage raté est la signature « vidéo IA » la plus reconnaissable : il annule tout le
+  travail d'ancrage trading.
+- Lèvres qui bougent → relancer : la vidéo est muette et la voix est montée après, la
+  synchronisation ne peut pas tomber juste.
+- Ne jamais livrer un visage douteux en pariant sur le petit format mobile.
 
 ## 11. Étape G — Livraison + journal
 - Livrable = `final_subbed.mp4` (URL Higgsfield) + `caps.srt` + narration texte + description (skill `short-description`).

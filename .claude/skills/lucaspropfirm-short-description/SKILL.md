@@ -18,8 +18,53 @@ description: |
 - Narration TTS voix **"Julian"** en français (moteur ElevenLabs ; jamais `voice_change`)
 - La vidéo est générée **muette** (`generate_audio=false`) ; la voix est montée en post-prod (jamais en référence audio dans la génération).
 
-## UNIVERS VISUEL — "marché financier vivant" · FUTURISTE PREMIUM
-Style : animation 3D stylisée **futuriste de haute qualité** (rendu cinématique, type film de science-fiction financier), bleu nuit profond + accents or/lime, **SANS visage humain**, ambiance premium fintech. **Matériaux riches** (verre fumé, métal brossé, chrome, surfaces réfléchissantes, lumières HDR), **éclairage cinématique** (rim light bleu froid + halos or/lime + bokeh, jamais plat), **détails fintech** (micro-textures, particules lumineuses, hologrammes abstraits, HUD flottants sans texte lisible), **échelle et profondeur** (volumes monumentaux ou intimes avec profondeur de champ et couches FG/MG/BG), **mouvement fluide** (dolly lent, transitions organiques). Cohérent avec la charte branding (bleu nuit + lime-jaune, logo LP rond).
+## UNIVERS VISUEL — DEUX REGISTRES, UNE SEULE LUMIÈRE
+
+Un short se tourne dans **l'un des deux registres**, jamais les deux à la fois :
+
+**A. Scène réelle** (par défaut depuis le 03/09) — un lieu que le spectateur reconnaît, avec un
+élément du LEXIQUE VISUEL TRADING intégré à la scène : salle de marchés, toit d'immeuble à
+l'aube, parc au petit matin, rue mouillée la nuit, café vide, couloir vitré de bureau.
+L'élément trading fait **partie du décor**, il n'est pas collé par-dessus : une courbe de lumière
+qui court au-dessus des arbres du parc · une rangée de chandeliers de verre posée sur une table
+de café · un mur d'écrans au fond d'une salle · une grille de niveaux projetée sur le bitume.
+
+**B. Abstrait fintech** — l'univers d'origine : volumes de verre, plaines de chandeliers,
+architectures lumineuses, sans lieu réel. À garder pour les concepts que rien ne rend
+littéralement (une mécanique invisible, un seuil, une règle).
+
+**Charte lumineuse commune aux deux registres — c'est elle qui fait la marque, pas le décor :**
+- Dominante **bleu nuit profond** + accents **or / lime**. En extérieur de jour, choisir des
+  heures qui donnent cette dominante naturellement : **aube, crépuscule, ciel couvert froid,
+  nuit éclairée**. Jamais un plein soleil de midi, jamais une dominante verte ou chaude.
+- **Éclairage cinématique** : rim light bleu froid, halos or/lime, brume volumétrique, bokeh.
+  Jamais plat, jamais une lumière de caméra de téléphone.
+- **Matériaux riches** nommés (verre fumé, métal brossé, chrome, béton mouillé, feuillage humide).
+- **Échelle et profondeur** : couches premier plan / milieu / arrière-plan, profondeur de champ.
+- **Mouvement fluide** : un seul mouvement de caméra, lent, avec une révélation.
+- Rouge et vert **uniquement en signaux ponctuels**, jamais en dominante.
+
+> **Test de la vignette** : deux shorts côte à côte, l'un dans un parc, l'autre dans une salle de
+> marchés, doivent se reconnaître comme venant du même compte. Si ce n'est pas le cas, c'est la
+> lumière qui a dérivé, pas le lieu.
+
+### PERSONNAGES (autorisés, visages compris — décision du 03/09)
+Les humains sont autorisés à l'image, visages visibles. Seedance 2.0 Mini en 720p rend mal les
+visages : les garde-fous ci-dessous ne sont pas du confort, ce sont eux qui évitent le rendu
+« vidéo IA » que ces shorts cherchent justement à fuir.
+- **Cadrage** : plan large, plan taille ou plan américain. **Jamais de gros plan serré sur un
+  visage** — c'est là que le modèle échoue le plus visiblement.
+- **Le personnage ne parle pas face caméra.** La vidéo est générée muette et la voix est montée
+  après : des lèvres qui bougent sans synchronisation trahissent immédiatement le montage.
+  Décrire une action, un regard, une posture, jamais une parole.
+- **Un seul personnage par plan** au maximum ; au-delà, des silhouettes hors focus.
+- **Contre-jour, profil, trois-quarts** plutôt que face pleine lumière : le modèle s'en sort
+  mieux et l'image est plus cinématographique.
+- **Aucune marque visible** sur les vêtements, aucun logo, aucun écran de téléphone lisible.
+- **Aucune personne réelle, aucun sosie, aucune célébrité.** Personnages génériques uniquement.
+- **Contrôle qualité obligatoire** (`shorts-generation`) : inspecter les frames où le visage est
+  visible. Yeux, bouche ou mains déformés → relancer avec le personnage plus loin ou de dos.
+  Ne jamais livrer un visage raté en pensant que ça passera sur mobile.
 
 ### Cohérence transversale
 - Même palette bleu nuit + or/lime sur tous les shorts ; rouge/vert = signaux uniquement.
@@ -61,7 +106,7 @@ PREMIÈRE IMAGE (0-1,2 s).** Un short sans aucun de ces éléments ne part pas e
 | **Courbe / ligne de prix** | « longue ligne de lumière continue qui monte par paliers puis retombe brutalement, tracée dans le vide, épaisseur constante » | Pas « courbe de prix », pas « cours » : décrire le tracé et son mouvement. |
 | **Grille et niveaux** | « grille lumineuse fine au sol et en fond, lignes horizontales de niveau qui traversent le cadre », « un plafond lumineux horizontal », « un sol lumineux horizontal » | Pas d'axes chiffrés, pas de graduation lisible. |
 | **Mur d'écrans** | « mur incurvé de panneaux lumineux empilés du sol au plafond, contenus abstraits, aucun texte, aucun chiffre » | Ne pas nommer une plateforme ni un terminal. |
-| **Salle de marchés** | « grande salle sombre aux longues rangées de pupitres alignés face à un mur de panneaux lumineux, reflets sur les surfaces, salle vide » — ou avec « silhouettes sombres de dos, hors focus, aucun visage » | En anglais « trading floor » est un mot déclencheur. En français, décrire le lieu. |
+| **Salle de marchés** | « grande salle sombre aux longues rangées de pupitres alignés face à un mur de panneaux lumineux, reflets sur les surfaces » — vide, ou avec une personne debout de dos et des silhouettes hors focus | En anglais « trading floor » est un mot déclencheur. En français, décrire le lieu. |
 | **Carnet / flux d'ordres** | « deux colonnes verticales de tuiles de verre qui s'empilent et se vident en alternance, l'une froide l'autre chaude » | Pas de chiffres, pas de niveaux affichés. |
 | **Bandeau défilant** | « long bandeau lumineux horizontal qui défile lentement, motifs abstraits, aucun texte lisible » | Pas de ticker nommé. |
 | **Horloge de séance** | « grand cadran de verre sans chiffres dont un seul repère lumineux avance » | Pas d'heure affichée, pas d'horaire réel. |
@@ -80,7 +125,7 @@ par rangée), pas du remplacement du trading par une métaphore de développemen
 - **Le prompt est écrit en français.** Narration en français. (Seedance est entraîné surtout en anglais/chinois : si un même prompt donne **deux** plans faibles, tester sa traduction anglaise à l'identique et noter le résultat au journal — le français reste la règle.)
 - **130-200 mots**, **8 blocs dans cet ordre, une ligne par bloc**, jamais de paragraphe libre :
   `CONTEXTE DE SCÈNE → PREMIÈRE IMAGE → OPTIQUE → CAMÉRA → LUMIÈRE → PHYSIQUE → TIMING DE L'ACTION → AUDIO`
-- Seedance n'a **pas de negative prompt** : « aucune personne, aucun visage, aucun texte, aucun chiffre, aucun symbole » s'écrit **dans** le CONTEXTE, positivement.
+- Seedance n'a **pas de negative prompt** : les exclusions s'écrivent **dans** le CONTEXTE, positivement. Phrase type sans personnage : « Aucune personne, aucun texte, aucun chiffre, aucun symbole dans l'image. » Avec personnage : « Aucun texte, aucun chiffre, aucun logo, aucune marque dans l'image ; le personnage ne parle pas. »
 
 ### Ce que chaque bloc doit contenir
 | Bloc | Attendu | À éviter |
@@ -111,6 +156,9 @@ par rangée), pas du remplacement du trading par une métaphore de développemen
 - [ ] Aucun mot de la liste « génériques »
 - [ ] **Au moins un élément du LEXIQUE VISUEL TRADING, présent dès la PREMIÈRE IMAGE**
 - [ ] Si le plan contient des chandeliers : **géométrie décrite** (corps rectangulaire + tige), jamais « bougie » seul
+- [ ] Registre choisi (scène réelle **ou** abstrait fintech), jamais les deux
+- [ ] Charte lumineuse respectée : dominante bleu nuit + or/lime, jamais plein soleil de midi
+- [ ] Si personnage : pas de gros plan visage, il ne parle pas, aucune marque visible
 
 ### Exemple de référence (style figé) — sujet « 1 tick »
 ```

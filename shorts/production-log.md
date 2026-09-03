@@ -15,7 +15,19 @@ Familles de plan utilisées : puits + ligne rouge poursuivante · portail + sol 
 | 2026-09-05 10h | points-vs-ticks-nq | 20 points NQ = 400 $, pas 100 $ | CH | abstrait | fragmentation de verre | Nexural, TestMax (tick values) | da912b90 | e8011d6e | 37,65 | programmé | patron hook |
 | 2026-09-06 10h | regle-coherence | Le meilleur jour bloque le retrait | ER | abstrait | balance de verre | Thor, Portail Propfirm | 500a1bc6 | 5a1fd7f9 | 37,65 | programmé | patron hook |
 
+| 2026-09-07 10h | rollover-trimestriel | Le contrat change quatre fois par an | CI | scène réelle | salle des marchés + tubes lumineux | test technique interne | abdd2e9e | b118b47a | 76,50 | programmé | registre scène réelle + avatar |
 Statuts : `livré` · `programmé` · `publié` · `échec-IP` (prompt rejeté 2×) · `échec-tech` · `abandonné`.
+
+## Short test du 03/09 — ce qu'il a prouvé et ce qu'il a cassé
+**Validé** : le filtre IP laisse passer une salle des marchés ; l'avatar tient son identité sur
+15 s via `image_references` ; la chaîne voix + sous-titres est opérationnelle de bout en bout.
+**Cassé** : le budget de 36 mots était compté sur le texte écrit alors que le TTS lit les domaines
+épelés (CTA = 14 tokens, pas 7). Deux prises rejetées au gate avant de tomber à 20 tokens de
+contenu. Règle réécrite en tokens parlés.
+**Cassé** : un lieu nommé sans son mobilier produit autre chose. « Salle de marchés » sans bureaux
+ni écrans a donné un **musée** (v1, 37,50 crédits perdus). Corrigé en v2 par la liste du mobilier.
+**Persistant** : les objets flottants sans support sont réinterprétés à chaque fois (bougie de
+cire, vitrine, tube suspendu). Préférer un élément intégré au décor.
 
 ## Écarts constatés sur ce lot (à corriger au prochain)
 - **Short 3** : « bougie de verre » a été rendu par Seedance comme une **bougie de cire avec flamme**, pas un chandelier de trading. Le mot est ambigu en français. Décrire désormais la géométrie : « bloc de verre vertical lumineux, corps rectangulaire, fine tige au-dessus et en dessous ».

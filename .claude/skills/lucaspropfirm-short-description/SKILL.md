@@ -129,6 +129,25 @@ PREMIÈRE IMAGE (0-1,2 s).** Un short sans aucun de ces éléments ne part pas e
 | **Bandeau défilant** | « long bandeau lumineux horizontal qui défile lentement, motifs abstraits, aucun texte lisible » | Pas de ticker nommé. |
 | **Horloge de séance** | « grand cadran de verre sans chiffres dont un seul repère lumineux avance » | Pas d'heure affichée, pas d'horaire réel. |
 
+**RÈGLE DU MOBILIER — un lieu se décrit par ses objets, jamais par son nom.** Écrire « salle des
+marchés » ne suffit pas : le 03/09, un prompt qui nommait le lieu sans son mobilier a produit un
+**musée**, parce que les seuls objets décrits étaient des blocs de verre alignés sur une grille.
+En ajoutant les objets réels — « longues tables alignées serrées, cinq écrans par poste montés sur
+bras articulés, chaises de bureau vides, goulottes de câbles, faux plafond bas percé de rails de
+spots » — la même scène est devenue une salle des marchés incontestable. Le mobilier de chaque
+lieu doit être listé dans le bloc CONTEXTE :
+- **salle des marchés** : tables serrées, écrans multiples sur bras, chaises, câbles, plafond technique ;
+- **café** : tables rondes, chaises dépareillées, comptoir, machine, tasses ;
+- **parc** : bancs, allée, arbres, grille, lampadaires ;
+- **toit d'immeuble** : gravier, gaines de ventilation, garde-corps, antennes.
+
+⚠️ **Les objets flottants sans support sont peu fiables.** Trois tentatives, trois
+réinterprétations : « bougie » → bougie de cire ; « blocs de verre sur grille » → vitrines de
+musée ; « barres verticales flottant sans support » → tubes lumineux suspendus au plafond. Le
+modèle rattache toujours un objet à un support connu. **Préférer un élément du lexique intégré au
+décor** (une courbe qui court sur un mur, une grille projetée au sol, des écrans qui s'éteignent
+rangée par rangée) plutôt qu'un objet en lévitation.
+
 **Rouge et vert** : autorisés uniquement comme signaux ponctuels (une bougie qui vire, une ligne
 de perte), jamais comme palette dominante. La palette reste bleu nuit + or/lime.
 
@@ -175,6 +194,8 @@ par rangée), pas du remplacement du trading par une métaphore de développemen
 - [ ] **Au moins un élément du LEXIQUE VISUEL TRADING, présent dès la PREMIÈRE IMAGE**
 - [ ] Si le plan contient des chandeliers : **géométrie décrite** (corps rectangulaire + tige), jamais « bougie » seul
 - [ ] Registre choisi (scène réelle **ou** abstrait fintech), jamais les deux
+- [ ] Si scène réelle : **mobilier du lieu listé** dans CONTEXTE, pas seulement son nom
+- [ ] Script compté en **tokens parlés** sur le texte TTS : ≤ 20 de contenu + 14 de CTA
 - [ ] Charte lumineuse respectée : dominante bleu nuit + or/lime, jamais plein soleil de midi
 - [ ] **Personnage Lucas présent** (défaut de tous les shorts) : `image_references` jointes, costume bleu nuit, désigné par sa fonction et non par ses traits
 - [ ] Cadrage du personnage : pas de gros plan visage, il ne parle pas, aucune marque visible
@@ -210,18 +231,27 @@ Le hook est la phrase d'accroche des 0-1,2 s. Il doit être compréhensible **sa
 - [ ] Validé → production ; sinon → réécrire avec un autre patron
 
 ## SCRIPT NARRATION (15 s)
-**Budget : 36 mots MAXIMUM au total, CTA oral inclus** (ElevenLabs lit à ≈ 2,4-2,6 mots/s ; la durée réelle est mesurée sur la voix par le gate de `shorts-generation` — c'est elle qui fait foi, pas le compte de mots).
-⚠️ **Les deux noms de domaine du CTA sont lourds à l'oral** (« Phidiaspropfirm point com » ≈ 1,6 s, « lucaspropfirm point F R » ≈ 1,5 s) : le CTA parlé occupe **~4,5 s à lui seul**. Le contenu ne dispose donc que de **26-29 mots**. Ne jamais rogner le CTA pour gagner du temps — raccourcir le contenu.
+**Budget : 34 TOKENS PARLÉS maximum, CTA oral inclus — dont 14 pour le seul CTA, donc 20 tokens de contenu** (ElevenLabs lit à ≈ 2,4-2,6 mots/s ; la durée réelle est mesurée sur la voix par le gate de `shorts-generation` — c'est elle qui fait foi, pas le compte de mots).
+⚠️ **Compter sur le TEXTE TTS, jamais sur le texte écrit.** Les domaines sont épelés pour la
+prononciation : `Phidias propfirm point com` et `Lucas propfirm point F R`. Le CTA fait **7 mots à
+l'écrit mais 14 tokens à l'oral** — il pèse 41 % du temps de parole. Un script de 34 mots écrits
+a échoué au gate deux fois de suite le 03/09 (14,98 s puis 14,83 s pour un plafond de 14,3 s).
+**Mesuré** : débit ElevenLabs entre 2,44 et 2,80 tokens/s selon la prise, non déterministe.
+Au pire débit, 14,3 s = 34 tokens. Le CTA en prend 14. **Il reste 20 tokens de contenu.**
+Ne jamais rogner le CTA pour gagner du temps : raccourcir le contenu.
 
-| Temps | Contenu | Mots |
+| Temps mesuré | Contenu | Tokens parlés |
 |---|---|---|
-| 0-1,2 s | **HOOK** (verrouillé par le module Hook) | 5-6 |
-| 1,2-4 s | problème / mise en situation | 6-8 |
-| 4-7,5 s | explication — **1 seule idée**, vocabulaire débutant | 7-9 |
-| 7,5-10,5 s | règle à retenir | 5-6 |
-| 10,5-15 s | **CTA ORAL FIXE** (7 mots, ~4,5 s, dit tel quel) | 7 |
+| 0-1,3 s | **HOOK** (verrouillé par le module Hook) | 5-6 |
+| 1,3-5 s | explication — **1 seule idée**, vocabulaire débutant | 7-8 |
+| 5-8 s | règle à retenir | 5-6 |
+| 8-13,3 s | **CTA ORAL FIXE**, dit tel quel | **14** |
 
-**Ancrage** : sur les 26-29 mots de contenu, au moins **un marqueur concret** (instrument, chiffre, plateforme, moment de séance ou mécanique prop firm nommée) — voir « ANTI-IA & ANCRAGE TRADING ». Les mots interdits de cette liste valent aussi pour la narration.
+> Découpage relevé sur le short test du 03/09 (13,28 s de parole) : le CTA démarre à 8,23 s et
+> finit à 13,00 s. Il n'y a **pas de place pour un quatrième temps** : le beat « problème / mise
+> en situation » de l'ancienne table est supprimé, il faisait dépasser le gate.
+
+**Ancrage** : sur les 20 tokens de contenu, au moins **un marqueur concret** (instrument, chiffre, plateforme, moment de séance ou mécanique prop firm nommée) — voir « ANTI-IA & ANCRAGE TRADING ». Les mots interdits de cette liste valent aussi pour la narration.
 
 **CTA ORAL FIXE (fin de narration, jamais reformulé ni omis)** :
 « Code LUCAS chez Phidiaspropfirm.com, détails sur lucaspropfirm.fr. »
@@ -284,7 +314,7 @@ ou ce que le spectateur saura faire. Bannis : « Chaque jour, une règle décort
 slogans interchangeables. Écrire plutôt : « 🎓 Demain : pourquoi le drawdown EOD se gère à la
 clôture, pas en séance. Abonne-toi. »
 
-**5. Même exigence pour la narration** (`SCRIPT NARRATION`) : sur les 26-29 mots de contenu,
+**5. Même exigence pour la narration** (`SCRIPT NARRATION`) : sur les 20 tokens de contenu,
 au moins **un** marqueur concret. Un short de 15 s sans instrument, sans chiffre et sans
 mécanique nommée ne se distingue d'aucun autre compte.
 

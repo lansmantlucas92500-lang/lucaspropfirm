@@ -19,7 +19,7 @@ description: |-
 |---|---|---|---|
 | 0 | **Lire le journal** `shorts/production-log.md` : derniers concepts, dernier patron de hook, échecs IP récents | ici | — |
 | 1 | **Choix du concept** par recherche en ligne (protocole ci-dessous) | ici | concept ≠ des 10 derniers ; patron hook ≠ du précédent |
-| 2 | **Contenu** — hook, script (**36 mots max**, CTA oral inclus), prompt 8 blocs, description | `short-description` | checklist hook ✔ ; **test d'ancrage trading ✔** (≥ 2 marqueurs concrets hors CTA) ; zéro mot de la liste interdite ; **≥ 1 élément du lexique visuel trading dès la première image** ; **avatar Lucas présent** |
+| 2 | **Contenu** — hook, script (**20 tokens parlés de contenu + 14 de CTA**), prompt 8 blocs, description | `short-description` | checklist hook ✔ ; **test d'ancrage trading ✔** (≥ 2 marqueurs concrets hors CTA) ; zéro mot de la liste interdite ; **≥ 1 élément du lexique visuel trading dès la première image** ; **avatar Lucas présent** |
 | 3 | **Validation utilisateur** — concept + hook + script + prompt + description, puis **coût** (`get_cost`) | ici | OK explicite ×2 |
 | 4 | **Exécution** — narration → gate débit → vidéo muette → gate viralité → montage → sous-titres → vérifs | `shorts-generation` | `speech` ≤ 14,3 s ; `completed` ; frames propres ; **visage de l'avatar inspecté** |
 | 5 | **Publication / programmation** — Metricool : **UN post par short, sur TOUS les réseaux du brand** (§ Programmation Metricool) ; TikTok direct via `tiktok_prepare_publish`/`tiktok_publish` seulement si Lucas le demande | `shorts-generation` §11 + § ci-dessous | description complète (CTA haut 5 lignes + CTA écrit + 11 liens) ; tous les réseaux du brand couverts |
@@ -39,7 +39,7 @@ description: |-
 **Règle de variété** : jamais 2 posts consécutifs de la même famille de plan ni du même patron de hook ; jamais 2 vidéos identiques (le journal fait foi).
 
 ## Contrat de script (rappel — détail dans short-description)
-UNE idée par vidéo ; **36 mots maximum**, CTA oral inclus ; durée verrouillée sur la parole mesurée (jamais accélérer la voix — réécrire) ; hook à 0-1,2 s compréhensible sans le son ; CTA oral fixe en fin, CTA écrit complet sur l'encart et la description. Zéro promesse de gains ; « jusqu'à -80 % » jamais garanti ; pas de nom de firme dans les vidéos éducatives.
+UNE idée par vidéo ; **20 tokens parlés de contenu**, plus 14 pour le CTA, comptés sur le texte TTS ; durée verrouillée sur la parole mesurée (jamais accélérer la voix — réécrire) ; hook à 0-1,2 s compréhensible sans le son ; CTA oral fixe en fin, CTA écrit complet sur l'encart et la description. Zéro promesse de gains ; « jusqu'à -80 % » jamais garanti ; pas de nom de firme dans les vidéos éducatives.
 
 ## Mode semaine (« programme ma semaine », « lance la semaine »)
 Un lot de **N shorts (défaut 7)** produit en **une session**, publié **étalé**.

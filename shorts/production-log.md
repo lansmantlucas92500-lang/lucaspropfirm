@@ -99,6 +99,25 @@ de mardi »). Avatar Lucas présent sur les 7. Sept lieux distincts, registre **
 - **Encart de fin toujours inactif** : `logo_lp.png` et `ding.wav` manquent toujours.
 - **Aucune musique** sur les 7, comme sur tous les lots précédents.
 
-## Programmation
-**Rien n'est programmé.** Livré à Lucas pour validation le 12/09, conformément à sa règle
-permanente « avant exécution toujours demander validation ».
+## Programmation Metricool (brand LucasPropfirm, blogId 6758811)
+
+Validé par Lucas le 12/09. **Un post par jour à 08h00 Europe/Paris**, un seul post par short
+couvrant les **6 réseaux** (X, Facebook, Instagram, LinkedIn, TikTok, YouTube), texte long
+identique partout. `getBrandSettings` relu avant programmation : 6 réseaux connectés, inchangé.
+
+| Date 08h00 | Sujet | uuid Metricool | Réseaux | Déclarations |
+|---|---|---|---|---|
+| 14/09 | Revenge trading | 7245897801098937275 | 6 | IG isAiGenerated · TikTok isAigc · YT isAiGeneratedContent |
+| 15/09 | Frais de données CME | 2471707216445521940 | 6 | idem + TikTok `commercialContentOwnBrand` (Phidiaspropfirm.com cité) |
+| 16/09 | Ouverture 15h30 | 8426648242412144244 | 6 | idem |
+| 17/09 | Risque 0,25 % | -4187157527692033536 | 6 | idem |
+| 18/09 | Bots et full auto | -7269547498704648828 | 6 | idem |
+| 19/09 | Pérennité de la firme | 98243610301845403 | 6 | idem |
+| 20/09 | Week-end sur les futures | 624404411752989771 | 6 | idem |
+
+Vérification `getScheduledPosts` sur la fenêtre 14 au 20 : les 7 posts portent bien les 6 réseaux
+en `PENDING`. Metricool a recopié chaque vidéo sur son propre stockage
+(`static.metricool.com/planner/...`), donc l'expiration des URL CDN Higgsfield est sans effet.
+
+**Heure changée : 08h00 et non 10h00** comme les lots précédents. C'est la variable testée de ce
+lot au niveau du calendrier, à comparer aux quatre posts de 10h00 du 03 au 06/09.

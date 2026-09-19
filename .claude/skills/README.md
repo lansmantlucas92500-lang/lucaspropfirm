@@ -1,9 +1,6 @@
 # Skills du projet LucasPropfirm
 
-Deux familles cohabitent ici. **Elles ne passent pas par le meme canal Higgsfield**, c'est le
-point a comprendre avant d'en utiliser une.
-
-## 1. Skills maison — production des shorts (canal MCP)
+## Skills maison — production des shorts
 
 | Skill | Role |
 |---|---|
@@ -11,42 +8,48 @@ point a comprendre avant d'en utiliser une.
 | `lucaspropfirm-short-description` | Source de verite creative : visuel, avatar Lucas, prompt 8 blocs, script, description. |
 | `lucaspropfirm-shorts-generation` | Execution : Seedance 2.0 Mini, voix Julian, gate TTS, montage et sous-titres. |
 
-Ils appellent Higgsfield par le **MCP** (`mcp__Higgsfield__*`) deja connecte a cette session.
-Rien a installer. C'est la chaine qui a produit tous les shorts publies a ce jour.
+Ils passent par le **MCP Higgsfield**, deja connecte. Rien a installer.
 
-## 2. Skills officiels Higgsfield — installes le 19/09 (canal CLI)
+## Les skills officiels Higgsfield n'ont pas besoin d'etre installes
 
-Depot `higgsfield-ai/skills`, version 0.12.0 : `higgsfield-generate`, `higgsfield-brandkit`,
-`higgsfield-soul-id`, `higgsfield-video-explainer`, `higgsfield-youtube-thumbnail`,
-`higgsfield-product-photoshoot`, `higgsfield-marketplace-cards`, `higgsfield-websites`.
+Le depot `higgsfield-ai/skills` pilote la **CLI**. Installe le 19/09, puis retire le meme jour :
+le MCP Higgsfield **sert deja les memes skills en natif**, cablees sur ses propres outils.
 
-**Ils pilotent la CLI `higgsfield`, pas le MCP.** Sans la CLI installee et authentifiee, aucun
-des huit ne fonctionne. Deux etapes, a faire par Lucas sur sa machine :
+On les charge avec `get_workflow_instructions`, sans rien copier dans le repo. Le catalogue
+complet s'obtient en appelant l'outil sans argument, puis
+`get_workflow_instructions({ workflow: "<nom>" })` pour charger celle qu'il faut.
 
-```
-curl -fsSL https://raw.githubusercontent.com/higgsfield-ai/cli/main/install.sh | sh
-higgsfield auth login
-```
+| Skill CLI du depot | Equivalent natif MCP |
+|---|---|
+| `higgsfield-brandkit` | workflow `brand-asset-creation` |
+| `higgsfield-generate` | outils `generate_image` / `generate_video` / `generate_audio` / `generate_3d`, `models_explore`, `jobs_wait` ; workflows `ad-multiplier`, `ugc-*` |
+| `higgsfield-product-photoshoot` | workflow `product-photoshoot` |
+| `higgsfield-youtube-thumbnail` | workflow `thumbnail-generation` |
+| `higgsfield-video-explainer` | workflow `faceless-video` (+ `narrator`, `subtitles`) |
+| `higgsfield-soul-id` | modeles `soul_2` / `soul_v2` avec le parametre `soul_id`, outil `show_characters`, workflow `character-sheet` |
+| `higgsfield-websites` | workflow `website-builder-flow` + outils `create_website` / `deploy_website` / `publish_website` |
+| `higgsfield-marketplace-cards` | **aucun equivalent MCP** a ce jour |
 
-Verification : `higgsfield account status` doit afficher l'email, le plan et les credits.
+Verifie le 19/09 : la copie CLI de `higgsfield-brandkit` et le workflow natif
+`brand-asset-creation` ont la **meme liste de fichiers `references/`**. Meme skill, deux cablages.
+La copie CLI ne mentionne aucun outil MCP et appelle la CLI dix fois ; la version native appelle
+`sandbox_exec`, `generate_image_batch`, `models_explore`, `media_upload`, et **ses scripts sont
+deja installes dans le sandbox**. La version native est celle qui est maintenue.
+
+`_higgsfield-upstream/cli-reference/` garde les huit dossiers en **lecture seule**, hors du
+chemin des skills chargeables : un agent ne peut plus les charger et tenter une commande CLI
+absente, mais la documentation reste consultable pour comparer lors d'une mise a jour.
 
 ## Lequel utiliser pour un short
 
-**Pour un short LucasPropfirm, c'est la famille 1, toujours.** Elle porte l'avatar verrouille,
-la charte lumineuse, le budget de 34 tokens parles, le lexique visuel trading et le format de
-description avec le bloc de 11 liens. `higgsfield-generate` genere une video mais ne connait
-aucune de ces regles : l'utiliser pour un short produirait un plan hors charte, sans avatar et
-sans CTA.
+**Famille maison, toujours.** Elle porte l'avatar verrouille, la charte lumineuse, le budget de
+34 tokens parles, le lexique visuel trading et le format de description. Les workflows Higgsfield
+generiques ne connaissent aucune de ces regles.
 
-La famille 2 sert a ce que la famille 1 ne couvre pas :
-- `higgsfield-youtube-thumbnail` : couvertures de Shorts et miniatures YouTube.
-- `higgsfield-video-explainer` : formats longs narres, au-dela des 15 s.
-- `higgsfield-brandkit` : logo et charte. **C'est la piste pour produire enfin `logo_lp.png`**,
-  qui manque depuis le debut et bloque l'encart de fin des shorts.
-- `higgsfield-soul-id` : entrainement d'un vrai Soul sur des photos de Lucas. Remplacerait
-  l'avatar genere actuel, qui ne lui ressemble pas. Demande des photos.
-- `higgsfield-websites`, `higgsfield-product-photoshoot`, `higgsfield-marketplace-cards` :
-  hors perimetre des shorts.
-
-`_higgsfield-upstream/` garde le README, l'INSTALL, le COOKBOOK et le VERSION du depot d'origine
-pour retrouver la provenance et comparer lors d'une mise a jour.
+Les workflows natifs servent a ce que la famille maison ne couvre pas :
+- `brand-asset-creation` : **la piste pour produire enfin `logo_lp.png`**, qui manque depuis le
+  debut et bloque l'encart de fin des shorts.
+- `soul_2` + `soul_id` : un avatar entraine sur de vraies photos de Lucas, au lieu du personnage
+  genere actuel qui ne lui ressemble pas. Demande des photos.
+- `thumbnail-generation` : couvertures de Shorts et miniatures YouTube.
+- `faceless-video` : formats longs narres, au-dela des 15 s.
